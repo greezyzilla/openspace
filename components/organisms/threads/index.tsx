@@ -1,10 +1,12 @@
 import thread from '../../../features/thread';
-import { useAppSelector } from '../../../hooks/redux';
 import Thread from '../../molecules/thread';
+import { Thread as ThreadInterface } from '../../../features/thread/thread.interface';
 
-export default function Threads() {
-  const threads = useAppSelector((state) => state.thread.threads);
+interface ThreadsInterface{
+  threads: ThreadInterface[];
+}
 
+export default function Threads({ threads } : ThreadsInterface) {
   if (!thread.length) return <p>loading</p>;
-  return <div className="flex flex-col gap-4 max-w-[700px] mx-auto">{threads.map((t) => <Thread thread={t} key={t.id} />)}</div>;
+  return <div className="flex flex-col gap-4 max-w-[700px] mx-auto">{threads.map((t : ThreadInterface) => <Thread thread={t} key={t.id} />)}</div>;
 }

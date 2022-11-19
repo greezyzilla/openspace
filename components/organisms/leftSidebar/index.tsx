@@ -14,7 +14,7 @@ export default function LeftSidebar() {
 
   const threads = useAppSelector((state) => state.thread.threads);
   if (!threads.length) return <p>Loading</p>;
-  const categories = threads.map((thread) => (thread.category || '').toLocaleLowerCase());
+  const categories = threads.map((thread) => (thread.category || 'Unknown').toLocaleLowerCase());
   const groupedCategories = categories
     .reduce((acc : any, category) => ({ ...acc, [category]: (+acc[category] || 0) + 1 }), {});
   const sortedCategories = Object.keys(groupedCategories)
