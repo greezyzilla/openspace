@@ -1,9 +1,10 @@
-import { ChartBarIcon, HomeIcon, PlusIcon } from '@heroicons/react/24/solid';
+import {
+  ChartBarIcon, HashtagIcon, HomeIcon, PlusIcon,
+} from '@heroicons/react/24/solid';
 import { useState } from 'react';
 import { useAppSelector } from '../../../hooks/redux';
 import AddThreadForm from '../../molecules/form/addThread';
 import Modal from '../../molecules/modal';
-import CategoryItem from './categoryItem';
 import SidebarItem from './sidebarItem';
 
 export default function LeftSidebar() {
@@ -49,7 +50,12 @@ export default function LeftSidebar() {
         <div className="flex flex-col gap-1">
           {
             trendingCategories.map(({ category, total }) => (
-              <CategoryItem category={category} total={total} key={category} />
+              <SidebarItem key={category} href={`/categories/${category}`} Icon={HashtagIcon}>
+                <div className="flex justify-between items-center flex-1 overflow-hidden gap-2">
+                  <p className="truncate overflow-hidden flex-1">{category}</p>
+                  <p className="text-xs rounded-lg w-6 h-6 flex items-center justify-center text-violet-400 bg-violet-100">{total}</p>
+                </div>
+              </SidebarItem>
             ))
           }
         </div>

@@ -11,7 +11,7 @@ interface SidebarItemProps{
 
 export default function SidebarItem({ Icon, href, children } : SidebarItemProps) {
   const router = useRouter();
-  const isActive = router.asPath === href;
+  const isActive = decodeURI(router.asPath) === href;
 
   const linkClassname = classcat({
     'px-3 rounded-xl py-2 flex text-sm items-center gap-3 mr-2': true,
