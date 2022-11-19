@@ -27,7 +27,7 @@ export default function SearchThread({ onClose } : SearchThreadProps) {
   });
 
   return (
-    <div className="absolute top-28 left-1/2 w-full max-w-xl -translate-x-1/2 rounded-lg bg-white">
+    <div className="absolute top-28 left-1/2 w-full max-w-xl -translate-x-1/2 overflow-hidden rounded-lg bg-white">
       <div className="flex flex-col">
         <div className="relative">
           <input type="text" onChange={(e) => setSearch(e.target.value)} value={search} className="w-full bg-transparent px-6 py-5 text-slate-800 focus:outline-none" placeholder="Search thread here..." />

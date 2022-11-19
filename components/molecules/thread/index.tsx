@@ -18,7 +18,7 @@ export default function Thread({ thread } : ThreadProps) {
 
   return (
     <article className="flex flex-col gap-3 rounded-xl bg-white p-6">
-      <Button isLink href={`/details/${thread.id}`} className="text-xl font-semibold text-slate-700">{thread.title}</Button>
+      <Button isLink href={`/details/${thread.id}`} className="text-xl font-semibold text-slate-700 line-clamp-2">{thread.title}</Button>
       <div className="flex gap-3">
         <img src={user?.avatar} className="h-10 w-10 rounded-lg" alt={user?.name} />
         <div className="flex flex-col justify-center">
@@ -28,7 +28,7 @@ export default function Thread({ thread } : ThreadProps) {
           </p>
         </div>
       </div>
-      <div className="text-sm leading-6 text-slate-600/80">{parse(thread.body)}</div>
+      <div className="text-sm leading-6 text-slate-600/80 line-clamp-6">{parse(thread.body)}</div>
       <div className="flex justify-between">
         <div className="flex items-center justify-center gap-1 rounded-lg bg-slate-100/80 p-2 text-xs">
           <ChatBubbleLeftRightIcon className="h-5 w-5 text-slate-400" />
