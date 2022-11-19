@@ -17,21 +17,21 @@ export default function Thread({ thread } : ThreadProps) {
   const user = users.find((u) => u.id === thread.ownerId);
 
   return (
-    <article className="bg-white rounded-xl p-6 flex flex-col gap-3">
+    <article className="flex flex-col gap-3 rounded-xl bg-white p-6">
       <Button isLink href={`/details/${thread.id}`} className="text-xl font-semibold text-slate-700">{thread.title}</Button>
       <div className="flex gap-3">
-        <img src={user?.avatar} className="w-10 h-10 rounded-lg" alt={user?.name} />
+        <img src={user?.avatar} className="h-10 w-10 rounded-lg" alt={user?.name} />
         <div className="flex flex-col justify-center">
-          <p className="text-slate-800/80 font-medium text-sm">{user?.name || thread.ownerId}</p>
-          <p className="text-slate-500 font-light text-xs">
+          <p className="text-sm font-medium text-slate-800/80">{user?.name || thread.ownerId}</p>
+          <p className="text-xs font-light text-slate-500">
             {date}
           </p>
         </div>
       </div>
-      <div className="text-slate-600/80 leading-6 text-sm">{parse(thread.body)}</div>
+      <div className="text-sm leading-6 text-slate-600/80">{parse(thread.body)}</div>
       <div className="flex justify-between">
-        <div className="p-2 gap-1 text-xs bg-slate-100/80 rounded-lg flex items-center justify-center">
-          <ChatBubbleLeftRightIcon className="w-5 h-5 text-slate-400" />
+        <div className="flex items-center justify-center gap-1 rounded-lg bg-slate-100/80 p-2 text-xs">
+          <ChatBubbleLeftRightIcon className="h-5 w-5 text-slate-400" />
           <p className="text-slate-500/90">
             {thread.totalComments}
             &nbsp;
@@ -39,16 +39,16 @@ export default function Thread({ thread } : ThreadProps) {
           </p>
         </div>
         <div className="flex gap-4">
-          <div className="p-2 gap-1 text-xs bg-slate-100/80 rounded-lg flex items-center justify-center">
-            <HandThumbUpIcon className="w-5 h-5 text-slate-400" />
+          <div className="flex items-center justify-center gap-1 rounded-lg bg-slate-100/80 p-2 text-xs">
+            <HandThumbUpIcon className="h-5 w-5 text-slate-400" />
             <p className="text-slate-500/90">
               {thread.upVotesBy?.length}
               &nbsp;
               Like
             </p>
           </div>
-          <div className="p-2 gap-1 text-xs bg-slate-100/80 rounded-lg flex items-center justify-center">
-            <HandThumbDownIcon className="w-5 h-5 text-slate-400" />
+          <div className="flex items-center justify-center gap-1 rounded-lg bg-slate-100/80 p-2 text-xs">
+            <HandThumbDownIcon className="h-5 w-5 text-slate-400" />
             <p className="text-slate-500/90">
               {thread.downVotesBy?.length}
               &nbsp;

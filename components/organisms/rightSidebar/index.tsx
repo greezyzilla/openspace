@@ -7,12 +7,12 @@ export default function RightSidebar() {
   if (!users.length) return <p>Loading</p>;
 
   return (
-    <aside className="max-w-[240px] pl-6 pt-4 flex-1 border-r-2 border-slate-200/50 flex flex-col gap-4">
+    <aside className="flex max-w-[240px] flex-1 flex-col gap-4 border-r-2 border-slate-200/50 pl-6 pt-4">
       <div>
-        <h2 className="text-slate-400 font-medium text-xs mb-1">
+        <h2 className="mb-1 text-xs font-medium text-slate-400">
           Recent Users
         </h2>
-        <div className="flex flex-col gap-1 mr-3">
+        <div className="mr-3 flex flex-col gap-1">
           {users.slice(0, 8).map((user) => <UserItem user={user} key={user.id} />)}
         </div>
       </div>

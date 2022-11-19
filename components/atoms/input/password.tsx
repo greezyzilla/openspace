@@ -15,9 +15,9 @@ export default function InputPassword(props : Partial<InputPasswordProps>) {
     label, placeholder, isValid = true, name, onChange, value,
   } = props;
   const inputClassname = classcat({
-    'w-full border-2 focus:outline-none py-3 focus:ring-4 rounded-lg text-sm px-4': true,
-    'ring-violet-200 border-violet-400': isValid,
-    'ring-red-200 border-red-400': !isValid,
+    'w-full rounded-lg border-2 py-3 px-4 text-sm focus:outline-none focus:ring-4': true,
+    'border-violet-400 ring-violet-200': isValid,
+    'border-red-400 ring-red-200': !isValid,
   });
 
   return (

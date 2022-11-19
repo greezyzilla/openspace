@@ -1,6 +1,5 @@
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, ReactNode } from 'react';
-import Card from '../../atoms/card';
 
 interface ModalProps{
     children: ReactNode;
@@ -20,11 +19,11 @@ export default function Modal({ children, isOpen, onClose } : ModalProps) {
           leave="ease-in duration-200"
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
-          className="fixed inset-0 bg-black/25"
+          className="fixed inset-0 bg-black/25 backdrop-blur-[2px]"
         />
         <Transition.Child
           as="div"
-          className="fixed inset-0 overflow-y-auto flex min-h-full items-center justify-center p-4 text-center"
+          className="fixed inset-0 flex min-h-full items-center justify-center overflow-y-auto p-4 text-center"
           enter="ease-out duration-300"
           enterFrom="opacity-0 scale-95"
           enterTo="opacity-100 scale-100"
@@ -32,11 +31,7 @@ export default function Modal({ children, isOpen, onClose } : ModalProps) {
           leaveFrom="opacity-100 scale-100"
           leaveTo="opacity-0 scale-95"
         >
-          <Dialog.Panel>
-            <Card size="lg" className="rounded-2xl overflow-hidden transition-all">
-              {children}
-            </Card>
-          </Dialog.Panel>
+          <Dialog.Panel>{children}</Dialog.Panel>
         </Transition.Child>
       </Dialog>
     </Transition>

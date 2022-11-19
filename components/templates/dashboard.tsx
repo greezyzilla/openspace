@@ -11,9 +11,9 @@ export default function DashboardTemplate({ children } : DashboardProps) {
   return (
     <>
       <Header />
-      <div className="bg-slate-50 backdrop-blur-lg flex-1 flex h-full overflow-hidden">
+      <div className="flex h-full flex-1 overflow-hidden bg-slate-50 backdrop-blur-lg">
         <LeftSidebar />
-        <div className="p-6 max-h-full flex-1 overflow-y-auto scroll-smooth">
+        <div className="max-h-full flex-1 overflow-y-auto scroll-smooth p-6">
           {children}
         </div>
         <RightSidebar />

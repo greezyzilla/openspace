@@ -19,7 +19,7 @@ export default function InputEmail(props : InputEmailProps) {
         type="email"
         name={name}
         placeholder={placeholder}
-        className="w-full border-2 focus:outline-none py-3 focus:ring-4 rounded-lg text-sm px-4 ring-violet-200 border-violet-400"
+        className="w-full rounded-lg border-2 border-violet-400 py-3 px-4 text-sm ring-violet-200 focus:outline-none focus:ring-4"
         onChange={onChange}
         value={value}
         required

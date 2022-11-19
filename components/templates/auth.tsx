@@ -6,7 +6,7 @@ interface AuthTemplateProps{
 
 export default function AuthTemplate({ children } : AuthTemplateProps) {
   return (
-    <div className="flex items-center justify-center h-full bg-slate-50/50">
+    <div className="flex h-full items-center justify-center bg-slate-50/50">
       {children}
     </div>
   );

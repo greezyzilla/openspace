@@ -36,7 +36,10 @@ export const threadSlice = createSlice({
     builder.addCase(getThreads.pending, (state) => { state.loading = true; });
     builder.addCase(getThreads.rejected, (state) => { state.loading = false; });
     builder.addCase(getThreads.fulfilled, (state, action: PayloadAction<GetThreadsResponse>) => {
-      if (action.payload.status === 'success') state.threads = action.payload.data.threads;
+      if (action.payload.status === 'success') {
+        state.threads = action.payload.data.threads
+          .map((thread) => (thread.category ? thread : ({ ...thread, category: 'unknown' })));
+      }
       state.loading = false;
     });
   },

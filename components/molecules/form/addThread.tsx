@@ -32,17 +32,17 @@ export default function AddThreadForm({ onSubmit, onCancel } : AddThreadFormProp
 
   return (
     <form onSubmit={onSubmitHandle}>
-      <h3 className="text-lg font-medium leading-6 text-gray-900 border-b-2 px-8 pt-6 pb-4">
+      <h3 className="border-b-2 px-8 pt-6 pb-4 text-lg font-medium leading-6 text-gray-900">
         Create New Thread
       </h3>
-      <div className="py-6 px-8 flex flex-col gap-6">
+      <div className="flex flex-col gap-6 py-6 px-8">
         <div className="flex gap-6">
           <InputText name="title" label="Title" onChange={onChangeHandle} value={data.title} placeholder="How to, I want to, etc..." />
           <InputText name="category" label="Category" onChange={onChangeHandle} value={data.category} placeholder="React, Javascript, Typescript, etc..." />
         </div>
         <TextArea name="body" label="Body" placeholder="Hi, i would like to share that..." onChange={onChangeHandle} value={data.body} />
       </div>
-      <div className="px-8 pb-6 flex gap-4">
+      <div className="flex gap-4 px-8 pb-6">
         <Button onClick={() => onCancel()} isSecondary>Cancel</Button>
         <Button isSubmit isPrimary>Publish</Button>
       </div>

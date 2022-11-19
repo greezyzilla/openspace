@@ -14,25 +14,25 @@ export default function SidebarItem({ Icon, href, children } : SidebarItemProps)
   const isActive = decodeURI(router.asPath) === href;
 
   const linkClassname = classcat({
-    'px-3 rounded-xl py-2 flex text-sm items-center gap-3 mr-2': true,
-    'bg-white/90 shadow-md shadow-slate-100/50 text-slate-600/80 after:absolute after:right-0 z-10 after:h-full after:w-[2px] after:bg-violet-500 after:rounded-l-full': isActive,
+    'mr-2 flex items-center gap-3 rounded-xl px-3 py-2 text-sm': true,
+    'z-10 bg-white/90 text-slate-600/80 shadow-md shadow-slate-100/50 after:absolute after:right-0 after:h-full after:w-[2px] after:rounded-l-full after:bg-violet-500': isActive,
     'text-slate-500/80': !isActive,
   });
 
   const iconWrapperClassname = classcat({
-    'rounded-lg w-8 h-8 flex justify-center items-center': true,
+    'flex h-8 w-8 items-center justify-center rounded-lg': true,
     'bg-slate-400/10 ring-1 ring-slate-200/0': isActive,
     'bg-slate-400/20': !isActive,
   });
 
   const iconClassname = classcat({
-    'w-4 h-4': true,
+    'h-4 w-4': true,
     'text-violet-600': isActive,
     'text-slate-500/70': !isActive,
   });
 
   return (
-    <div className="pr-3 relative">
+    <div className="relative pr-3">
       <Link href={href} className={linkClassname}>
         <div className={iconWrapperClassname}>
           <Icon className={iconClassname} />

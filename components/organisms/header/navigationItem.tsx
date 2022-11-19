@@ -13,9 +13,9 @@ export default function NavigationItem({ children, href } : NavItemProps) {
   const isActive = router.asPath === href;
 
   const linkClassname = classcat({
-    'h-full items-center relative flex items-center px-2': true,
+    'relative flex h-full items-center px-2': true,
     'text-slate-400': !isActive,
-    'text-slate-500 font-medium after:w-full after:h-[3px] after:bg-violet-400 after:absolute after:bottom-0 after:left-0': isActive,
+    'font-medium text-slate-500 after:absolute after:bottom-0 after:left-0 after:h-[3px] after:w-full after:bg-violet-400': isActive,
   });
 
   return (

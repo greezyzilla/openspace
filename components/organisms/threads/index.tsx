@@ -8,5 +8,5 @@ interface ThreadsInterface{
 
 export default function Threads({ threads } : ThreadsInterface) {
   if (!thread.length) return <p>loading</p>;
-  return <div className="flex flex-col gap-4 max-w-[700px] mx-auto">{threads.map((t : ThreadInterface) => <Thread thread={t} key={t.id} />)}</div>;
+  return <div className="mx-auto flex max-w-[700px] flex-col gap-4">{threads.map((t : ThreadInterface) => <Thread thread={t} key={t.id} />)}</div>;
 }
