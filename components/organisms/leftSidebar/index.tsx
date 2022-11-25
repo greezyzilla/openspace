@@ -2,7 +2,10 @@ import {
   ChartBarIcon, HashtagIcon, HomeIcon, PlusIcon,
 } from '@heroicons/react/24/solid';
 import { useState } from 'react';
-import { useAppSelector } from '../../../hooks/redux';
+import { postThread } from '../../../features/thread';
+import { AddThread } from '../../../features/thread/thread.interface';
+import useAppRequest from '../../../hooks';
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import Card from '../../atoms/card';
 import AddThreadForm from '../../molecules/form/addThread';
 import Modal from '../../molecules/modal';
@@ -10,6 +13,10 @@ import SidebarItem from './sidebarItem';
 
 export default function LeftSidebar() {
   const [isOpen, setIsOpen] = useState(false);
+  const dispatch = useAppDispatch();
+  const request = useAppRequest();
+
+  const onAddThread = async (thread: AddThread) => request(() => dispatch(postThread(thread)));
 
   const closeModal = () => setIsOpen(false);
   const openModal = () => setIsOpen(true);
@@ -34,7 +41,7 @@ export default function LeftSidebar() {
       </button>
       <Modal isOpen={isOpen} onClose={closeModal}>
         <Card size="lg" className="overflow-hidden rounded-2xl transition-all">
-          <AddThreadForm onCancel={closeModal} onSubmit={(v) => console.log(v)} />
+          <AddThreadForm onCancel={closeModal} onSubmit={onAddThread} />
         </Card>
       </Modal>
       <div>

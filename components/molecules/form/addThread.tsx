@@ -27,7 +27,10 @@ export default function AddThreadForm({ onSubmit, onCancel } : AddThreadFormProp
   const onSubmitHandle = (e : FormEvent) => {
     e.preventDefault();
     if (data.body === '' || data.body === '<p><br></p>') toast.error('Thread body should not be empty');
-    else onSubmit(data);
+    else {
+      onSubmit(data);
+      onCancel();
+    }
   };
 
   return (
