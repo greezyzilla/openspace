@@ -1,7 +1,7 @@
 import { ChangeEvent } from 'react';
 
 interface InputTextProps {
-    label: string;
+    label?: string;
     placeholder: string;
     onChange(e: ChangeEvent<HTMLInputElement>) : void;
     value: string;
@@ -9,11 +9,11 @@ interface InputTextProps {
 }
 
 export default function InputText({
-  label, placeholder, onChange, value, name,
-} : InputTextProps) {
+  label = '', placeholder, onChange, value, name,
+} : Partial<InputTextProps>) {
   return (
     <div className="flex flex-col gap-2">
-      <p className="text-sm text-slate-500">{ label }</p>
+      {label && <p className="text-sm text-slate-500">{ label }</p>}
       <input
         type="text"
         name={name}

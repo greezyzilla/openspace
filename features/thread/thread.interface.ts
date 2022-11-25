@@ -36,6 +36,7 @@ export interface Comment{
   }
 
 export interface ThreadDetail{
+    id: string;
     body: string;
     category: string;
     comments: Comment[];
@@ -70,5 +71,19 @@ export interface PostVoteResponse{
             threadId: string;
             voteType: 1
         };
+    }
+}
+
+export interface PostComment{
+    threadId: string;
+    content: string;
+}
+
+export interface PostCommentResponse{
+    status: string;
+    message: string;
+    data: {
+        comment: Comment;
+        threadId?: string;
     }
 }

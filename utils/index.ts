@@ -6,6 +6,8 @@ import relativeTime from 'dayjs/plugin/relativeTime';
 dayjs.extend(relativeTime);
 
 export function getAccessToken() {
+  if (typeof window === 'undefined') return null;
+
   const accessToken = localStorage.getItem('accessToken');
   return accessToken;
 }

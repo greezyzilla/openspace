@@ -14,19 +14,21 @@ export default function useAppRequest() {
   const request = async (callback : () => Promise<PayloadAction<any>>) => {
     if (!hasAuthenticatedUser || !hasAccessToken) {
       toast.error('Please login to continue');
-      router.push('/auth/login');
-    } else {
-      const response = await callback();
-
-      const { code, message } = response.payload;
-      if (isRejectedWithValue(response)) toast.error(message);
-      else toast.success(message);
-
-      if (code === 401) {
-        removeAccessToken();
-        router.replace('/auth/login');
-      }
+      return router.push('/auth/login');
     }
+
+    const response = await callback();
+
+    const { code, message } = response.payload;
+    if (isRejectedWithValue(response)) toast.error(message);
+    else toast.success(message);
+
+    if (code === 401) {
+      removeAccessToken();
+      router.push('/auth/login');
+    }
+
+    return response;
   };
 
   return request;

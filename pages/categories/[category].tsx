@@ -14,17 +14,14 @@ export default function ThreadByCategoryPage() {
 
   useEffect(() => {
     if (router.isReady) {
-      const filteredThread = threads.filter((t) => {
-        // console.log(t.category);
-        if (category === 'unknown') return !t.category;
-        return t.category === category;
-      });
-      console.log(filteredThread);
+      const filteredThread = threads.filter((t) => t.category === category);
       setThreadByCategory(filteredThread);
     }
   }, [router, loading]);
 
-  if (!threadByCategory?.length || loading) return <p>Loading</p>;
+  if (!threadByCategory?.length || loading) {
+    return <DashboardTemplate><p>Loading</p></DashboardTemplate>;
+  }
 
   return (
     <DashboardTemplate>
