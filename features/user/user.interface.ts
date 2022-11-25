@@ -5,16 +5,29 @@ export interface User{
     avatar: string;
 }
 
-export interface UserState{
-    users: User[];
-    filter: string;
-    loading: boolean;
-}
-
 export interface GetUsersResponse{
     status: string;
     message: string;
     data: {
         users: User[];
     }
+}
+
+export interface Leaderboard{
+    user: User;
+    score: number;
+}
+
+export interface GetLeaderboardsResponse{
+    status: string;
+    message: string;
+    data: {
+        leaderboards: Leaderboard[];
+    }
+}
+
+export interface UserState{
+    users: User[];
+    leaderboards: Leaderboard[];
+    loading: boolean;
 }

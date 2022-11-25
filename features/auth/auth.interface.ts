@@ -1,6 +1,6 @@
 export interface UserRegister{
-    id: string;
     name: string;
+    email: string;
     password: string;
 }
 
@@ -11,14 +11,14 @@ export interface UserRegisterResponse{
         user: {
             id: string;
             name: string;
-            photo: string;
+            email: string;
+            avatar: string;
         }
     };
 }
 
 export interface UserLogin{
-    id: string;
-    name: string;
+    email: string;
     password: string;
 }
 
@@ -47,6 +47,5 @@ export interface AuthenticatedUserResponse{
 
 export interface AuthenticationState{
     user?: AuthenticatedUser;
-    filter: string;
     loading: boolean;
 }
