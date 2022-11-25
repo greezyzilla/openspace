@@ -45,3 +45,30 @@ export interface ThreadDetail{
     title: string;
     upVotesBy: string[];
 }
+
+export interface AddThread{
+    title: string;
+    body: string;
+    category: string;
+}
+
+export interface AddThreadResponse{
+    status: string;
+    message: string;
+    data: {
+        thread: Thread;
+    }
+}
+
+export interface PostVoteResponse{
+    status: string;
+    message: string;
+    data: {
+        vote: {
+            id: string;
+            userId: string;
+            threadId: string;
+            voteType: 1
+        };
+    }
+}
