@@ -15,7 +15,7 @@ export default function Leaderboard() {
     <Dashboard>
       {
         loading ? <p>Loading</p> : (
-          <div className="mx-auto flex max-w-[700px] flex-col gap-4">
+          <div className="flex flex-col gap-4">
             {leaderboards.slice(0, 10).map((leaderboard, index) => (
               <div key={leaderboard.user.id} className="flex h-20 items-center gap-3 rounded-2xl bg-white p-6">
                 <p className="w-10 text-center text-4xl font-extralight text-slate-500">

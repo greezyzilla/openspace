@@ -14,7 +14,9 @@ export default function DashboardTemplate({ children } : DashboardProps) {
       <div className="flex h-full flex-1 overflow-hidden bg-slate-50 backdrop-blur-lg">
         <LeftSidebar />
         <div className="max-h-full flex-1 overflow-y-auto scroll-smooth p-6">
-          {children}
+          <div className="mx-auto max-w-[700px]">
+            {children}
+          </div>
         </div>
         <RightSidebar />
       </div>
