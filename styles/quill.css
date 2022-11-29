@@ -945,7 +945,7 @@
 }
 
 .quill{
-    @apply border-[2px] border-violet-400 rounded-lg overflow-auto
+    @apply border-[2px] border-violet-400 rounded-lg h-fit
 }
 
 .quill:has(.ql-editor:focus){
@@ -953,5 +953,5 @@
 }
 
 .ql-editor{
-  @apply h-full overflow-hidden
+  @apply h-[150px]
 }
