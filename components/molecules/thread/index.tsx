@@ -4,8 +4,7 @@ import { Thread as ThreadInterface } from '../../../features/thread/thread.inter
 import { useAppSelector } from '../../../hooks/redux';
 import { getRelativeDate } from '../../../utils';
 import Button from '../../atoms/button';
-import DownVoteButton from '../button/downVote';
-import UpVoteButton from '../button/upVote';
+import VoteButton from '../button/vote';
 
 interface ThreadProps{
   thread: ThreadInterface;
@@ -47,8 +46,8 @@ export default function Thread({ thread } : ThreadProps) {
           </p>
         </Button>
         <div className="flex gap-4">
-          <UpVoteButton thread={thread} />
-          <DownVoteButton thread={thread} />
+          <VoteButton votes={thread.upVotesBy} threadId={thread.id} />
+          <VoteButton votes={thread.downVotesBy} threadId={thread.id} isVoteDown />
         </div>
       </div>
     </article>
