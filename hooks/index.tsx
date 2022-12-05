@@ -19,16 +19,18 @@ export default function useAppRequest() {
 
     const response = await callback();
 
-    const { code, message } = response.payload;
-    if (isRejectedWithValue(response)) toast.error(message);
-    else toast.success(message);
+    if (response.payload) {
+      const { code, message } = response.payload;
+      if (isRejectedWithValue(response)) toast.error(message);
+      else toast.success(message);
 
-    if (code === 401) {
-      removeAccessToken();
-      router.push('/auth/login');
+      if (code === 401) {
+        removeAccessToken();
+        router.push('/auth/login');
+      }
+
+      return response;
     }
-
-    return response;
   };
 
   return request;

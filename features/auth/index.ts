@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { fetchWithToken, putAccessToken } from '../../utils';
+import { fetchWithToken, putAccessToken, removeAccessToken } from '../../utils';
 import {
   AuthenticatedUserResponse, AuthenticationState, UserLogin,
   UserLoginResponse, UserRegister, UserRegisterResponse,
@@ -46,7 +46,12 @@ const initialState : AuthenticationState = {
 export const userSlice = createSlice({
   name: 'auth',
   initialState,
-  reducers: {},
+  reducers: {
+    postSignOut: (state) => {
+      state.user = undefined;
+      removeAccessToken();
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(getAuthenticatedUser.pending, (state) => { state.loading = true; });
     builder.addCase(getAuthenticatedUser.rejected, (state) => { state.loading = false; });
@@ -78,4 +83,5 @@ export const userSlice = createSlice({
   },
 });
 
+export const { postSignOut } = userSlice.actions;
 export default userSlice.reducer;

@@ -59,7 +59,6 @@ export default function SearchThread() {
                   { filteredThread.length
                     ? filteredThread?.map((thread) => {
                       const user = users.find((u) => u.id === thread.ownerId);
-
                       return (
                         <Button href={`/details/${thread.id}`} onClick={closeModal} isLink className="flex gap-2 py-3 px-4 hover:bg-slate-50" key={thread.id}>
                           <img src={user?.avatar} alt={user?.name} className="h-12 w-12 rounded-lg" />
@@ -69,7 +68,7 @@ export default function SearchThread() {
                               <p className="text-sm">
                                 Created by&nbsp;
                                 <span className="text-sm font-medium">{user?.name}</span>
-                            &nbsp;
+                                &nbsp;
                                 {getRelativeDate(thread.createdAt!)}
                               </p>
                               <p className="max-w-[150px] truncate rounded-md bg-violet-100 p-1 text-xs text-slate-800">
@@ -84,7 +83,6 @@ export default function SearchThread() {
                 </div>
               )
             }
-
           </div>
         </div>
       </Modal>
