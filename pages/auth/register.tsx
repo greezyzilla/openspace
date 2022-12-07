@@ -39,9 +39,9 @@ export default function Register() {
 
   return (
     <AuthTemplate>
-      <Card className="flex flex-col gap-4 rounded-lg shadow-xl shadow-slate-200">
+      <Card className="m-4 flex flex-col gap-4 rounded-lg shadow-xl shadow-slate-200 sm:m-0">
         <h1 className="border-b-2 border-slate-100/80 px-8 pt-6 pb-5 text-lg font-medium text-slate-600">Register</h1>
-        <form className="flex flex-col gap-6 px-8" onSubmit={onSubmit}>
+        <form className="flex flex-col gap-4 px-8 sm:gap-6" onSubmit={onSubmit}>
           <InputText label="Full Name" name="name" onChange={onChangeHandle} placeholder="Alexander Scotch, etc.." value={data.name} />
           <InputEmail label="Email" name="email" onChange={onChangeHandle} placeholder="email@example.com" value={data.email} />
           <div className="flex gap-6">

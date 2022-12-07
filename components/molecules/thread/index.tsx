@@ -42,7 +42,7 @@ export default function Thread({ thread } : ThreadProps) {
           <p className="text-slate-500/90">
             {thread.totalComments}
             &nbsp;
-            Comment
+            <span className="hidden sm:inline-flex">Comment</span>
           </p>
         </Button>
         <div className="flex gap-4">

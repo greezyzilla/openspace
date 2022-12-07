@@ -130,7 +130,12 @@ export const threadSlice = createSlice({
     builder.addCase(getThreads.rejected, (state) => { state.loading = false; });
     builder.addCase(getThreads.fulfilled, (state, action: PayloadAction<GetThreadsResponse>) => {
       state.threads = action.payload.data.threads
-        .map((thread) => (thread.category ? thread : ({ ...thread, category: 'unknown' })));
+        .map((thread) => {
+          if (thread.category) {
+            if (thread.category.startsWith('#')) return { ...thread, category: thread.category.slice(1) };
+            return thread;
+          } return { ...thread, category: 'unknown' };
+        });
       state.loading = false;
     });
     builder.addCase(postThread.pending, (state) => { state.loading = true; });
@@ -203,10 +208,6 @@ export const threadSlice = createSlice({
     builder.addCase(postComment.pending, (state) => { state.loading = true; });
     builder.addCase(postComment.rejected, (state) => { state.loading = false; });
     builder.addCase(postComment.fulfilled, (state, action: PayloadAction<PostCommentResponse>) => {
-      const { threadId } = action.payload.data;
-      const threadIndex = state.threads.findIndex((thread) => thread.id === threadId)!;
-      const thread = state.threads[threadIndex];
-      thread.totalComments = (thread.totalComments ?? 0) + 1;
       state.thread?.comments.unshift(action.payload.data.comment);
       state.loading = false;
     });

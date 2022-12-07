@@ -945,13 +945,13 @@
 }
 
 .quill{
-    @apply border-[2px] border-violet-400 rounded-lg h-fit
+    @apply border-[2px] border-violet-400 rounded-lg h-fit overflow-hidden
 }
 
 .quill:has(.ql-editor:focus){
-    @apply ring-4 ring-violet-200 
+    @apply ring-4 ring-violet-200
 }
 
 .ql-editor{
-  @apply h-[150px]
+  @apply overflow-auto
 }

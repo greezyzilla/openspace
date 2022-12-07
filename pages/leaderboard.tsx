@@ -23,9 +23,9 @@ export default function Leaderboard() {
                   .
                 </p>
                 <img src={leaderboard.user.avatar} className="h-10 w-10 rounded-lg" alt={leaderboard.user.name} />
-                <div className="flex-1">
-                  <h3 className="font-medium text-slate-600">{leaderboard.user.name}</h3>
-                  <p className="text-xs text-slate-500">{leaderboard.user.email}</p>
+                <div className="flex-1 overflow-hidden">
+                  <h3 className="truncate font-medium text-slate-600 sm:max-w-none">{leaderboard.user.name}</h3>
+                  <p className="truncate text-xs text-slate-500 sm:max-w-none">{leaderboard.user.email}</p>
                 </div>
                 <p className="flex items-end justify-center text-4xl font-light text-violet-800/80">
                   {leaderboard.score}

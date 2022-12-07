@@ -49,7 +49,13 @@ export default function VoteButton(props : Partial<VoteButtonProps>) {
       isActive={isUpVoting || false}
     >
       {isVoteDown ? <ArrowSmallDownIcon className="h-4 w-4" /> : <ArrowSmallUpIcon className="h-4 w-4" />}
-      {`${votes?.length} ${isVoteDown ? 'Down' : 'Up'} Vote`}
+      <p className="inline-flex gap-1 pr-1 md:pr-0">
+        <span>{votes?.length}</span>
+        <span className="hidden sm:inline">
+          {isVoteDown ? 'Down ' : 'Up '}
+          Vote
+        </span>
+      </p>
     </Toggle>
   );
 }

@@ -38,16 +38,17 @@ export default function SearchThread() {
 
   return (
     <>
-      <Button onClick={openModal} className="flex items-center justify-between gap-20 rounded-xl bg-slate-100 px-4 py-2">
-        <p className="bg-transparent text-xs text-slate-400 outline-none">
+      <Button onClick={openModal} className="flex h-10 w-10 items-center justify-center gap-20 rounded-xl bg-slate-100 md:h-auto md:w-auto md:justify-between md:px-4 md:py-2">
+        <p className="hidden bg-transparent text-xs text-slate-400 outline-none md:block">
           Type to search
         </p>
-        <div className="flex h-8 items-center justify-center rounded-lg bg-white px-2 text-xs text-slate-500 shadow-sm shadow-slate-200">
+        <div className="hidden h-8 items-center justify-center rounded-lg bg-white px-2 text-xs text-slate-500 shadow-sm shadow-slate-200 md:flex">
           Ctrl + /
         </div>
+        <MagnifyingGlassIcon className="inline-block h-4 w-4 text-slate-600 md:hidden" />
       </Button>
       <Modal isOpen={isOpen} onClose={closeModal}>
-        <div className="absolute top-28 left-1/2 w-full max-w-xl -translate-x-1/2 overflow-hidden rounded-lg bg-white">
+        <div className="absolute top-28 left-1/2 w-11/12 max-w-xl -translate-x-1/2 overflow-hidden rounded-lg bg-white">
           <div className="flex flex-col">
             <div className="relative">
               <input type="text" onChange={(e) => setSearch(e.target.value)} value={search} className="w-full bg-transparent px-6 py-5 text-slate-800 focus:outline-none" placeholder="Search thread here..." />
@@ -64,14 +65,14 @@ export default function SearchThread() {
                           <img src={user?.avatar} alt={user?.name} className="h-12 w-12 rounded-lg" />
                           <div className="flex w-full flex-col items-start overflow-hidden">
                             <h3 className="mb-1 w-full truncate text-left font-medium text-slate-800">{thread.title}</h3>
-                            <div className="flex w-full justify-between">
-                              <p className="text-sm">
+                            <div className="flex w-full justify-between gap-2">
+                              <p className="truncate text-sm">
                                 Created by&nbsp;
                                 <span className="text-sm font-medium">{user?.name}</span>
                                 &nbsp;
                                 {getRelativeDate(thread.createdAt!)}
                               </p>
-                              <p className="max-w-[150px] truncate rounded-md bg-violet-100 p-1 text-xs text-slate-800">
+                              <p className="w-full max-w-[100px] truncate rounded-md bg-violet-100 p-1 text-xs text-slate-800">
                                 #
                                 {thread.category}
                               </p>
