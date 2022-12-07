@@ -14,7 +14,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import { getThreads } from '../features/thread';
 import { getUsers } from '../features/user';
 
-const forumPath = ['', 'leaderboard', 'categories', 'details'];
 function Middleware({ children } : {children : ReactElement}) {
   const router = useRouter();
   const dispatch = useAppDispatch();
@@ -23,14 +22,15 @@ function Middleware({ children } : {children : ReactElement}) {
     if (router.isReady) {
       const pathName = router.asPath.split('/')[1];
       const hasAccessToken = !!getAccessToken();
+      const guestPath = ['', 'leaderboard', 'categories', 'details'].includes(pathName);
 
-      if (forumPath.includes(pathName)) {
+      if (guestPath) {
         dispatch(getThreads());
         dispatch(getUsers());
       }
 
       if (hasAccessToken) {
-        if (forumPath.includes(pathName)) {
+        if (guestPath) {
           dispatch(getAuthenticatedUser())
             .then((response) => isRejectedWithValue(response) && removeAccessToken());
         } else router.replace('/');

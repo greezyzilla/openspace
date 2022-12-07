@@ -1,7 +1,7 @@
 import { isRejectedWithValue, PayloadAction } from '@reduxjs/toolkit';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
-import { getAccessToken, removeAccessToken } from '../utils';
+import { capitalize, getAccessToken, removeAccessToken } from '../utils';
 import { useAppSelector } from './redux';
 
 export default function useAppRequest() {
@@ -13,7 +13,7 @@ export default function useAppRequest() {
 
   const request = async (callback : () => Promise<PayloadAction<any>>) => {
     if (!hasAuthenticatedUser || !hasAccessToken) {
-      toast.error('Please login to continue');
+      toast.error('Please Login To Continue');
       return router.push('/auth/login');
     }
 
@@ -21,16 +21,18 @@ export default function useAppRequest() {
 
     if (response.payload) {
       const { code, message } = response.payload;
-      if (isRejectedWithValue(response)) toast.error(message);
-      else toast.success(message);
+      if (isRejectedWithValue(response)) toast.error(capitalize(message));
+      else toast.success(capitalize(message));
 
-      if (code === 401) {
+      if (code && code === 401) {
         removeAccessToken();
         router.push('/auth/login');
       }
 
       return response;
     }
+
+    return null;
   };
 
   return request;

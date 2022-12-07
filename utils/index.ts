@@ -53,4 +53,6 @@ export async function fetcWithoutToken(url : string, options : AxiosRequestConfi
   }
 }
 
+export const capitalize = (text: string) => text.split(' ').map((t) => t[0].toUpperCase() + t.slice(1)).join(' ');
+
 export const getRelativeDate = (dateString: string) => dayjs(dateString).fromNow();
