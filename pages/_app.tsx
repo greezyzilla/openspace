@@ -6,6 +6,8 @@ import { ToastContainer } from 'react-toastify';
 import { useRouter } from 'next/router';
 import { ReactElement, useEffect } from 'react';
 import { isRejectedWithValue } from '@reduxjs/toolkit';
+import LoadingBar from 'react-redux-loading-bar';
+import { violet } from 'tailwindcss/colors';
 import { store } from '../store';
 import { getAccessToken, removeAccessToken } from '../utils';
 import { useAppDispatch } from '../hooks/redux';
@@ -45,6 +47,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <Provider store={store}>
       <main className="flex h-screen w-screen flex-col font-poppins">
+        <LoadingBar style={{ backgroundColor: violet[600], height: 4 }} />
         <Middleware>
           <Component {...pageProps} />
         </Middleware>

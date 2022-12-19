@@ -1,4 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
+import { loadingBarMiddleware, loadingBarReducer } from 'react-redux-loading-bar';
 import threadReducer from '../features/thread';
 import userReducer from '../features/user';
 import authenticationReducer from '../features/auth';
@@ -8,6 +9,12 @@ export const store = configureStore({
     thread: threadReducer,
     user: userReducer,
     auth: authenticationReducer,
+    loadingBar: loadingBarReducer,
+  },
+  middleware(getDefaultMiddleware) {
+    return getDefaultMiddleware().concat(loadingBarMiddleware({
+      promiseTypeSuffixes: ['pending', 'fulfilled', 'rejected'],
+    }));
   },
 });
 

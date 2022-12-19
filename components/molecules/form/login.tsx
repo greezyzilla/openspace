@@ -1,7 +1,7 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
-import { toast } from 'react-toastify';
 import { isRejectedWithValue } from '@reduxjs/toolkit';
 import { useRouter } from 'next/router';
+import { toast } from 'react-toastify';
 import { Button, InputPassword, InputText } from '../../atoms';
 import { UserLogin } from '../../../features/auth/auth.interface';
 import { useAppDispatch } from '../../../hooks/redux';
@@ -32,7 +32,9 @@ export default function LoginForm() {
       if (isRejectedWithValue(response)) toast.error(response.payload.message);
       else {
         toast.success('Login success');
-        router.replace('/');
+        setTimeout(() => {
+          router.replace('/');
+        }, 500);
       }
     }
   };
