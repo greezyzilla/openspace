@@ -2,10 +2,10 @@ import { ArrowSmallDownIcon, ArrowSmallUpIcon } from '@heroicons/react/24/solid'
 import {
   postVoteDown, postVoteNeutral, postVoteUp,
   postVoteUpComment, postVoteDownComment, postVoteNeutralComment,
-} from '../../../features/thread';
-import useAppRequest from '../../../hooks';
-import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
-import Toggle from '../../atoms/button/toggle';
+} from '../../features/thread';
+import useAppRequest from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import Toggle from '../atoms/button/toggle';
 
 interface VoteButtonProps{
     threadId: string;
@@ -14,7 +14,7 @@ interface VoteButtonProps{
     isVoteDown?: boolean;
 }
 
-export default function VoteButton(props : Partial<VoteButtonProps>) {
+export default function ButtonVote(props : Partial<VoteButtonProps>) {
   const {
     commentId = '', threadId = '', isVoteDown = false, votes = [],
   } = props;
@@ -59,3 +59,11 @@ export default function VoteButton(props : Partial<VoteButtonProps>) {
     </Toggle>
   );
 }
+
+ButtonVote.Skeleton = function ButtonVoteSkeleton() {
+  return (
+    <div className="skeleton w-16 gap-2 rounded-lg p-2 text-xs sm:w-24">
+      &nbsp;
+    </div>
+  );
+};

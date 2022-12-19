@@ -1,11 +1,11 @@
 import { MagnifyingGlassIcon } from '@heroicons/react/24/solid';
 import { useEffect, useState } from 'react';
-import { useAppSelector } from '../../../hooks/redux';
-import { getRelativeDate } from '../../../utils';
-import Button from '../../atoms/button';
-import Modal from '../../molecules/modal';
+import { useAppSelector } from '../../hooks/redux';
+import { getRelativeDate } from '../../utils';
+import Modal from './modal';
+import { Button } from '../atoms';
 
-export default function SearchThread() {
+export default function Search() {
   const [isOpen, setIsOpen] = useState(false);
   const [search, setSearch] = useState('');
   const { threads, users } = useAppSelector((state) => ({

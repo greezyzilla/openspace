@@ -1,7 +1,7 @@
 import React, { ChangeEvent, FormEvent, useState } from 'react';
 import { toast } from 'react-toastify';
 import { Thread } from '../../../features/thread/thread.interface';
-import Button from '../../atoms/button';
+import Button from '../../atoms/button/default';
 import InputText from '../../atoms/input/text';
 import TextArea from '../../atoms/input/textarea';
 

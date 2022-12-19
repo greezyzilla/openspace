@@ -33,6 +33,7 @@ export const postLoginUser = createAsyncThunk(
       method: 'POST',
       data: user,
     });
+
     if (response.status === 'success') return response;
     return rejectWithValue(response);
   },

@@ -1,6 +1,6 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { PostComment } from '../../../features/thread/thread.interface';
-import Button from '../../atoms/button';
+import Button from '../../atoms/button/default';
 import InputText from '../../atoms/input/text';
 
 interface AddCommentProps{

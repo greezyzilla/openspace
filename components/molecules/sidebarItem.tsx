@@ -42,3 +42,17 @@ export default function SidebarItem({ Icon, href, children } : SidebarItemProps)
     </div>
   );
 }
+
+SidebarItem.Skeleton = function SidebarItemSkeleton() {
+  return (
+    <div className="relative pr-3">
+      <div className="mr-2 flex items-center gap-3 rounded-xl px-3 py-2 text-sm">
+        <p className="skeleton h-8 w-full max-w-[32px] rounded-lg" />
+        <div className="flex h-6 flex-1 gap-2">
+          <p className="skeleton flex-1">&nbsp;</p>
+          <div className="skeleton max-w-[24px] flex-1 rounded-lg">&nbsp;</div>
+        </div>
+      </div>
+    </div>
+  );
+};

@@ -1,6 +1,6 @@
 import classcat from 'classcat';
 import { ReactNode } from 'react';
-import Button from '.';
+import Button from './default';
 
 interface ToggleProps{
     children: ReactNode;

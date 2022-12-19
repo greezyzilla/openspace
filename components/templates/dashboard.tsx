@@ -1,7 +1,5 @@
 import { ReactNode } from 'react';
-import Header from '../organisms/header';
-import LeftSidebar from '../organisms/leftSidebar';
-import RightSidebar from '../organisms/rightSidebar';
+import { Header, LeftSidebar, RightSidebar } from '../organisms';
 
 interface DashboardProps{
     children : ReactNode;

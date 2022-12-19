@@ -1,6 +1,6 @@
 import classcat from 'classcat';
 import Link from 'next/link';
-import { ReactNode } from 'react';
+import { ReactNode, forwardRef } from 'react';
 
 interface ButtonProps{
     children: ReactNode;
@@ -15,7 +15,7 @@ interface ButtonProps{
     isDisabled?: boolean;
 }
 
-export default function Button(props : Partial<ButtonProps>) {
+const Button = forwardRef((props : Partial<ButtonProps>, ref : any) => {
   const {
     children, className = '', isExternal = false, href = '/', isLink = false, isPrimary = false, isSecondary = false, onClick = () => {}, isSubmit = false, isDisabled,
   } = props;
@@ -29,13 +29,17 @@ export default function Button(props : Partial<ButtonProps>) {
   }, className]);
 
   if (isLink) {
-    if (isExternal) return <a href={href} className={buttonClassname}>{children}</a>;
-    return <Link href={href} className={buttonClassname} onClick={onClick}>{children}</Link>;
+    if (isExternal) return <a href={href} ref={ref} className={buttonClassname}>{children}</a>;
+    return (
+      <Link href={href} ref={ref} className={buttonClassname} onClick={onClick}>{children}</Link>
+    );
   }
 
   return (
-    <button type={isSubmit ? 'submit' : 'button'} onClick={onClick} className={buttonClassname}>
+    <button type={isSubmit ? 'submit' : 'button'} ref={ref} onClick={onClick} className={buttonClassname}>
       {children}
     </button>
   );
-}
+});
+
+export default Button;

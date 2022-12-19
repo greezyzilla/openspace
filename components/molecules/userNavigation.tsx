@@ -1,8 +1,9 @@
 import { Menu, Transition } from '@headlessui/react';
 import { Fragment } from 'react';
-import { postSignOut } from '../../../features/auth';
-import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
-import Button from '../../atoms/button';
+import { UserIcon } from '@heroicons/react/24/solid';
+import { postSignOut } from '../../features/auth';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { Button } from '../atoms';
 
 export default function UserInformation() {
   const user = useAppSelector((state) => state.auth.user);
@@ -45,3 +46,19 @@ export default function UserInformation() {
     </Menu>
   );
 }
+
+UserInformation.NotAuthenticated = function UserInformationNotAuthenticated() {
+  return (
+    <Button isLink href="/auth/login" className="rounded-md px-2 py-1.5 text-sm text-white hover:bg-slate-50/50">
+      <div className="flex gap-3">
+        <div className="hidden flex-col items-end md:flex">
+          <p className="text-sm text-slate-500">Has an account?</p>
+          <p className="text-xs font-light text-slate-400">Come Here to Sign In.</p>
+        </div>
+        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-100">
+          <UserIcon className="h-4 w-4 text-slate-400" />
+        </div>
+      </div>
+    </Button>
+  );
+};

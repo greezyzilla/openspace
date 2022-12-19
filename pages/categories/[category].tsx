@@ -1,9 +1,9 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import Threads from '../../components/organisms/threads';
-import { DashboardTemplate } from '../../components/templates';
 import { Thread } from '../../features/thread/thread.interface';
 import { useAppSelector } from '../../hooks/redux';
+import { DashboardTemplate } from '../../components/templates';
+import { Threads } from '../../components/organisms';
 
 export default function ThreadByCategoryPage() {
   const [threadByCategory, setThreadByCategory] = useState<Thread[]>();
