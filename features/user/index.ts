@@ -34,7 +34,7 @@ export const userSlice = createSlice({
     builder.addCase(getUsers.pending, (state) => { state.loading = true; });
     builder.addCase(getUsers.rejected, (state) => { state.loading = false; });
     builder.addCase(getUsers.fulfilled, (state, action: PayloadAction<GetUsersResponse>) => {
-      state.users = action.payload.data.users;
+      state.users = action.payload.data.users.reverse();
       state.loading = false;
     });
     builder.addCase(getLeaderboards.pending, (state) => { state.loading = true; });

@@ -49,6 +49,7 @@ export default function Thread({ thread, isDetails = true } : ThreadProps) {
         <Button isLink isDisabled={isDetails} href={`/details/${thread.id}`} className="flex items-center justify-center gap-1 rounded-lg bg-slate-100/80 p-2 text-xs">
           <ChatBubbleLeftRightIcon className="h-5 w-5 text-slate-400" />
           <p className="text-slate-500/90">
+            &nbsp;
             {thread.totalComments}
             &nbsp;
             <span className="hidden sm:inline-flex">Comment</span>
