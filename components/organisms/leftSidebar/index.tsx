@@ -6,11 +6,13 @@ import { postThread } from '../../../features/thread';
 import { AddThread } from '../../../features/thread/thread.interface';
 import useAppRequest from '../../../hooks';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
+import { getTrendingCategoriesFromThreads } from '../../../utils';
 import Button from '../../atoms/button';
 import Card from '../../atoms/card';
 import AddThreadForm from '../../molecules/form/addThread';
 import Modal from '../../molecules/modal';
 import SidebarItem from './sidebarItem';
+import SidebarItemSkeleton from './sidebarItemSkeleton';
 
 export default function LeftSidebar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -22,16 +24,9 @@ export default function LeftSidebar() {
   const closeModal = () => setIsOpen(false);
   const openModal = () => setIsOpen(true);
 
-  const threads = useAppSelector((state) => state.thread.threads);
-  if (!threads.length) return <p>Loading</p>;
-  const categories = threads.map((thread) => (thread.category).toLocaleLowerCase());
-  const groupedCategories = categories
-    .reduce((acc : any, category) => ({ ...acc, [category]: (+acc[category] || 0) + 1 }), {});
-  const sortedCategories = Object.keys(groupedCategories)
-    .map((category) => ({ category, total: groupedCategories[category] }))
-    .sort((a, b) => b.total - a.total);
-  const trendingCategories = sortedCategories.slice(0, 5);
+  const { threads, loading } = useAppSelector((state) => state.thread);
 
+  const isLoading = !threads.length || loading;
   return (
     <>
       <Button onClick={openModal} className="group fixed bottom-8 right-8 flex items-center gap-3 rounded-lg bg-violet-700 p-2 text-sm text-white/90 shadow-xl shadow-black/20 md:hidden">
@@ -67,14 +62,17 @@ export default function LeftSidebar() {
           </h2>
           <div className="flex flex-col gap-1">
             {
-              trendingCategories.map(({ category, total }) => (
-                <SidebarItem key={category} href={`/categories/${category}`} Icon={HashtagIcon}>
-                  <div className="flex flex-1 items-center justify-between gap-2 overflow-hidden">
-                    <p className="flex-1 overflow-hidden truncate">{category}</p>
-                    <p className="flex h-6 w-6 items-center justify-center rounded-lg bg-violet-100 text-xs text-violet-400">{total}</p>
-                  </div>
-                </SidebarItem>
-              ))
+              !isLoading ? getTrendingCategoriesFromThreads(threads)
+                .map(({ category, total }) => (
+                  <SidebarItem key={category} href={`/categories/${category}`} Icon={HashtagIcon}>
+                    <div className="flex flex-1 items-center justify-between gap-2 overflow-hidden">
+                      <p className="flex-1 overflow-hidden truncate">{category}</p>
+                      <p className="flex h-6 w-6 items-center justify-center rounded-lg bg-violet-100 text-xs text-violet-400">{total}</p>
+                    </div>
+                  </SidebarItem>
+                )) : (
+                [...new Array(5)].map((_, index) => <SidebarItemSkeleton key={`skeleton-category-${index}`} />)
+              )
             }
           </div>
         </div>

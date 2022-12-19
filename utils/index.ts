@@ -2,6 +2,7 @@ import axios, { AxiosRequestConfig } from 'axios';
 
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
+import { Thread } from '../features/thread/thread.interface';
 
 dayjs.extend(relativeTime);
 
@@ -51,6 +52,16 @@ export async function fetcWithoutToken(url : string, options : AxiosRequestConfi
   } catch (e : any) {
     return { status: 'fail', message: e.response.data.message };
   }
+}
+
+export function getTrendingCategoriesFromThreads(threads: Thread[]) {
+  const categories = threads.map((thread) => (thread.category).toLocaleLowerCase());
+  const groupedCategories = categories
+    .reduce((acc : any, category) => ({ ...acc, [category]: (+acc[category] || 0) + 1 }), {});
+  const sortedCategories = Object.keys(groupedCategories)
+    .map((category) => ({ category, total: groupedCategories[category] }))
+    .sort((a, b) => b.total - a.total);
+  return sortedCategories.slice(0, 5);
 }
 
 export const capitalize = (text: string) => text.split(' ').map((t) => t[0].toUpperCase() + t.slice(1)).join(' ');

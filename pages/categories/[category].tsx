@@ -19,10 +19,6 @@ export default function ThreadByCategoryPage() {
     }
   }, [router, loading]);
 
-  if (!threadByCategory?.length || loading) {
-    return <DashboardTemplate><p>Loading</p></DashboardTemplate>;
-  }
-
   return (
     <DashboardTemplate>
       <Threads threads={threadByCategory} />

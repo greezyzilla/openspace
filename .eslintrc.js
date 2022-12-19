@@ -40,6 +40,7 @@ module.exports = {
     '@typescript-eslint/no-shadow': ['error'],
     'no-unused-vars': 'off',
     '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
+    'react/no-array-index-key': 'off',
   },
   settings: {
     'import/extensions': ['.js', '.jsx', '.ts', '.tsx'],

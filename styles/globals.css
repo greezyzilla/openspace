@@ -1,8 +1,31 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;700;900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-* {
-    @apply font-poppins;
+@layer base{
+    * {
+        @apply font-poppins;
+    }
+    
+    ::-webkit-scrollbar {
+        @apply w-2;
+    }
+      
+    ::-webkit-scrollbar-track {
+        @apply rounded-full bg-violet-100;
+    }
+       
+    ::-webkit-scrollbar-thumb {
+        @apply rounded-full bg-violet-500;
+    }
+      
+    ::-webkit-scrollbar-thumb:hover {
+        @apply bg-violet-500 
+    }
+
+    .skeleton{
+        @apply bg-slate-200 animate-pulse w-full
+    }
 }

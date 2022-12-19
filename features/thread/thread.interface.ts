@@ -1,25 +1,25 @@
 import { User } from '../user/user.interface';
 
 export interface Thread{
-    id?: string;
+    id: string;
     title: string;
     body: string;
     category: string;
-    createdAt?: string;
-    ownerId?: string;
-    upVotesBy?: any[];
-    downVotesBy?: any[];
-    totalComments?: number;
+    createdAt: string;
+    ownerId: string;
+    upVotesBy: string[];
+    downVotesBy: string[];
+    totalComments: number;
 }
 
 export interface Comment{
+    id: string;
     content: string;
+    owner: User;
     createdAt: string;
     downVotesBy: string[];
-    id: string;
-    owner: User;
     upVotesBy: string[];
-  }
+}
 
 export interface ThreadDetail{
     id: string;

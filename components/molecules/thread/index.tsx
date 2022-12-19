@@ -1,43 +1,52 @@
 import { ChatBubbleLeftRightIcon } from '@heroicons/react/24/solid';
 import parse from 'html-react-parser';
 import { Thread as ThreadInterface } from '../../../features/thread/thread.interface';
-import { useAppSelector } from '../../../hooks/redux';
 import { getRelativeDate } from '../../../utils';
 import Button from '../../atoms/button';
 import VoteButton from '../button/vote';
 
 interface ThreadProps{
-  thread: ThreadInterface;
+  thread: ThreadInterface & {
+    owner: {
+      id: string;
+      name: string;
+      email: string;
+      avatar: string;
+    }
+  }
+  isDetails: boolean;
 }
 
-export default function Thread({ thread } : ThreadProps) {
-  const { users, loading } = useAppSelector((state) => ({
-    users: state.user.users,
-    threads: state.thread.threads,
-    loading: state.user.loading,
-  }));
-
-  const date = getRelativeDate(thread.createdAt!);
-  if (!users.length || loading) return <p>Loading</p>;
-  const owner = users.find((u) => u.id === thread.ownerId);
-
+export default function Thread({ thread, isDetails = true } : ThreadProps) {
   return (
     <article className="flex flex-col gap-3 rounded-xl bg-white p-6">
-      <Button isLink href={`/details/${thread.id}`} className="text-xl font-semibold text-slate-700 line-clamp-2">{thread.title}</Button>
+      <Button isLink href={`/details/${thread.id}`} className="text-xl font-semibold text-slate-700 line-clamp-2" isDisabled={isDetails}>{thread.title}</Button>
       <div className="flex gap-3">
-        <img src={owner?.avatar} className="h-10 w-10 rounded-lg" alt={owner?.name} />
-        <div className="flex flex-col justify-center">
-          <p className="text-sm font-medium text-slate-800/80">{owner?.name || thread.ownerId}</p>
-          <p className="text-xs font-light text-slate-500">
-            {date}
-          </p>
+        <img src={thread.owner.avatar} className="h-10 w-10 rounded-lg" alt={thread.owner.name} />
+        <div className="flex flex-1 items-end justify-between gap-20">
+          <div className="flex h-full flex-col justify-center">
+            <p className="text-sm font-medium text-slate-800/80">{thread.owner.name}</p>
+            <p className="text-xs font-light text-slate-500">
+              {getRelativeDate(thread.createdAt)}
+            </p>
+          </div>
+          <Button
+            isLink
+            href={`/categories/${thread.category}`}
+            className="h-fit max-w-[160px] overflow-hidden truncate rounded-md p-2 text-center text-sm font-medium text-violet-800/70 hover:text-violet-800/80"
+          >
+            #
+            {thread.category}
+          </Button>
         </div>
       </div>
-      <div className="text-sm leading-6 text-slate-600/80 line-clamp-6">
-        {parse(thread.body, { trim: true })}
+      <div>
+        <div className={`text-sm leading-6 text-slate-600/80 ${!isDetails && 'line-clamp-5'}`}>
+          {parse(thread.body, { trim: true })}
+        </div>
       </div>
       <div className="flex justify-between">
-        <Button isLink href={`/details/${thread.id}`} className="flex items-center justify-center gap-1 rounded-lg bg-slate-100/80 p-2 text-xs">
+        <Button isLink isDisabled={isDetails} href={`/details/${thread.id}`} className="flex items-center justify-center gap-1 rounded-lg bg-slate-100/80 p-2 text-xs">
           <ChatBubbleLeftRightIcon className="h-5 w-5 text-slate-400" />
           <p className="text-slate-500/90">
             {thread.totalComments}

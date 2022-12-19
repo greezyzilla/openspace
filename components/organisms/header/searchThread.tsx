@@ -8,8 +8,7 @@ import Modal from '../../molecules/modal';
 export default function SearchThread() {
   const [isOpen, setIsOpen] = useState(false);
   const [search, setSearch] = useState('');
-  const { loading, threads, users } = useAppSelector((state) => ({
-    loading: state.thread.loading || state.user.loading,
+  const { threads, users } = useAppSelector((state) => ({
     threads: state.thread.threads,
     users: state.user.users,
   }));
@@ -26,9 +25,6 @@ export default function SearchThread() {
     return () => window.removeEventListener('keydown', onKeyDown);
   }, []);
 
-  if (loading) return <p>Loading</p>;
-
-  // if (!!search && threads.length)
   const filteredThread = threads.filter((thread) => {
     const filter = search.toLowerCase();
     const regressingTitle = thread.title.toLowerCase().includes(filter);

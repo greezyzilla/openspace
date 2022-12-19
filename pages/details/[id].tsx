@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
-import ThreadDetail from '../../components/organisms/threadDetail';
+import ThreadDetail from '../../components/organisms/details';
+import ThreadDetailsSkeleton from '../../components/organisms/details/skeleton';
 import { DashboardTemplate } from '../../components/templates';
 import { getThreadById } from '../../features/thread';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
@@ -8,7 +9,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 export default function ThreadDetailPage() {
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const thread = useAppSelector((state) => state.thread.thread);
+  const { thread, loading } = useAppSelector((state) => state.thread);
 
   useEffect(() => {
     if (router.isReady) {
@@ -17,10 +18,12 @@ export default function ThreadDetailPage() {
     }
   }, [router]);
 
+  const isLoading = !thread || loading;
   return (
     <DashboardTemplate>
       {
-        (!thread) ? <p>Loading</p> : <ThreadDetail thread={thread!} />
+        !isLoading ? <ThreadDetail thread={thread!} />
+          : <ThreadDetailsSkeleton />
       }
     </DashboardTemplate>
   );
