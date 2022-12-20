@@ -43,9 +43,9 @@ export default function ButtonVote(props : Partial<VoteButtonProps>) {
     <Toggle
       onActiveClick={onVoteNeutralHandle}
       onInactiveClick={onVoteHandle}
-      activeClassname="bg-violet-700 text-slate-50/90"
-      inactiveClassname="bg-slate-100/80 text-slate-500/90"
-      className="flex items-center justify-center gap-2 rounded-lg p-2 text-xs"
+      activeClassname="bg-violet-700 text-slate-50/90 shadow-violet-300 hover:bg-violet-800 hover:text-slate-50"
+      inactiveClassname="bg-slate-100/80 text-slate-500/90 shadow-slate-200 hover:bg-slate-200/50 hover:text-slate-500"
+      className="flex items-center justify-center gap-2 rounded-lg p-2 text-xs shadow-sm"
       isActive={isUpVoting || false}
     >
       {isVoteDown ? <ArrowSmallDownIcon className="h-4 w-4" /> : <ArrowSmallUpIcon className="h-4 w-4" />}
@@ -62,7 +62,7 @@ export default function ButtonVote(props : Partial<VoteButtonProps>) {
 
 ButtonVote.Skeleton = function ButtonVoteSkeleton() {
   return (
-    <div className="skeleton w-16 gap-2 rounded-lg p-2 text-xs sm:w-24">
+    <div className="skeleton w-16 gap-2 rounded-lg p-2 text-xs shadow-sm shadow-slate-200 sm:w-24">
       &nbsp;
     </div>
   );

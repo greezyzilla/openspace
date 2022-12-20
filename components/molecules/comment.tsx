@@ -12,7 +12,7 @@ export default function Comment(props: CommentProps) {
   } = props;
 
   return (
-    <div key={id} className="flex flex-col gap-2 rounded-lg bg-white p-5">
+    <div key={id} className="flex flex-col gap-2 rounded-lg bg-white p-5 shadow-md shadow-slate-100">
       <div className="flex gap-3">
         <img src={owner.avatar} className="h-10 w-10 rounded-lg" alt={owner.name} />
         <div className="flex flex-col justify-center">
@@ -25,7 +25,7 @@ export default function Comment(props: CommentProps) {
       <p className="text-sm leading-6 text-slate-600/80">
         {content}
       </p>
-      <div className="flex gap-4">
+      <div className="flex h-9 gap-4">
         <ButtonVote commentId={id} votes={upVotesBy} threadId={threadId} />
         <ButtonVote commentId={id} votes={downVotesBy} threadId={threadId} isVoteDown />
       </div>
@@ -35,7 +35,7 @@ export default function Comment(props: CommentProps) {
 
 Comment.Skeleton = function CommentSkeleton() {
   return (
-    <div className="flex flex-col gap-2 rounded-lg bg-white p-5">
+    <div className="flex flex-col gap-2 rounded-lg bg-white p-5 shadow-md shadow-slate-100">
       <div className="flex gap-3">
         <div className="skeleton h-10 w-full max-w-[40px] rounded-lg" />
         <div className="flex w-full flex-col justify-center gap-1">
@@ -44,7 +44,7 @@ Comment.Skeleton = function CommentSkeleton() {
         </div>
       </div>
       <p className="skeleton text-sm leading-6 text-slate-600/80">&nbsp;</p>
-      <div className="flex gap-4">
+      <div className="flex h-9 gap-4">
         <ButtonVote.Skeleton />
         <ButtonVote.Skeleton />
       </div>

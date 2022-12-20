@@ -36,7 +36,7 @@ export default function ThreadDetails({ thread }: ThreadDetailProps) {
                 <Comment {...comment} key={comment.id} threadId={thread.id} />
               ))}
             </div>
-          ) : <p className="w-full rounded-md bg-slate-100 p-6 text-center text-sm text-slate-500/80">No Comment yet</p>
+          ) : <p className="w-full rounded-md bg-slate-100 p-6 text-center text-sm text-slate-500/60 shadow-sm shadow-slate-200/90">No Comment yet</p>
         }
       </div>
     </div>

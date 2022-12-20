@@ -14,7 +14,7 @@ export default function SidebarItem({ Icon, href, children } : SidebarItemProps)
   const isActive = decodeURI(router.asPath) === href;
 
   const linkClassname = classcat({
-    'mr-2 flex items-center gap-3 rounded-xl px-3 py-2 text-sm': true,
+    'mr-1 flex items-center gap-3 rounded-xl px-3 py-2 text-sm ring-violet-300 focus:outline-none focus:ring-2': true,
     'z-10 bg-white/90 text-slate-600/80 shadow-md shadow-slate-100/50 after:absolute after:right-0 after:h-full after:w-[2px] after:rounded-l-full after:bg-violet-500': isActive,
     'text-slate-500/80': !isActive,
   });
@@ -46,7 +46,7 @@ export default function SidebarItem({ Icon, href, children } : SidebarItemProps)
 SidebarItem.Skeleton = function SidebarItemSkeleton() {
   return (
     <div className="relative pr-3">
-      <div className="mr-2 flex items-center gap-3 rounded-xl px-3 py-2 text-sm">
+      <div className="mr-1 flex items-center gap-3 rounded-xl px-3 py-2 text-sm">
         <p className="skeleton h-8 w-full max-w-[32px] rounded-lg" />
         <div className="flex h-6 flex-1 gap-2">
           <p className="skeleton flex-1">&nbsp;</p>

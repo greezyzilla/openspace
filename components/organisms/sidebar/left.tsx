@@ -32,7 +32,7 @@ export default function LeftSidebar() {
         </div>
       </Button>
       <aside className="hidden max-w-[240px] flex-1 flex-col gap-6 border-r-2 border-slate-200/50 pl-6 pt-6 md:flex">
-        <Button onClick={onOpenModalHandle} className="mr-3 flex items-center gap-3 rounded-lg bg-violet-700 px-3 py-2 text-sm text-white/90">
+        <Button onClick={onOpenModalHandle} className="mr-3 flex items-center gap-3 rounded-lg bg-violet-700 px-3 py-2 text-sm text-white/90 shadow-sm shadow-violet-300">
           <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-100/20">
             <PlusIcon className="h-4 w-4 text-white" />
           </div>

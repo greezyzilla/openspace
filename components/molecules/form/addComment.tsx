@@ -30,7 +30,7 @@ export default function AddComment({ onSubmit, threadId } : AddCommentProps) {
   };
 
   return (
-    <form onSubmit={onSubmitHandle} className="mb-4 flex items-center gap-4 rounded-lg bg-white px-5 py-6">
+    <form onSubmit={onSubmitHandle} className="mb-4 flex items-center gap-4 rounded-xl bg-white px-5 py-6 shadow-md shadow-slate-100">
       <div className="w-full">
         <InputText name="content" label="" placeholder="What your response about this thing?" value={data.content} onChange={onChangeHandle} />
       </div>

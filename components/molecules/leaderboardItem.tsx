@@ -14,7 +14,7 @@ interface LeaderboardItemProps{
 export default function LeaderboardItem(props : LeaderboardItemProps) {
   const { score, user, no } = props;
   return (
-    <div className="flex h-20 items-center gap-3 rounded-2xl bg-white p-6">
+    <div className="flex h-20 items-center gap-3 rounded-2xl bg-white p-6 shadow-md shadow-slate-100">
       <p className="w-10 text-center text-4xl font-extralight text-slate-500">
         {no}
         .

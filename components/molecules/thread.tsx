@@ -19,7 +19,7 @@ interface ThreadProps{
 
 export default function Thread({ thread, isDetails = true } : ThreadProps) {
   return (
-    <article className="flex flex-col gap-3 rounded-xl bg-white p-6">
+    <article className="flex flex-col gap-3 rounded-xl bg-white p-6 shadow-md shadow-slate-100">
       <Button isLink href={`/details/${thread.id}`} className="text-xl font-semibold text-slate-700 line-clamp-2" isDisabled={isDetails}>{thread.title}</Button>
       <div className="flex gap-3">
         <img src={thread.owner.avatar} className="h-10 w-10 rounded-lg" alt={thread.owner.name} />
@@ -33,29 +33,27 @@ export default function Thread({ thread, isDetails = true } : ThreadProps) {
           <Button
             isLink
             href={`/categories/${thread.category}`}
-            className="h-fit max-w-[160px] overflow-hidden truncate rounded-md px-2 text-center text-sm font-medium text-violet-800/70 hover:text-violet-800/80"
+            className="h-fit max-w-[160px] overflow-hidden  truncate rounded-md px-2 text-center text-sm font-medium text-violet-800/70 hover:text-violet-800/80"
           >
             #
             {thread.category}
           </Button>
         </div>
       </div>
-      <div>
-        <div className={`text-sm leading-6 text-slate-600/80 ${!isDetails && 'line-clamp-5'}`}>
-          {parse(thread.body, { trim: true })}
-        </div>
+      <div className={`text-sm leading-6 text-slate-600/80 ${!isDetails && 'line-clamp-5'}`}>
+        {parse(thread.body, { trim: true })}
       </div>
       <div className="flex justify-between">
-        <Button isLink isDisabled={isDetails} href={`/details/${thread.id}`} className="flex items-center justify-center gap-1 rounded-lg bg-slate-100/80 p-2 text-xs">
+        <Button isLink isDisabled={isDetails} href={`/details/${thread.id}`} className="flex items-center justify-center gap-1 rounded-lg bg-slate-100/80 p-2 text-xs shadow-sm shadow-slate-200 hover:bg-slate-200/50 hover:text-slate-500">
           <ChatBubbleLeftRightIcon className="h-5 w-5 text-slate-400" />
-          <p className="text-slate-500/90">
+          <p className="text-slate-500/90 shadow-md shadow-slate-100">
             &nbsp;
             {thread.totalComments}
             &nbsp;
             <span className="hidden sm:inline-flex">Comment</span>
           </p>
         </Button>
-        <div className="flex gap-4">
+        <div className="flex gap-4 ">
           <ButtonVote votes={thread.upVotesBy} threadId={thread.id} />
           <ButtonVote votes={thread.downVotesBy} threadId={thread.id} isVoteDown />
         </div>
@@ -66,7 +64,7 @@ export default function Thread({ thread, isDetails = true } : ThreadProps) {
 
 Thread.Skeleton = function ThreadSkeleton() {
   return (
-    <article className="flex flex-col gap-3 rounded-xl bg-white p-6">
+    <article className="flex flex-col gap-3 rounded-xl bg-white p-6 shadow-md shadow-slate-100">
       <p className="skeleton h-min text-xl font-semibold text-slate-700 line-clamp-2">&nbsp;</p>
       <div className="flex items-end justify-between">
         <div className="flex flex-1 gap-3">
@@ -80,10 +78,10 @@ Thread.Skeleton = function ThreadSkeleton() {
       </div>
       <div className="skeleton w-full text-sm leading-6 text-slate-600/80 line-clamp-6">&nbsp;</div>
       <div className="flex justify-between">
-        <div className="skeleton w-14 rounded-lg p-2 text-xs sm:w-28">&nbsp;</div>
+        <div className="skeleton w-14 rounded-lg p-2 text-xs shadow-md shadow-slate-200 sm:w-28">&nbsp;</div>
         <div className="flex gap-4">
-          <div className="skeleton w-14 rounded-lg p-2 text-xs sm:w-28">&nbsp;</div>
-          <div className="skeleton w-14 rounded-lg p-2 text-xs sm:w-28">&nbsp;</div>
+          <div className="skeleton w-14 rounded-lg p-2 text-xs shadow-md shadow-slate-200 sm:w-28">&nbsp;</div>
+          <div className="skeleton w-14 rounded-lg p-2 text-xs shadow-md shadow-slate-200 sm:w-28">&nbsp;</div>
         </div>
       </div>
     </article>
