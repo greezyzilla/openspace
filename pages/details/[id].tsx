@@ -19,7 +19,7 @@ export default function ThreadDetailPage() {
 
   const isLoading = !thread || loading;
   return (
-    <DashboardTemplate>
+    <DashboardTemplate title="Details">
       {
         !isLoading ? <ThreadDetails thread={thread} /> : <ThreadDetails.Skeleton />
       }

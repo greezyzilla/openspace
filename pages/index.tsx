@@ -6,7 +6,7 @@ export default function Home() {
   const threads = useAppSelector((state) => state.thread.threads);
 
   return (
-    <DashboardTemplate>
+    <DashboardTemplate title="Home">
       <Threads threads={threads} />
     </DashboardTemplate>
   );

@@ -20,7 +20,7 @@ export default function ThreadByCategoryPage() {
   }, [router, loading]);
 
   return (
-    <DashboardTemplate>
+    <DashboardTemplate title={`#${category}`}>
       <Threads threads={threadByCategory} />
     </DashboardTemplate>
   );

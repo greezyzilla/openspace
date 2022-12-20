@@ -1,13 +1,18 @@
 import { ReactNode } from 'react';
+import Head from 'next/head';
 import { Header, LeftSidebar, RightSidebar } from '../organisms';
 
 interface DashboardProps{
     children : ReactNode;
+    title?: string;
 }
 
-export default function DashboardTemplate({ children } : DashboardProps) {
+export default function DashboardTemplate({ title, children } : Partial<DashboardProps>) {
   return (
     <>
+      <Head>
+        <title>{title ? `${title} | OpenSpace` : 'OpenSpace'}</title>
+      </Head>
       <Header />
       <div className="flex h-full flex-1 overflow-hidden bg-slate-50 backdrop-blur-lg">
         <LeftSidebar />

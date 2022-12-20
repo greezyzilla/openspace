@@ -3,7 +3,7 @@ import { Leaderboards } from '../components/organisms';
 
 export default function Leaderboard() {
   return (
-    <DashboardTemplate>
+    <DashboardTemplate title="Leaderboard">
       <Leaderboards />
     </DashboardTemplate>
   );

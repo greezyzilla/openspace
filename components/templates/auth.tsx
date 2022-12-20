@@ -1,13 +1,20 @@
+import Head from 'next/head';
 import { ReactNode } from 'react';
 
 interface AuthTemplateProps{
     children: ReactNode;
+    title: string;
 }
 
-export default function AuthTemplate({ children } : AuthTemplateProps) {
+export default function AuthTemplate({ children, title } : Partial<AuthTemplateProps>) {
   return (
-    <div className="flex h-full items-center justify-center bg-slate-50/50">
-      {children}
-    </div>
+    <>
+      <Head>
+        <title>{title ? `${title} | OpenSpace` : 'OpenSpace'}</title>
+      </Head>
+      <div className="flex h-full items-center justify-center bg-slate-50/50">
+        {children}
+      </div>
+    </>
   );
 }
