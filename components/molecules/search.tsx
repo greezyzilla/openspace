@@ -1,40 +1,35 @@
 import { MagnifyingGlassIcon } from '@heroicons/react/24/solid';
-import { useEffect, useState } from 'react';
-import { useAppSelector } from '../../hooks/redux';
-import { getRelativeDate } from '../../utils';
-import Modal from './modal';
+import { useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { getFilteredThread, getRelativeDate } from '../../utils';
 import { Button } from '../atoms';
+import Modal from './modal';
+import useToggle from '../../hooks/useToggle';
+import { searchThread } from '../../features/thread';
 
 export default function Search() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [search, setSearch] = useState('');
-  const { threads, users } = useAppSelector((state) => ({
+  const [isOpen, _, open, close] = useToggle(false);
+  const { threads, users, filter } = useAppSelector((state) => ({
     threads: state.thread.threads,
+    filter: state.thread.filter,
     users: state.user.users,
   }));
 
-  const openModal = () => setIsOpen(true);
-  const closeModal = () => setIsOpen(false);
+  const dispatch = useAppDispatch();
+  const filteredThread = getFilteredThread(filter, threads);
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.ctrlKey && event.code === 'Slash') openModal();
+      if (event.ctrlKey && event.code === 'Slash') open();
     };
 
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);
   }, []);
 
-  const filteredThread = threads.filter((thread) => {
-    const filter = search.toLowerCase();
-    const regressingTitle = thread.title.toLowerCase().includes(filter);
-    const regressingCategory = thread.category.toLocaleLowerCase().includes(filter);
-    return regressingTitle || regressingCategory;
-  });
-
   return (
     <>
-      <Button onClick={openModal} className="flex h-10 w-10 items-center justify-center gap-20 rounded-xl bg-slate-100 md:h-auto md:w-auto md:justify-between md:px-4 md:py-2">
+      <Button onClick={open} className="flex h-10 w-10 items-center justify-center gap-20 rounded-xl bg-slate-100 md:h-auto md:w-auto md:justify-between md:px-4 md:py-2">
         <p className="hidden bg-transparent text-xs text-slate-400 outline-none md:block">
           Type to search
         </p>
@@ -43,21 +38,21 @@ export default function Search() {
         </div>
         <MagnifyingGlassIcon className="inline-block h-4 w-4 text-slate-600 md:hidden" />
       </Button>
-      <Modal isOpen={isOpen} onClose={closeModal}>
+      <Modal isOpen={isOpen} onClose={close}>
         <div className="absolute top-28 left-1/2 w-11/12 max-w-xl -translate-x-1/2 overflow-hidden rounded-lg bg-white">
           <div className="flex flex-col">
             <div className="relative">
-              <input type="text" onChange={(e) => setSearch(e.target.value)} value={search} className="w-full bg-transparent px-6 py-5 text-slate-800 focus:outline-none" placeholder="Search thread here..." />
+              <input type="text" onChange={(e) => dispatch(searchThread({ filter: e.target.value }))} value={filter} className="w-full bg-transparent px-6 py-5 text-slate-800 focus:outline-none" placeholder="Search thread here..." />
               <MagnifyingGlassIcon className="absolute top-1/2 right-6 h-6 w-6 -translate-y-1/2 text-slate-300" />
             </div>
             {
-              !!search && (
+              !!filter && (
                 <div className="flex max-h-72 flex-col overflow-auto border-t-2">
                   { filteredThread.length
                     ? filteredThread?.map((thread) => {
                       const user = users.find((u) => u.id === thread.ownerId);
                       return (
-                        <Button href={`/details/${thread.id}`} onClick={closeModal} isLink className="flex gap-2 py-3 px-4 hover:bg-slate-50" key={thread.id}>
+                        <Button href={`/details/${thread.id}`} onClick={close} isLink className="flex gap-2 py-3 px-4 hover:bg-slate-50" key={thread.id}>
                           <img src={user?.avatar} alt={user?.name} className="h-12 w-12 rounded-lg" />
                           <div className="flex w-full flex-col items-start overflow-hidden">
                             <h3 className="mb-1 w-full truncate text-left font-medium text-slate-800">{thread.title}</h3>

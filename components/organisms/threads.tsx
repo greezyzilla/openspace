@@ -1,6 +1,6 @@
 import Thread from '../molecules/thread';
 import { Thread as ThreadInterface } from '../../features/thread/thread.interface';
-import { useAppSelector } from '../../hooks/redux';
+import { useAppSelector } from '../../hooks';
 
 interface ThreadsInterface{
   threads?: ThreadInterface[];

@@ -1,4 +1,4 @@
-import { useAppSelector } from '../../hooks/redux';
+import { useAppSelector } from '../../hooks';
 import { Search, UserNavigation } from '../molecules';
 import { Button } from '../atoms';
 

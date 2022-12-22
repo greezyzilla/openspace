@@ -117,6 +117,7 @@ export const postVoteNeutralComment = createAsyncThunk(
 
 const initialState : ThreadState = {
   threads: [],
+  filter: '',
   loading: true,
   thread: undefined,
 };
@@ -124,7 +125,11 @@ const initialState : ThreadState = {
 export const threadSlice = createSlice({
   name: 'thread',
   initialState,
-  reducers: {},
+  reducers: {
+    searchThread: (state, action: PayloadAction<{filter : string}>) => {
+      state.filter = action.payload.filter.toLowerCase();
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(getThreads.pending, (state) => { state.loading = true; });
     builder.addCase(getThreads.rejected, (state) => { state.loading = false; });
@@ -289,4 +294,5 @@ export const threadSlice = createSlice({
   },
 });
 
+export const { searchThread } = threadSlice.actions;
 export default threadSlice.reducer;

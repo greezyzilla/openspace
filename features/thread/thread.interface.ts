@@ -33,18 +33,25 @@ export interface ThreadDetail{
     upVotesBy: string[];
 }
 
-export interface ThreadDetailResponse{
-    status: string;
-    message: string;
-    data: {
-        detailThread: ThreadDetail;
-    }
+export interface VoteThread{
+    id: string;
+    userId: string;
+    threadId: string;
+    voteType: number;
+}
+
+export interface VoteComment{
+    id: string;
+    userId: string;
+    commentId: string;
+    voteType: number;
 }
 
 export interface ThreadState{
     threads: Thread[];
     loading: boolean;
     thread?: ThreadDetail;
+    filter: string;
 }
 
 export interface GetThreadsResponse{
@@ -55,13 +62,13 @@ export interface GetThreadsResponse{
     }
 }
 
-export interface AddThread{
+export interface PostThread{
     title: string;
     body: string;
     category: string;
 }
 
-export interface AddThreadResponse{
+export interface PostThreadResponse{
     status: string;
     message: string;
     data: {
@@ -69,14 +76,19 @@ export interface AddThreadResponse{
     }
 }
 
-export interface VoteThread{
-    id: string;
-    userId: string;
-    threadId: string;
-    voteType: number;
+export interface GetThreadDetailResponse{
+    status: string;
+    message: string;
+    data: {
+        detailThread: ThreadDetail;
+    }
 }
 
-export interface PostVoteResponse{
+export interface PostVoteThread{
+    threadId: string;
+}
+
+export interface PostVoteThreadResponse{
     status: string;
     message: string;
     data: {
@@ -96,13 +108,6 @@ export interface PostCommentResponse{
         comment: Comment;
         threadId?: string;
     }
-}
-
-export interface VoteComment{
-    id: string;
-    userId: string;
-    commentId: string;
-    voteType: number;
 }
 
 export interface PostVoteComment{

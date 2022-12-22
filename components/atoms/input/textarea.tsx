@@ -21,7 +21,6 @@ export default function TextArea(props : TextAreaProps) {
   } = props;
 
   const onChangeHandle = (newValue : string) => {
-    // create object to mock default ChangeEvent obj
     const customChangeEvent = {
       target: {
         name,
@@ -38,6 +37,7 @@ export default function TextArea(props : TextAreaProps) {
         placeholder={placeholder}
         onChange={onChangeHandle}
         value={value}
+        className="break-all"
         style={{ height: 180 }}
         modules={{ toolbar: [[{ color: [] }, { background: [] }, 'bold', 'italic', 'underline', 'strike', { script: 'sub' }, { script: 'super' }, { list: 'ordered' }, { list: 'bullet' }, 'link', 'image', 'clean']] }}
       />

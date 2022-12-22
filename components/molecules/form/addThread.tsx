@@ -1,28 +1,20 @@
-import React, { ChangeEvent, FormEvent, useState } from 'react';
+import { FormEvent } from 'react';
 import { toast } from 'react-toastify';
-import { Thread } from '../../../features/thread/thread.interface';
-import Button from '../../atoms/button/default';
-import InputText from '../../atoms/input/text';
-import TextArea from '../../atoms/input/textarea';
+import { PostThread } from '../../../features/thread/thread.interface';
+import { Button, InputText, InputTextarea } from '../../atoms';
+import { useForm } from '../../../hooks';
 
 interface AddThreadFormProps{
-    onSubmit(_thread : Thread): void;
+    onSubmit(_newThread : PostThread): void;
     onCancel(): void;
 }
 
 export default function AddThreadForm({ onSubmit, onCancel } : AddThreadFormProps) {
-  const [data, setData] = useState({
+  const [data, onChange] = useForm<PostThread>({
     title: '',
     category: '',
     body: '',
   });
-
-  const onChangeHandle = (e : ChangeEvent<HTMLInputElement>) => {
-    setData((prevState) => ({
-      ...prevState,
-      [e.target.name]: e.target.value,
-    }));
-  };
 
   const onSubmitHandle = (e : FormEvent) => {
     e.preventDefault();
@@ -40,10 +32,10 @@ export default function AddThreadForm({ onSubmit, onCancel } : AddThreadFormProp
       </h3>
       <div className="flex flex-col gap-6 py-6 px-8">
         <div className="flex gap-6">
-          <InputText name="title" label="Title" onChange={onChangeHandle} value={data.title} placeholder="How to, I want to, etc..." />
-          <InputText name="category" label="Category" onChange={onChangeHandle} value={data.category} placeholder="React, Javascript, Typescript, etc..." />
+          <InputText name="title" label="Title" onChange={onChange} value={data.title} placeholder="How to, I want to, etc..." />
+          <InputText name="category" label="Category" onChange={onChange} value={data.category} placeholder="React, Javascript, Typescript, etc..." />
         </div>
-        <TextArea name="body" label="Body" placeholder="Hi, i would like to share that..." onChange={onChangeHandle} value={data.body} />
+        <InputTextarea name="body" label="Body" placeholder="Hi, i would like to share that..." onChange={onChange} value={data.body} />
       </div>
       <div className="flex gap-4 px-8 pb-6">
         <Button onClick={() => onCancel()} isSecondary>Cancel</Button>

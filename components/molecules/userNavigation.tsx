@@ -2,7 +2,7 @@ import { Menu, Transition } from '@headlessui/react';
 import { Fragment } from 'react';
 import { UserIcon } from '@heroicons/react/24/solid';
 import { postSignOut } from '../../features/auth';
-import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { Button } from '../atoms';
 
 export default function UserInformation() {

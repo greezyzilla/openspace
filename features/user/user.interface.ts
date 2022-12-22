@@ -5,6 +5,17 @@ export interface User{
     avatar: string;
 }
 
+export interface Leaderboard{
+    user: User;
+    score: number;
+}
+
+export interface UserState{
+    users: User[];
+    leaderboards: Leaderboard[];
+    loading: boolean;
+}
+
 export interface GetUsersResponse{
     status: string;
     message: string;
@@ -13,21 +24,10 @@ export interface GetUsersResponse{
     }
 }
 
-export interface Leaderboard{
-    user: User;
-    score: number;
-}
-
 export interface GetLeaderboardsResponse{
     status: string;
     message: string;
     data: {
         leaderboards: Leaderboard[];
     }
-}
-
-export interface UserState{
-    users: User[];
-    leaderboards: Leaderboard[];
-    loading: boolean;
 }

@@ -1,28 +1,25 @@
-export interface UserRegister{
+import { User } from '../user/user.interface';
+
+export interface PostRegister{
     name: string;
     email: string;
     password: string;
 }
 
-export interface UserRegisterResponse{
+export interface PostRegisterResponse{
     status: string;
     message: string;
     data?: {
-        user: {
-            id: string;
-            name: string;
-            email: string;
-            avatar: string;
-        }
+        user: User
     };
 }
 
-export interface UserLogin{
+export interface PostLogin{
     email: string;
     password: string;
 }
 
-export interface UserLoginResponse{
+export interface PostLoginResponse{
     status: string;
     message: string;
     data?: {
@@ -30,22 +27,15 @@ export interface UserLoginResponse{
     }
 }
 
-export interface AuthenticatedUser{
-    id: string;
-    name: string;
-    email: string;
-    avatar: string;
-}
-
-export interface AuthenticatedUserResponse{
+export interface GetAuthenticatedUserResponse{
     status: string;
     message: string;
     data?: {
-        user : AuthenticatedUser;
+        user : User;
     }
 }
 
 export interface AuthenticationState{
-    user?: AuthenticatedUser;
+    user?: User;
     loading: boolean;
 }

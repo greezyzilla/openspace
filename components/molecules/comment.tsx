@@ -1,6 +1,6 @@
 import { Comment as CommentInterface } from '../../features/thread/thread.interface';
 import { getRelativeDate } from '../../utils';
-import ButtonVote from './buttonVote';
+import { ButtonVote } from '.';
 
 interface CommentProps extends CommentInterface{
   threadId: string;
@@ -22,7 +22,7 @@ export default function Comment(props: CommentProps) {
           </p>
         </div>
       </div>
-      <p className="text-sm leading-6 text-slate-600/80">
+      <p className="break-all text-sm leading-6 text-slate-600/80">
         {content}
       </p>
       <div className="flex h-9 gap-4">

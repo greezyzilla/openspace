@@ -1,4 +1,4 @@
-import { useAppSelector } from '../../../hooks/redux';
+import { useAppSelector } from '../../../hooks';
 import { UserItem } from '../../molecules';
 
 export default function RightSidebar() {

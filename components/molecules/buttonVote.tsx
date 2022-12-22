@@ -3,9 +3,8 @@ import {
   postVoteDown, postVoteNeutral, postVoteUp,
   postVoteUpComment, postVoteDownComment, postVoteNeutralComment,
 } from '../../features/thread';
-import useAppRequest from '../../hooks';
-import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import Toggle from '../atoms/button/toggle';
+import { useRequest, useAppDispatch, useAppSelector } from '../../hooks';
+import { ToggleButton } from '../atoms';
 
 interface VoteButtonProps{
     threadId: string;
@@ -21,7 +20,7 @@ export default function ButtonVote(props : Partial<VoteButtonProps>) {
 
   const { auth } = useAppSelector((state) => state);
   const dispatch = useAppDispatch();
-  const request = useAppRequest();
+  const request = useRequest();
 
   const isVotingComment = !!commentId;
   const isUpVoting = !!votes.find((userId) => userId === auth.user?.id);
@@ -40,7 +39,7 @@ export default function ButtonVote(props : Partial<VoteButtonProps>) {
   };
 
   return (
-    <Toggle
+    <ToggleButton
       onActiveClick={onVoteNeutralHandle}
       onInactiveClick={onVoteHandle}
       activeClassname="bg-violet-700 text-slate-50/90 shadow-violet-300 hover:bg-violet-800 hover:text-slate-50"
@@ -56,7 +55,7 @@ export default function ButtonVote(props : Partial<VoteButtonProps>) {
           Vote
         </span>
       </p>
-    </Toggle>
+    </ToggleButton>
   );
 }
 

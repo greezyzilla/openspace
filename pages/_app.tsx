@@ -10,7 +10,7 @@ import LoadingBar from 'react-redux-loading-bar';
 import { violet } from 'tailwindcss/colors';
 import { store } from '../store';
 import { getAccessToken, removeAccessToken } from '../utils';
-import { useAppDispatch } from '../hooks/redux';
+import { useAppDispatch } from '../hooks';
 import { getAuthenticatedUser } from '../features/auth';
 import 'react-toastify/dist/ReactToastify.css';
 import { getThreads } from '../features/thread';

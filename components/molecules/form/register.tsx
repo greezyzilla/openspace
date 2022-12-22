@@ -1,15 +1,15 @@
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { FormEvent } from 'react';
 import { toast } from 'react-toastify';
 import { isRejectedWithValue } from '@reduxjs/toolkit';
 import { useRouter } from 'next/router';
 import {
   Button, InputEmail, InputPassword, InputText,
 } from '../../atoms';
-import { useAppDispatch } from '../../../hooks/redux';
+import { useAppDispatch, useForm } from '../../../hooks';
 import { postRegisterUser } from '../../../features/auth';
 
 export default function RegisterForm() {
-  const [data, setData] = useState({
+  const [data, onChange] = useForm({
     name: '',
     email: '',
     password: '',
@@ -18,13 +18,6 @@ export default function RegisterForm() {
 
   const dispatch = useAppDispatch();
   const router = useRouter();
-
-  const onChangeHandle = (e : ChangeEvent<HTMLInputElement>) => {
-    setData((prevState) => ({
-      ...prevState,
-      [e.target.name]: e.target.value,
-    }));
-  };
 
   const onSubmitHandle = async (e : FormEvent) => {
     e.preventDefault();
@@ -48,11 +41,11 @@ export default function RegisterForm() {
 
   return (
     <form className="flex flex-col gap-4 px-8 sm:gap-6" onSubmit={onSubmitHandle}>
-      <InputText label="Full Name" name="name" onChange={onChangeHandle} placeholder="Alexander Scotch, etc.." value={data.name} />
-      <InputEmail label="Email" name="email" onChange={onChangeHandle} placeholder="email@example.com" value={data.email} />
+      <InputText label="Full Name" name="name" onChange={onChange} placeholder="Alexander Scotch, etc.." value={data.name} />
+      <InputEmail label="Email" name="email" onChange={onChange} placeholder="email@example.com" value={data.email} />
       <div className="flex gap-6">
-        <InputPassword label="Password" name="password" onChange={onChangeHandle} placeholder="*********" value={data.password} />
-        <InputPassword label="Confirm Password" name="passwordConfirmation" onChange={onChangeHandle} placeholder="*********" value={data.passwordConfirmation} />
+        <InputPassword label="Password" name="password" onChange={onChange} placeholder="*********" value={data.password} />
+        <InputPassword label="Confirm Password" name="passwordConfirmation" onChange={onChange} placeholder="*********" value={data.passwordConfirmation} />
       </div>
       <Button isPrimary isSubmit>Register</Button>
     </form>

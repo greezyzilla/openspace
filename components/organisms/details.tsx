@@ -1,7 +1,6 @@
 import { postComment } from '../../features/thread';
 import { PostComment, ThreadDetail as ThreadDetailInterface } from '../../features/thread/thread.interface';
-import useAppRequest from '../../hooks';
-import { useAppDispatch } from '../../hooks/redux';
+import { useRequest, useAppDispatch } from '../../hooks';
 import { AddCommentForm, Thread, Comment } from '../molecules';
 
 interface ThreadDetailProps{
@@ -10,7 +9,7 @@ interface ThreadDetailProps{
 
 export default function ThreadDetails({ thread }: ThreadDetailProps) {
   const dispatch = useAppDispatch();
-  const request = useAppRequest();
+  const request = useRequest();
 
   const onAddComment = async (comment : PostComment) => (
     request(() => dispatch(postComment(comment)))

@@ -1,7 +1,7 @@
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { FormEvent } from 'react';
 import { PostComment } from '../../../features/thread/thread.interface';
-import Button from '../../atoms/button/default';
-import InputText from '../../atoms/input/text';
+import { Button, InputText } from '../../atoms';
+import { useForm } from '../../../hooks';
 
 interface AddCommentProps{
     onSubmit(_comment: PostComment): void;
@@ -9,30 +9,21 @@ interface AddCommentProps{
 }
 
 export default function AddComment({ onSubmit, threadId } : AddCommentProps) {
-  const initialData = {
+  const [data, onChange, reset] = useForm<PostComment>({
     content: '',
     threadId,
-  };
-
-  const [data, setData] = useState<PostComment>(initialData);
-
-  const onChangeHandle = (e : ChangeEvent<HTMLInputElement>) => {
-    setData((prevState) => ({
-      ...prevState,
-      [e.target.name]: e.target.value,
-    }));
-  };
+  });
 
   const onSubmitHandle = (e : FormEvent) => {
     e.preventDefault();
     onSubmit(data);
-    setData(initialData);
+    reset();
   };
 
   return (
     <form onSubmit={onSubmitHandle} className="mb-4 flex items-center gap-4 rounded-xl bg-white px-5 py-6 shadow-md shadow-slate-100">
       <div className="w-full">
-        <InputText name="content" label="" placeholder="What your response about this thing?" value={data.content} onChange={onChangeHandle} />
+        <InputText name="content" label="" placeholder="What your response about this thing?" value={data.content} onChange={onChange} />
       </div>
       <Button isSubmit className="w-fit !text-xs" isPrimary>Comment</Button>
     </form>

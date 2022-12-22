@@ -1,27 +1,20 @@
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { FormEvent } from 'react';
 import { isRejectedWithValue } from '@reduxjs/toolkit';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import { Button, InputPassword, InputText } from '../../atoms';
-import { UserLogin } from '../../../features/auth/auth.interface';
-import { useAppDispatch } from '../../../hooks/redux';
+import { PostLogin } from '../../../features/auth/auth.interface';
+import { useAppDispatch, useForm } from '../../../hooks';
 import { postLoginUser } from '../../../features/auth';
 
 export default function LoginForm() {
-  const [data, setData] = useState<UserLogin>({
+  const [data, onChange] = useForm<PostLogin>({
     email: '',
     password: '',
   });
 
   const dispatch = useAppDispatch();
   const router = useRouter();
-
-  const onChangeHandle = (e : ChangeEvent<HTMLInputElement>) => {
-    setData((prevState) => ({
-      ...prevState,
-      [e.target.name]: e.target.value,
-    }));
-  };
 
   const onSubmitHandle = async (e : FormEvent) => {
     e.preventDefault();
@@ -41,8 +34,8 @@ export default function LoginForm() {
 
   return (
     <form className="flex flex-col gap-4 px-8 sm:gap-6" onSubmit={onSubmitHandle}>
-      <InputText label="Email" name="email" onChange={onChangeHandle} placeholder="email@example.com" value={data.email} />
-      <InputPassword label="Password" name="password" onChange={onChangeHandle} placeholder="*********" value={data.password} />
+      <InputText label="Email" name="email" onChange={onChange} placeholder="email@example.com" value={data.email} />
+      <InputPassword label="Password" name="password" onChange={onChange} placeholder="*********" value={data.password} />
       <Button isPrimary isSubmit>Login</Button>
     </form>
   );

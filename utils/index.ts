@@ -36,7 +36,7 @@ export async function fetchWithToken(url : string, options : AxiosRequestConfig<
 
     return response.data;
   } catch (e : any) {
-    // if(e.response.status === 401) removeAccessToken();
+    if (e.response?.status === 401) removeAccessToken();
     return { status: 'fail', message: e.response.data.message, code: e.response.status };
   }
 }
@@ -67,3 +67,9 @@ export function getTrendingCategoriesFromThreads(threads: Thread[]) {
 export const capitalize = (text: string) => text.split(' ').map((t) => t[0].toUpperCase() + t.slice(1)).join(' ');
 
 export const getRelativeDate = (dateString: string) => dayjs(dateString).fromNow();
+
+export const getFilteredThread = (filter:string, threads:Thread[]) => threads.filter((thread) => {
+  const regressingTitle = thread.title.toLowerCase().includes(filter);
+  const regressingCategory = thread.category.toLocaleLowerCase().includes(filter);
+  return regressingTitle || regressingCategory;
+});
