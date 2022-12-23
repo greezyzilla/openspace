@@ -27,9 +27,7 @@ export default function Thread({ thread, isDetails = true } : ThreadProps) {
         <div className="flex flex-1 items-end justify-between gap-4 sm:gap-20">
           <div className="flex h-full flex-col justify-center">
             <p className="text-sm font-medium text-slate-800/80">{thread.owner.name}</p>
-            <p className="text-xs font-light text-slate-500">
-              {getRelativeDate(thread.createdAt)}
-            </p>
+            <p className="text-xs font-light text-slate-500">{getRelativeDate(thread.createdAt)}</p>
           </div>
           <Button
             isLink
@@ -41,9 +39,7 @@ export default function Thread({ thread, isDetails = true } : ThreadProps) {
           </Button>
         </div>
       </div>
-      <div className={`text-sm leading-6 text-slate-600/80 ${!isDetails && 'line-clamp-5'}`}>
-        {parse(thread.body, { trim: true })}
-      </div>
+      <div className={`text-sm leading-6 text-slate-600/80 ${!isDetails && 'line-clamp-5'}`}>{parse(thread.body, { trim: true })}</div>
       <div className="flex justify-between">
         <Button isLink isDisabled={isDetails} href={`/details/${thread.id}`} className="flex items-center justify-center gap-1 rounded-lg bg-slate-100/80 p-2 text-xs shadow-sm shadow-slate-200 hover:bg-slate-200/50 hover:text-slate-500">
           <ChatBubbleLeftRightIcon className="h-5 w-5 text-slate-400" />

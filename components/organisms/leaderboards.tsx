@@ -17,15 +17,13 @@ export default function Leaderboard() {
     <div className="flex flex-col gap-4">
       {!isLoading ? leaderboards.slice(0, 10).map(({ score, user }, index) => (
         <LeaderboardItem
+          user={user}
+          score={score}
           key={user.id}
           no={index + 1}
-          score={score}
-          user={user}
         />
       )) : [...new Array(10)].map((_, index) => (
-        <LeaderboardItem.Skeleton
-          key={`skeleton-leaderboard-${index}`}
-        />
+        <LeaderboardItem.Skeleton key={`skeleton-leaderboard-${index}`} />
       ))}
     </div>
   );

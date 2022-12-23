@@ -1,11 +1,11 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { fetcWithoutToken } from '../../utils';
 import { GetLeaderboardsResponse, GetUsersResponse, UserState } from './user.interface';
 
 export const getUsers = createAsyncThunk(
   'user/getAll',
   async (_, { rejectWithValue }) => {
-    const response = await fetcWithoutToken('users', {});
+    const response = await fetcWithoutToken('users', {}) as GetUsersResponse;
     if (response.status === 'success') return response;
     return rejectWithValue(response);
   },
@@ -14,7 +14,7 @@ export const getUsers = createAsyncThunk(
 export const getLeaderboards = createAsyncThunk(
   'user/leaderboards',
   async (_, { rejectWithValue }) => {
-    const response = await fetcWithoutToken('leaderboards', {});
+    const response = await fetcWithoutToken('leaderboards', {}) as GetLeaderboardsResponse;
     if (response.status === 'success') return response;
     return rejectWithValue(response);
   },
@@ -33,19 +33,16 @@ export const userSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(getUsers.pending, (state) => { state.loading = true; });
     builder.addCase(getUsers.rejected, (state) => { state.loading = false; });
-    builder.addCase(getUsers.fulfilled, (state, action: PayloadAction<GetUsersResponse>) => {
+    builder.addCase(getUsers.fulfilled, (state, action) => {
       state.users = action.payload.data.users.reverse();
       state.loading = false;
     });
     builder.addCase(getLeaderboards.pending, (state) => { state.loading = true; });
     builder.addCase(getLeaderboards.rejected, (state) => { state.loading = false; });
-    builder.addCase(
-      getLeaderboards.fulfilled,
-      (state, action: PayloadAction<GetLeaderboardsResponse>) => {
-        state.leaderboards = action.payload.data.leaderboards;
-        state.loading = false;
-      },
-    );
+    builder.addCase(getLeaderboards.fulfilled, (state, action) => {
+      state.leaderboards = action.payload.data.leaderboards;
+      state.loading = false;
+    });
   },
 });
 

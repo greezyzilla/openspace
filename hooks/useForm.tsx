@@ -7,7 +7,7 @@ export default function useForm<D>(initialData : D) : [D, changeEvent, reset] {
   const [data, setData] = useState(initialData as D);
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setData((prevState: any) => ({
+    setData((prevState: D) => ({
       ...prevState,
       [e.target.name]: e.target.value,
     }));

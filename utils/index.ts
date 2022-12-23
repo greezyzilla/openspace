@@ -3,6 +3,7 @@ import axios, { AxiosRequestConfig } from 'axios';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import { Thread } from '../features/thread/thread.interface';
+import { ApiResponse } from '../interfaces';
 
 dayjs.extend(relativeTime);
 
@@ -34,10 +35,10 @@ export async function fetchWithToken(url : string, options : AxiosRequestConfig<
       },
     });
 
-    return response.data;
+    return { ...response.data, code: response.status } as ApiResponse;
   } catch (e : any) {
     if (e.response?.status === 401) removeAccessToken();
-    return { status: 'fail', message: e.response.data.message, code: e.response.status };
+    return { status: 'fail', message: e.response.data.message, code: e.response.status } as ApiResponse;
   }
 }
 
@@ -48,9 +49,9 @@ export async function fetcWithoutToken(url : string, options : AxiosRequestConfi
       ...options,
     });
 
-    return response.data;
+    return { ...response.data, code: response.status } as ApiResponse;
   } catch (e : any) {
-    return { status: 'fail', message: e.response.data.message };
+    return { status: 'fail', message: e.response.data.message } as ApiResponse;
   }
 }
 

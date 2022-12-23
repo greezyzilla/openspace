@@ -1,3 +1,4 @@
+import { ApiResponse } from '../../interfaces';
 import { User } from '../user/user.interface';
 
 export interface PostRegister{
@@ -6,9 +7,7 @@ export interface PostRegister{
     password: string;
 }
 
-export interface PostRegisterResponse{
-    status: string;
-    message: string;
+export interface PostRegisterResponse extends ApiResponse{
     data?: {
         user: User
     };
@@ -19,17 +18,13 @@ export interface PostLogin{
     password: string;
 }
 
-export interface PostLoginResponse{
-    status: string;
-    message: string;
+export interface PostLoginResponse extends ApiResponse{
     data?: {
         token : string;
     }
 }
 
-export interface GetAuthenticatedUserResponse{
-    status: string;
-    message: string;
+export interface GetAuthenticatedUserResponse extends ApiResponse{
     data?: {
         user : User;
     }

@@ -1,3 +1,5 @@
+import { ApiResponse } from '../../interfaces';
+
 export interface User{
     id: string;
     name: string;
@@ -16,17 +18,13 @@ export interface UserState{
     loading: boolean;
 }
 
-export interface GetUsersResponse{
-    status: string;
-    message: string;
+export interface GetUsersResponse extends ApiResponse{
     data: {
         users: User[];
     }
 }
 
-export interface GetLeaderboardsResponse{
-    status: string;
-    message: string;
+export interface GetLeaderboardsResponse extends ApiResponse{
     data: {
         leaderboards: Leaderboard[];
     }

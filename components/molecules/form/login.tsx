@@ -1,11 +1,12 @@
 import { FormEvent } from 'react';
-import { isRejectedWithValue } from '@reduxjs/toolkit';
+import { PayloadAction, isRejectedWithValue } from '@reduxjs/toolkit';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import { Button, InputPassword, InputText } from '../../atoms';
 import { PostLogin } from '../../../features/auth/auth.interface';
 import { useAppDispatch, useForm } from '../../../hooks';
 import { postLoginUser } from '../../../features/auth';
+import { PostCommentResponse } from '../../../features/thread/thread.interface';
 
 export default function LoginForm() {
   const [data, onChange] = useForm<PostLogin>({
@@ -20,14 +21,11 @@ export default function LoginForm() {
     e.preventDefault();
     if (data.email === '' || data.password === '') toast.error('Email or Password can\'t be empty');
     else {
-      const response : any = await dispatch(postLoginUser(data));
-
+      const response = await dispatch(postLoginUser(data)) as PayloadAction<PostCommentResponse>;
       if (isRejectedWithValue(response)) toast.error(response.payload.message);
       else {
+        setTimeout(() => router.replace('/'), 500);
         toast.success('Login success');
-        setTimeout(() => {
-          router.replace('/');
-        }, 500);
       }
     }
   };

@@ -1,6 +1,6 @@
 import classcat from 'classcat';
 import Link from 'next/link';
-import { ReactNode, forwardRef } from 'react';
+import { ReactNode, Ref, forwardRef } from 'react';
 
 interface ButtonProps{
     children: ReactNode;
@@ -15,7 +15,10 @@ interface ButtonProps{
     isDisabled?: boolean;
 }
 
-const Button = forwardRef((props : Partial<ButtonProps>, ref : any) => {
+const Button = forwardRef((
+  props : Partial<ButtonProps>,
+  ref : Ref<HTMLButtonElement | HTMLAnchorElement>,
+) => {
   const {
     children, className = '', isExternal = false, href = '/', isLink = false, isPrimary = false, isSecondary = false, onClick = () => {}, isSubmit = false, isDisabled,
   } = props;
@@ -34,7 +37,7 @@ const Button = forwardRef((props : Partial<ButtonProps>, ref : any) => {
     if (isExternal) {
       return (
         <a
-          ref={ref}
+          ref={ref as Ref<HTMLAnchorElement>}
           href={href}
           tabIndex={tabIndex}
           className={buttonClassName}
@@ -45,7 +48,7 @@ const Button = forwardRef((props : Partial<ButtonProps>, ref : any) => {
     }
     return (
       <Link
-        ref={ref}
+        ref={ref as Ref<HTMLAnchorElement>}
         href={href}
         onClick={onClick}
         tabIndex={tabIndex}
@@ -57,7 +60,7 @@ const Button = forwardRef((props : Partial<ButtonProps>, ref : any) => {
   }
 
   return (
-    <button type={isSubmit ? 'submit' : 'button'} ref={ref} onClick={onClick} className={buttonClassName}>
+    <button type={isSubmit ? 'submit' : 'button'} ref={ref as Ref<HTMLButtonElement>} onClick={onClick} className={buttonClassName}>
       {children}
     </button>
   );

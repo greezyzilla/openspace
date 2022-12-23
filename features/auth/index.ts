@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { fetchWithToken, putAccessToken, removeAccessToken } from '../../utils';
 import {
   AuthenticationState, GetAuthenticatedUserResponse,
@@ -8,8 +8,8 @@ import {
 
 export const getAuthenticatedUser = createAsyncThunk(
   'auth/me',
-  async (_args, { rejectWithValue }) => {
-    const response = await fetchWithToken('users/me', {});
+  async (_, { rejectWithValue }) => {
+    const response = await fetchWithToken('users/me', {}) as GetAuthenticatedUserResponse;
     if (response.status === 'success') return response;
     return rejectWithValue(response);
   },
@@ -21,7 +21,7 @@ export const postRegisterUser = createAsyncThunk(
     const response = await fetchWithToken('register', {
       method: 'POST',
       data: user,
-    });
+    }) as PostRegisterResponse;
     if (response.status === 'success') return response;
     return rejectWithValue(response);
   },
@@ -33,7 +33,7 @@ export const postLoginUser = createAsyncThunk(
     const response = await fetchWithToken('login', {
       method: 'POST',
       data: user,
-    });
+    }) as PostLoginResponse;
 
     if (response.status === 'success') return response;
     return rejectWithValue(response);
@@ -57,31 +57,22 @@ export const userSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(getAuthenticatedUser.pending, (state) => { state.loading = true; });
     builder.addCase(getAuthenticatedUser.rejected, (state) => { state.loading = false; });
-    builder.addCase(
-      getAuthenticatedUser.fulfilled,
-      (state, action: PayloadAction<GetAuthenticatedUserResponse>) => {
-        state.user = action.payload.data!.user;
-        state.loading = false;
-      },
-    );
+    builder.addCase(getAuthenticatedUser.fulfilled, (state, action) => {
+      state.user = action.payload.data!.user;
+      state.loading = false;
+    });
     builder.addCase(postRegisterUser.pending, (state) => { state.loading = true; });
     builder.addCase(postRegisterUser.rejected, (state) => { state.loading = false; });
-    builder.addCase(
-      postRegisterUser.fulfilled,
-      (state, action: PayloadAction<PostRegisterResponse>) => {
-        state.user = action.payload.data!.user;
-        state.loading = false;
-      },
-    );
+    builder.addCase(postRegisterUser.fulfilled, (state, action) => {
+      state.user = action.payload.data!.user;
+      state.loading = false;
+    });
     builder.addCase(postLoginUser.pending, (state) => { state.loading = true; });
     builder.addCase(postLoginUser.rejected, (state) => { state.loading = false; });
-    builder.addCase(
-      postLoginUser.fulfilled,
-      (state, action: PayloadAction<PostLoginResponse>) => {
-        putAccessToken(action.payload.data?.token!);
-        state.loading = false;
-      },
-    );
+    builder.addCase(postLoginUser.fulfilled, (state, action) => {
+      putAccessToken(action.payload.data?.token!);
+      state.loading = false;
+    });
   },
 });
 

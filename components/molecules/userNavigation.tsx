@@ -8,8 +8,8 @@ import { Button } from '../atoms';
 
 export default function UserInformation() {
   const user = useAppSelector((state) => state.auth.user)!;
-  const dispatch = useAppDispatch();
 
+  const dispatch = useAppDispatch();
   const onLogout = async () => dispatch(postSignOut());
 
   return (

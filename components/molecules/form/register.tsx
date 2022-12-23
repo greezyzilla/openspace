@@ -1,12 +1,13 @@
 import { FormEvent } from 'react';
 import { toast } from 'react-toastify';
-import { isRejectedWithValue } from '@reduxjs/toolkit';
+import { PayloadAction, isRejectedWithValue } from '@reduxjs/toolkit';
 import { useRouter } from 'next/router';
 import {
   Button, InputEmail, InputPassword, InputText,
 } from '../../atoms';
 import { useAppDispatch, useForm } from '../../../hooks';
 import { postRegisterUser } from '../../../features/auth';
+import { PostRegisterResponse } from '../../../features/auth/auth.interface';
 
 export default function RegisterForm() {
   const [data, onChange] = useForm({
@@ -24,15 +25,14 @@ export default function RegisterForm() {
     if (!data.email || !data.password || !data.password || !data.passwordConfirmation) toast.error('Email or Password can\'t be empty');
     else if (data.password !== data.passwordConfirmation) toast.error('Password doesn\'t match');
     else {
-      const response : any = await dispatch(postRegisterUser({
+      const response = await dispatch(postRegisterUser({
         email: data.email,
         name: data.name,
         password: data.password,
-      }));
+      })) as PayloadAction<PostRegisterResponse>;
 
-      if (isRejectedWithValue(response)) {
-        toast.error(response.payload.message);
-      } else {
+      if (isRejectedWithValue(response)) toast.error(response.payload.message);
+      else {
         toast.success('Register success');
         router.replace('/auth/login');
       }

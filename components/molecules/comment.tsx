@@ -18,14 +18,10 @@ export default function Comment(props: CommentProps) {
         <Image src={owner.avatar} className="rounded-lg" width={40} height={40} alt={owner.name} />
         <div className="flex flex-col justify-center">
           <p className="text-sm font-medium text-slate-800/80">{owner.name}</p>
-          <p className="text-xs font-light text-slate-500">
-            {getRelativeDate(createdAt)}
-          </p>
+          <p className="text-xs font-light text-slate-500">{getRelativeDate(createdAt)}</p>
         </div>
       </div>
-      <p className="break-all text-sm leading-6 text-slate-600/80">
-        {content}
-      </p>
+      <p className="break-all text-sm leading-6 text-slate-600/80">{content}</p>
       <div className="flex h-9 gap-4">
         <ButtonVote commentId={id} votes={upVotesBy} threadId={threadId} />
         <ButtonVote commentId={id} votes={downVotesBy} threadId={threadId} isVoteDown />

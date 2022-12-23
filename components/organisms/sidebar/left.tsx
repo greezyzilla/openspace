@@ -12,6 +12,7 @@ import {
 
 export default function LeftSidebar() {
   const [isOpen, _, open, close] = useToggle(false);
+
   const dispatch = useAppDispatch();
   const request = useRequest();
 
@@ -42,32 +43,28 @@ export default function LeftSidebar() {
           </Card>
         </Modal>
         <div>
-          <h2 className="mb-1 text-xs font-medium text-slate-400">
-            Navigation
-          </h2>
+          <h2 className="mb-1 text-xs font-medium text-slate-400">Navigation</h2>
           <div className="flex flex-col gap-1">
             <SidebarItem Icon={HomeIcon} href="/">Home</SidebarItem>
             <SidebarItem Icon={ChartBarIcon} href="/leaderboard">Leaderboard</SidebarItem>
           </div>
         </div>
         <div>
-          <h2 className="mb-1 text-xs font-medium text-slate-400">
-            Trending Categories
-          </h2>
+          <h2 className="mb-1 text-xs font-medium text-slate-400">Trending Categories</h2>
           <div className="flex flex-col gap-1">
             {
-                !isLoading ? getTrendingCategoriesFromThreads(threads)
-                  .map(({ category, total }) => (
-                    <SidebarItem key={category} href={`/categories/${category}`} Icon={HashtagIcon}>
-                      <div className="flex flex-1 items-center justify-between gap-2 overflow-hidden">
-                        <p className="flex-1 overflow-hidden truncate">{category}</p>
-                        <p className="flex h-6 w-6 items-center justify-center rounded-lg bg-violet-100 text-xs text-violet-400">{total}</p>
-                      </div>
-                    </SidebarItem>
-                  )) : (
-                  [...new Array(5)].map((__, index) => <SidebarItem.Skeleton key={`skeleton-category-${index}`} />)
-                )
-              }
+              !isLoading ? getTrendingCategoriesFromThreads(threads)
+                .map(({ category, total }) => (
+                  <SidebarItem key={category} href={`/categories/${category}`} Icon={HashtagIcon}>
+                    <div className="flex flex-1 items-center justify-between gap-2 overflow-hidden">
+                      <p className="flex-1 overflow-hidden truncate">{category}</p>
+                      <p className="flex h-6 w-6 items-center justify-center rounded-lg bg-violet-100 text-xs text-violet-400">{total}</p>
+                    </div>
+                  </SidebarItem>
+                )) : (
+                [...new Array(5)].map((__, index) => <SidebarItem.Skeleton key={`skeleton-category-${index}`} />)
+              )
+            }
           </div>
         </div>
       </aside>

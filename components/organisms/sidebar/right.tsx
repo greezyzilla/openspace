@@ -5,6 +5,7 @@ export default function RightSidebar() {
   const { users, loading } = useAppSelector((state) => state.user);
 
   const isLoading = !users.length || loading;
+
   return (
     <aside className="hidden max-w-[240px] flex-1 flex-col gap-4 border-r-2 border-slate-200/50 pl-6 pt-4 lg:flex">
       <div>

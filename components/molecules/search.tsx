@@ -1,11 +1,10 @@
 import { MagnifyingGlassIcon } from '@heroicons/react/24/solid';
 import { useEffect } from 'react';
 import Image from 'next/image';
-import { useAppDispatch, useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector, useToggle } from '../../hooks';
 import { getFilteredThread, getRelativeDate } from '../../utils';
 import { Button } from '../atoms';
 import Modal from './modal';
-import useToggle from '../../hooks/useToggle';
 import { searchThread } from '../../features/thread';
 
 export default function Search() {
@@ -31,9 +30,7 @@ export default function Search() {
   return (
     <>
       <Button onClick={open} className="flex h-10 w-10 items-center justify-center gap-20 rounded-xl bg-slate-100 md:h-auto md:w-auto md:justify-between md:px-4 md:py-2">
-        <p className="hidden bg-transparent text-xs text-slate-400 outline-none md:block">
-          Type to search
-        </p>
+        <p className="hidden bg-transparent text-xs text-slate-400 outline-none md:block">Type to search</p>
         <div className="hidden h-8 items-center justify-center rounded-lg bg-white px-2 text-xs text-slate-500 shadow-sm shadow-slate-200 md:flex">
           Ctrl + /
         </div>
@@ -60,7 +57,7 @@ export default function Search() {
                             <div className="flex w-full justify-between gap-2">
                               <p className="truncate text-sm">
                                 Created by&nbsp;
-                                <span className="text-sm font-medium">{user?.name}</span>
+                                <span className="text-sm font-medium">{user.name}</span>
                                 &nbsp;
                                 {getRelativeDate(thread.createdAt!)}
                               </p>

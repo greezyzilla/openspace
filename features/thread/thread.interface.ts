@@ -1,3 +1,4 @@
+import { ApiResponse } from '../../interfaces';
 import { User } from '../user/user.interface';
 
 export interface Thread{
@@ -58,9 +59,7 @@ export interface GetThread{
     threadId: string;
 }
 
-export interface GetThreadsResponse{
-    status: string;
-    message: string;
+export interface GetThreadsResponse extends ApiResponse{
     data: {
         threads: Thread[];
     }
@@ -72,17 +71,13 @@ export interface PostThread{
     category: string;
 }
 
-export interface PostThreadResponse{
-    status: string;
-    message: string;
+export interface PostThreadResponse extends ApiResponse{
     data: {
         thread: Thread;
     }
 }
 
-export interface GetThreadDetailResponse{
-    status: string;
-    message: string;
+export interface GetThreadDetailResponse extends ApiResponse{
     data: {
         detailThread: ThreadDetail;
     }
@@ -92,9 +87,7 @@ export interface PostVoteThread{
     threadId: string;
 }
 
-export interface PostVoteThreadResponse{
-    status: string;
-    message: string;
+export interface PostVoteThreadResponse extends ApiResponse{
     data: {
         vote: VoteThread;
     }
@@ -105,9 +98,7 @@ export interface PostComment{
     content: string;
 }
 
-export interface PostCommentResponse{
-    status: string;
-    message: string;
+export interface PostCommentResponse extends ApiResponse{
     data: {
         comment: Comment;
         threadId?: string;
@@ -119,9 +110,7 @@ export interface PostVoteComment{
     commentId: string;
 }
 
-export interface PostVoteCommentResponse{
-    status: string;
-    message: string;
+export interface PostVoteCommentResponse extends ApiResponse{
     data: {
         vote: VoteComment;
     }

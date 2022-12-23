@@ -6,15 +6,13 @@ import { DashboardTemplate } from '../../components/templates';
 import { ThreadDetails } from '../../components/organisms';
 
 export default function ThreadDetailPage() {
-  const router = useRouter();
-  const dispatch = useAppDispatch();
   const { thread, loading } = useAppSelector((state) => state.thread);
 
+  const router = useRouter();
+  const dispatch = useAppDispatch();
+
   useEffect(() => {
-    if (router.isReady) {
-      const threadId = router.query.id as string;
-      dispatch(getThreadById({ threadId }));
-    }
+    if (router.isReady) dispatch(getThreadById({ threadId: router.query.id as string }));
   }, [router, dispatch]);
 
   const isLoading = !thread || loading;
