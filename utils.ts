@@ -2,8 +2,8 @@ import axios, { AxiosRequestConfig } from 'axios';
 
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
-import { Thread } from '../features/thread/thread.interface';
-import { ApiResponse } from '../interfaces';
+import { Thread } from './features/thread/thread.interface';
+import { ApiResponse } from './interfaces';
 
 dayjs.extend(relativeTime);
 

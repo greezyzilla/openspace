@@ -1,10 +1,10 @@
 import { postComment } from '../../features/thread';
-import { PostComment, ThreadDetail as ThreadDetailInterface } from '../../features/thread/thread.interface';
+import { PostComment, ThreadDetail } from '../../features/thread/thread.interface';
 import { useRequest, useAppDispatch } from '../../hooks';
 import { AddCommentForm, Thread, Comment } from '../molecules';
 
 interface ThreadDetailProps{
-    thread: ThreadDetailInterface;
+    thread: ThreadDetail;
 }
 
 export default function ThreadDetails({ thread }: ThreadDetailProps) {

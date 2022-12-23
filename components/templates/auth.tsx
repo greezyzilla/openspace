@@ -3,7 +3,7 @@ import { ReactNode } from 'react';
 
 interface AuthTemplateProps{
     children: ReactNode;
-    title: string;
+    title?: string;
 }
 
 export default function AuthTemplate({ children, title } : Partial<AuthTemplateProps>) {

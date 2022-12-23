@@ -2,12 +2,12 @@ import { ReactNode } from 'react';
 import Head from 'next/head';
 import { Header, LeftSidebar, RightSidebar } from '../organisms';
 
-interface DashboardProps{
+interface DashboardTemplateProps{
     children : ReactNode;
     title?: string;
 }
 
-export default function DashboardTemplate({ title, children } : Partial<DashboardProps>) {
+export default function DashboardTemplate({ title, children } : Partial<DashboardTemplateProps>) {
   return (
     <>
       <Head>
