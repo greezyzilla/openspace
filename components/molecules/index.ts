@@ -5,6 +5,4 @@ export { default as Thread } from './thread';
 export { default as Modal } from './modal';
 export { default as Search } from './search';
 export { default as UserNavigation } from './userNavigation';
-export { default as SidebarItem } from './sidebarItem';
-export { default as UserItem } from './userItem';
-export { default as LeaderboardItem } from './leaderboardItem';
+export * from './item';

@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import React from 'react';
 
 interface LeaderboardItemProps{
@@ -19,7 +20,7 @@ export default function LeaderboardItem(props : LeaderboardItemProps) {
         {no}
         .
       </p>
-      <img src={user.avatar} className="h-10 w-10 rounded-lg" alt={user.name} />
+      <Image src={user.avatar} className="rounded-lg" width={40} height={40} alt={user.name} />
       <div className="flex-1 overflow-hidden">
         <h3 className="truncate font-medium text-slate-600 sm:max-w-none">{user.name}</h3>
         <p className="truncate text-xs text-slate-500 sm:max-w-none">{user.email}</p>

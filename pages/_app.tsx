@@ -38,7 +38,7 @@ function Middleware({ children } : {children : ReactElement}) {
         } else router.replace('/');
       }
     }
-  }, [router]);
+  }, [router, dispatch]);
 
   return children;
 }

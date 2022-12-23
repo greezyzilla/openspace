@@ -63,4 +63,5 @@ const Button = forwardRef((props : Partial<ButtonProps>, ref : any) => {
   );
 });
 
+Button.displayName = 'Button';
 export default Button;

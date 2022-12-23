@@ -1,6 +1,7 @@
+import Image from 'next/image';
 import { Comment as CommentInterface } from '../../features/thread/thread.interface';
 import { getRelativeDate } from '../../utils';
-import { ButtonVote } from '.';
+import ButtonVote from './buttonVote';
 
 interface CommentProps extends CommentInterface{
   threadId: string;
@@ -14,7 +15,7 @@ export default function Comment(props: CommentProps) {
   return (
     <div key={id} className="flex flex-col gap-2 rounded-lg bg-white p-5 shadow-md shadow-slate-100">
       <div className="flex gap-3">
-        <img src={owner.avatar} className="h-10 w-10 rounded-lg" alt={owner.name} />
+        <Image src={owner.avatar} className="rounded-lg" width={40} height={40} alt={owner.name} />
         <div className="flex flex-col justify-center">
           <p className="text-sm font-medium text-slate-800/80">{owner.name}</p>
           <p className="text-xs font-light text-slate-500">

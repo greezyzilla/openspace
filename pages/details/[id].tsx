@@ -12,10 +12,10 @@ export default function ThreadDetailPage() {
 
   useEffect(() => {
     if (router.isReady) {
-      const id = router.query.id as string;
-      dispatch(getThreadById(id));
+      const threadId = router.query.id as string;
+      dispatch(getThreadById({ threadId }));
     }
-  }, [router]);
+  }, [router, dispatch]);
 
   const isLoading = !thread || loading;
   return (

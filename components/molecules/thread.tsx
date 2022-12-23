@@ -1,9 +1,10 @@
 import { ChatBubbleLeftRightIcon } from '@heroicons/react/24/solid';
 import parse from 'html-react-parser';
+import Image from 'next/image';
 import { Thread as ThreadInterface } from '../../features/thread/thread.interface';
 import { getRelativeDate } from '../../utils';
-import ButtonVote from './buttonVote';
 import { Button } from '../atoms';
+import ButtonVote from './buttonVote';
 
 interface ThreadProps{
   thread: ThreadInterface & {
@@ -22,7 +23,7 @@ export default function Thread({ thread, isDetails = true } : ThreadProps) {
     <article className="flex flex-col gap-3 rounded-xl bg-white p-6 shadow-md shadow-slate-100">
       <Button isLink href={`/details/${thread.id}`} className="text-xl font-semibold text-slate-700 line-clamp-2" isDisabled={isDetails}>{thread.title}</Button>
       <div className="flex gap-3">
-        <img src={thread.owner.avatar} className="h-10 w-10 rounded-lg" alt={thread.owner.name} />
+        <Image src={thread.owner.avatar} className="rounded-lg" width={40} height={40} alt={thread.owner.name} />
         <div className="flex flex-1 items-end justify-between gap-4 sm:gap-20">
           <div className="flex h-full flex-col justify-center">
             <p className="text-sm font-medium text-slate-800/80">{thread.owner.name}</p>

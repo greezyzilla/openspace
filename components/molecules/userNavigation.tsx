@@ -1,12 +1,13 @@
 import { Menu, Transition } from '@headlessui/react';
 import { Fragment } from 'react';
 import { UserIcon } from '@heroicons/react/24/solid';
+import Image from 'next/image';
 import { postSignOut } from '../../features/auth';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { Button } from '../atoms';
 
 export default function UserInformation() {
-  const user = useAppSelector((state) => state.auth.user);
+  const user = useAppSelector((state) => state.auth.user)!;
   const dispatch = useAppDispatch();
 
   const onLogout = async () => dispatch(postSignOut());
@@ -19,7 +20,13 @@ export default function UserInformation() {
             <p className="text-sm text-slate-500">{user?.name}</p>
             <p className="text-xs font-light text-slate-400">{user?.email}</p>
           </div>
-          <img src={user?.avatar} alt={user?.name} className="flex h-10 w-10 items-center justify-center rounded-xl shadow-sm shadow-slate-200 sm:shadow-none" />
+          <Image
+            src={user.avatar}
+            alt={user.name}
+            width={40}
+            height={40}
+            className="flex items-center justify-center rounded-xl shadow-sm shadow-slate-200 sm:shadow-none"
+          />
         </div>
       </Menu.Button>
       <Transition

@@ -54,6 +54,10 @@ export interface ThreadState{
     filter: string;
 }
 
+export interface GetThread{
+    threadId: string;
+}
+
 export interface GetThreadsResponse{
     status: string;
     message: string;

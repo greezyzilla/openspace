@@ -1,8 +1,9 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { fetchWithToken, putAccessToken, removeAccessToken } from '../../utils';
 import {
-  AuthenticatedUserResponse, AuthenticationState, UserLogin,
-  UserLoginResponse, UserRegister, UserRegisterResponse,
+  AuthenticationState, GetAuthenticatedUserResponse,
+  PostLogin, PostLoginResponse, PostRegister,
+  PostRegisterResponse,
 } from './auth.interface';
 
 export const getAuthenticatedUser = createAsyncThunk(
@@ -16,7 +17,7 @@ export const getAuthenticatedUser = createAsyncThunk(
 
 export const postRegisterUser = createAsyncThunk(
   'auth/register',
-  async (user : UserRegister, { rejectWithValue }) => {
+  async (user : PostRegister, { rejectWithValue }) => {
     const response = await fetchWithToken('register', {
       method: 'POST',
       data: user,
@@ -28,7 +29,7 @@ export const postRegisterUser = createAsyncThunk(
 
 export const postLoginUser = createAsyncThunk(
   'auth/login',
-  async (user : UserLogin, { rejectWithValue }) => {
+  async (user : PostLogin, { rejectWithValue }) => {
     const response = await fetchWithToken('login', {
       method: 'POST',
       data: user,
@@ -58,7 +59,7 @@ export const userSlice = createSlice({
     builder.addCase(getAuthenticatedUser.rejected, (state) => { state.loading = false; });
     builder.addCase(
       getAuthenticatedUser.fulfilled,
-      (state, action: PayloadAction<AuthenticatedUserResponse>) => {
+      (state, action: PayloadAction<GetAuthenticatedUserResponse>) => {
         state.user = action.payload.data!.user;
         state.loading = false;
       },
@@ -67,7 +68,7 @@ export const userSlice = createSlice({
     builder.addCase(postRegisterUser.rejected, (state) => { state.loading = false; });
     builder.addCase(
       postRegisterUser.fulfilled,
-      (state, action: PayloadAction<UserRegisterResponse>) => {
+      (state, action: PayloadAction<PostRegisterResponse>) => {
         state.user = action.payload.data!.user;
         state.loading = false;
       },
@@ -76,7 +77,7 @@ export const userSlice = createSlice({
     builder.addCase(postLoginUser.rejected, (state) => { state.loading = false; });
     builder.addCase(
       postLoginUser.fulfilled,
-      (state, action: PayloadAction<UserLoginResponse>) => {
+      (state, action: PayloadAction<PostLoginResponse>) => {
         putAccessToken(action.payload.data?.token!);
         state.loading = false;
       },

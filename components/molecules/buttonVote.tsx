@@ -29,13 +29,13 @@ export default function ButtonVote(props : Partial<VoteButtonProps>) {
     if (isVotingComment) {
       if (isVoteDown) request(() => dispatch(postVoteDownComment({ commentId, threadId })));
       else request(() => dispatch(postVoteUpComment({ commentId, threadId })));
-    } else if (isVoteDown) request(() => dispatch(postVoteDown(threadId)));
-    else request(() => dispatch(postVoteUp(threadId)));
+    } else if (isVoteDown) request(() => dispatch(postVoteDown({ threadId })));
+    else request(() => dispatch(postVoteUp({ threadId })));
   };
 
   const onVoteNeutralHandle = async () => {
     if (isVotingComment) request(() => dispatch(postVoteNeutralComment({ threadId, commentId })));
-    else request(() => dispatch(postVoteNeutral(threadId)));
+    else request(() => dispatch(postVoteNeutral({ threadId })));
   };
 
   return (

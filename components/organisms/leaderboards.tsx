@@ -9,7 +9,7 @@ export default function Leaderboard() {
 
   useEffect(() => {
     dispatch(getLeaderboards());
-  }, []);
+  }, [dispatch]);
 
   const isLoading = !leaderboards.length || loading;
 

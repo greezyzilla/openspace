@@ -1,5 +1,6 @@
 import { MagnifyingGlassIcon } from '@heroicons/react/24/solid';
 import { useEffect } from 'react';
+import Image from 'next/image';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getFilteredThread, getRelativeDate } from '../../utils';
 import { Button } from '../atoms';
@@ -25,7 +26,7 @@ export default function Search() {
 
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);
-  }, []);
+  }, [open]);
 
   return (
     <>
@@ -50,10 +51,10 @@ export default function Search() {
                 <div className="flex max-h-72 flex-col overflow-auto border-t-2">
                   { filteredThread.length
                     ? filteredThread?.map((thread) => {
-                      const user = users.find((u) => u.id === thread.ownerId);
+                      const user = users.find((u) => u.id === thread.ownerId)!;
                       return (
                         <Button href={`/details/${thread.id}`} onClick={close} isLink className="flex gap-2 py-3 px-4 hover:bg-slate-50" key={thread.id}>
-                          <img src={user?.avatar} alt={user?.name} className="h-12 w-12 rounded-lg" />
+                          <Image src={user.avatar} alt={user.name} className="rounded-lg" width={52} height={52} />
                           <div className="flex w-full flex-col items-start overflow-hidden">
                             <h3 className="mb-1 w-full truncate text-left font-medium text-slate-800">{thread.title}</h3>
                             <div className="flex w-full justify-between gap-2">

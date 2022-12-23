@@ -1,10 +1,12 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { fetchWithToken, fetcWithoutToken } from '../../utils';
 import {
-  AddThread, AddThreadResponse, GetThreadsResponse,
-  PostComment, PostCommentResponse, PostVoteComment, PostVoteResponse,
-  ThreadDetailResponse, PostVoteCommentResponse,
-  ThreadState,
+  GetThread, GetThreadDetailResponse,
+  GetThreadsResponse, PostComment,
+  PostCommentResponse, PostThread,
+  PostThreadResponse, PostVoteComment,
+  PostVoteCommentResponse, PostVoteThread,
+  PostVoteThreadResponse, ThreadState,
 } from './thread.interface';
 
 export const getThreads = createAsyncThunk(
@@ -18,8 +20,8 @@ export const getThreads = createAsyncThunk(
 
 export const getThreadById = createAsyncThunk(
   'thread/getById',
-  async (id : string, { rejectWithValue }) => {
-    const response = await fetcWithoutToken(`threads/${id}`, {});
+  async ({ threadId } : GetThread, { rejectWithValue }) => {
+    const response = await fetcWithoutToken(`threads/${threadId}`, {});
     if (response.status === 'success') return response;
     return rejectWithValue(response);
   },
@@ -27,7 +29,7 @@ export const getThreadById = createAsyncThunk(
 
 export const postThread = createAsyncThunk(
   'thread/post',
-  async (thread : AddThread, { rejectWithValue }) => {
+  async (thread : PostThread, { rejectWithValue }) => {
     const response = await fetchWithToken('threads', {
       method: 'POST',
       data: thread,
@@ -39,7 +41,7 @@ export const postThread = createAsyncThunk(
 
 export const postVoteUp = createAsyncThunk(
   'thread/voteUp',
-  async (threadId : string, { rejectWithValue }) => {
+  async ({ threadId } : PostVoteThread, { rejectWithValue }) => {
     const response = await fetchWithToken(`threads/${threadId}/up-vote`, {
       method: 'POST',
     });
@@ -50,7 +52,7 @@ export const postVoteUp = createAsyncThunk(
 
 export const postVoteDown = createAsyncThunk(
   'thread/voteDown',
-  async (threadId : string, { rejectWithValue }) => {
+  async ({ threadId } : PostVoteThread, { rejectWithValue }) => {
     const response = await fetchWithToken(`threads/${threadId}/down-vote`, {
       method: 'POST',
     });
@@ -61,7 +63,7 @@ export const postVoteDown = createAsyncThunk(
 
 export const postVoteNeutral = createAsyncThunk(
   'thread/voteNeutral',
-  async (threadId : string, { rejectWithValue }) => {
+  async ({ threadId } : PostVoteThread, { rejectWithValue }) => {
     const response = await fetchWithToken(`threads/${threadId}/neutral-vote`, {
       method: 'POST',
     });
@@ -84,8 +86,8 @@ export const postComment = createAsyncThunk(
 
 export const postVoteUpComment = createAsyncThunk(
   'thread/voteUpComment',
-  async (args : PostVoteComment, { rejectWithValue }) => {
-    const response = await fetchWithToken(`threads/${args.threadId}/comments/${args.commentId}/up-vote`, {
+  async ({ threadId, commentId } : PostVoteComment, { rejectWithValue }) => {
+    const response = await fetchWithToken(`threads/${threadId}/comments/${commentId}/up-vote`, {
       method: 'POST',
     });
     if (response.status === 'success') return response;
@@ -145,7 +147,7 @@ export const threadSlice = createSlice({
     });
     builder.addCase(postThread.pending, (state) => { state.loading = true; });
     builder.addCase(postThread.rejected, (state) => { state.loading = false; });
-    builder.addCase(postThread.fulfilled, (state, action: PayloadAction<AddThreadResponse>) => {
+    builder.addCase(postThread.fulfilled, (state, action: PayloadAction<PostThreadResponse>) => {
       state.threads.unshift({
         ...action.payload.data.thread,
         category: action.payload.data.thread.category || 'unknown',
@@ -154,62 +156,71 @@ export const threadSlice = createSlice({
     });
     builder.addCase(postVoteUp.pending, (state) => { state.loading = true; });
     builder.addCase(postVoteUp.rejected, (state) => { state.loading = false; });
-    builder.addCase(postVoteUp.fulfilled, (state, action: PayloadAction<PostVoteResponse>) => {
-      const { threadId, userId } = action.payload.data.vote;
-      const threadIndex = state.threads.findIndex((thread) => thread.id === threadId);
+    builder.addCase(
+      postVoteUp.fulfilled,
+      (state, action: PayloadAction<PostVoteThreadResponse>) => {
+        const { threadId, userId } = action.payload.data.vote;
+        const threadIndex = state.threads.findIndex((thread) => thread.id === threadId);
 
-      const thread = state.threads[threadIndex];
-      const voteDownIndex = thread.downVotesBy?.findIndex((id) => userId === id);
+        const thread = state.threads[threadIndex];
+        const voteDownIndex = thread.downVotesBy?.findIndex((id) => userId === id);
 
-      if (voteDownIndex! >= 0) {
-        thread.downVotesBy?.splice(voteDownIndex!, 1);
-        state.thread?.downVotesBy?.splice(voteDownIndex!, 1);
-      }
+        if (voteDownIndex! >= 0) {
+          thread.downVotesBy?.splice(voteDownIndex!, 1);
+          state.thread?.downVotesBy?.splice(voteDownIndex!, 1);
+        }
 
-      thread.upVotesBy?.push(userId);
-      state.thread?.upVotesBy?.push(userId);
+        thread.upVotesBy?.push(userId);
+        state.thread?.upVotesBy?.push(userId);
 
-      state.loading = false;
-    });
+        state.loading = false;
+      },
+    );
     builder.addCase(postVoteDown.pending, (state) => { state.loading = true; });
     builder.addCase(postVoteDown.rejected, (state) => { state.loading = false; });
-    builder.addCase(postVoteDown.fulfilled, (state, action: PayloadAction<PostVoteResponse>) => {
-      const { threadId, userId } = action.payload.data.vote;
-      const threadIndex = state.threads.findIndex((thread) => thread.id === threadId);
+    builder.addCase(
+      postVoteDown.fulfilled,
+      (state, action: PayloadAction<PostVoteThreadResponse>) => {
+        const { threadId, userId } = action.payload.data.vote;
+        const threadIndex = state.threads.findIndex((thread) => thread.id === threadId);
 
-      const thread = state.threads[threadIndex];
-      const voteUpIndex = thread.upVotesBy?.findIndex((id) => userId === id)!;
-      if (voteUpIndex >= 0) {
-        thread.upVotesBy?.splice(voteUpIndex, 1);
-        state.thread?.upVotesBy?.splice(voteUpIndex, 1);
-      }
+        const thread = state.threads[threadIndex];
+        const voteUpIndex = thread.upVotesBy?.findIndex((id) => userId === id)!;
+        if (voteUpIndex >= 0) {
+          thread.upVotesBy?.splice(voteUpIndex, 1);
+          state.thread?.upVotesBy?.splice(voteUpIndex, 1);
+        }
 
-      thread.downVotesBy?.push(userId);
-      state.thread?.downVotesBy?.push(userId);
+        thread.downVotesBy?.push(userId);
+        state.thread?.downVotesBy?.push(userId);
 
-      state.loading = false;
-    });
+        state.loading = false;
+      },
+    );
     builder.addCase(postVoteNeutral.pending, (state) => { state.loading = true; });
     builder.addCase(postVoteNeutral.rejected, (state) => { state.loading = false; });
-    builder.addCase(postVoteNeutral.fulfilled, (state, action: PayloadAction<PostVoteResponse>) => {
-      const { threadId, userId } = action.payload.data.vote;
-      const threadIndex = state.threads.findIndex((thread) => thread.id === threadId);
+    builder.addCase(
+      postVoteNeutral.fulfilled,
+      (state, action: PayloadAction<PostVoteThreadResponse>) => {
+        const { threadId, userId } = action.payload.data.vote;
+        const threadIndex = state.threads.findIndex((thread) => thread.id === threadId);
 
-      const thread = state.threads[threadIndex];
-      const voteUpIndex = thread.upVotesBy?.findIndex((id) => userId === id)!;
-      if (voteUpIndex >= 0) {
-        thread.upVotesBy?.splice(voteUpIndex, 1);
-        state.thread?.upVotesBy?.splice(voteUpIndex, 1);
-      }
+        const thread = state.threads[threadIndex];
+        const voteUpIndex = thread.upVotesBy?.findIndex((id) => userId === id)!;
+        if (voteUpIndex >= 0) {
+          thread.upVotesBy?.splice(voteUpIndex, 1);
+          state.thread?.upVotesBy?.splice(voteUpIndex, 1);
+        }
 
-      const voteDownIndex = thread.downVotesBy?.findIndex((id) => userId === id);
-      if (voteDownIndex! >= 0) {
-        thread.downVotesBy?.splice(voteDownIndex!, 1);
-        state.thread?.downVotesBy?.splice(voteDownIndex!, 1);
-      }
+        const voteDownIndex = thread.downVotesBy?.findIndex((id) => userId === id);
+        if (voteDownIndex! >= 0) {
+          thread.downVotesBy?.splice(voteDownIndex!, 1);
+          state.thread?.downVotesBy?.splice(voteDownIndex!, 1);
+        }
 
-      state.loading = false;
-    });
+        state.loading = false;
+      },
+    );
     builder.addCase(postComment.pending, (state) => { state.loading = true; });
     builder.addCase(postComment.rejected, (state) => { state.loading = false; });
     builder.addCase(postComment.fulfilled, (state, action: PayloadAction<PostCommentResponse>) => {
@@ -286,7 +297,7 @@ export const threadSlice = createSlice({
     builder.addCase(getThreadById.rejected, (state) => { state.loading = false; });
     builder.addCase(
       getThreadById.fulfilled,
-      (state, action: PayloadAction<ThreadDetailResponse>) => {
+      (state, action: PayloadAction<GetThreadDetailResponse>) => {
         state.thread = action.payload.data.detailThread;
         state.loading = false;
       },
