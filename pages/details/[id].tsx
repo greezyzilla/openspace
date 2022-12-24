@@ -3,10 +3,10 @@ import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getThreadById } from '../../features/thread';
 import { DashboardTemplate } from '../../components/templates';
-import { ThreadDetails } from '../../components/organisms';
+import { NotFound, ThreadDetails } from '../../components/organisms';
 
 export default function ThreadDetailPage() {
-  const { thread } = useAppSelector((state) => state.thread.present);
+  const { thread, loading } = useAppSelector((state) => state.thread.present);
 
   const router = useRouter();
   const dispatch = useAppDispatch();
@@ -15,12 +15,14 @@ export default function ThreadDetailPage() {
     if (router.isReady) dispatch(getThreadById({ threadId: router.query.id as string }));
   }, [router, dispatch]);
 
-  const isLoading = !thread;
+  let detailPage;
+  if (thread) detailPage = <ThreadDetails thread={thread} />;
+  else if (!thread && loading) detailPage = <ThreadDetails.Skeleton />;
+  else detailPage = <NotFound />;
+
   return (
     <DashboardTemplate title="Details">
-      {
-        !isLoading ? <ThreadDetails thread={thread} /> : <ThreadDetails.Skeleton />
-      }
+      {detailPage}
     </DashboardTemplate>
   );
 }
