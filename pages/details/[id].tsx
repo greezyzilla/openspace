@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getThreadById } from '../../features/thread';
 import { DashboardTemplate } from '../../components/templates';
-import { NotFound, ThreadDetails } from '../../components/organisms';
+import { ThreadNotFound, ThreadDetails } from '../../components/organisms';
 
 export default function ThreadDetailPage() {
   const { thread, loading } = useAppSelector((state) => state.thread.present);
@@ -18,7 +18,7 @@ export default function ThreadDetailPage() {
   let detailPage;
   if (thread) detailPage = <ThreadDetails thread={thread} />;
   else if (!thread && loading) detailPage = <ThreadDetails.Skeleton />;
-  else detailPage = <NotFound />;
+  else detailPage = <ThreadNotFound />;
 
   return (
     <DashboardTemplate title="Details">
