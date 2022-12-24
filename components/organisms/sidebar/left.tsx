@@ -20,8 +20,9 @@ export default function LeftSidebar() {
     request(() => dispatch(postThread(thread)))
   );
 
-  const { threads, loading } = useAppSelector((state) => state.thread);
-  const isLoading = !threads.length || loading;
+  const { threads } = useAppSelector((state) => state.thread.present);
+  const isLoading = !threads.length;
+
   return (
     <>
       <Button onClick={open} className="group fixed bottom-8 right-8 flex items-center gap-3 rounded-lg bg-violet-700 p-2 text-sm text-white/90 shadow-xl shadow-black/20 md:hidden">

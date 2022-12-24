@@ -4,7 +4,7 @@ import { DashboardTemplate } from '../../components/templates';
 import { Threads } from '../../components/organisms';
 
 export default function ThreadByCategoryPage() {
-  const { threads } = useAppSelector((state) => state.thread);
+  const { threads } = useAppSelector((state) => state.thread.present);
 
   const category = useRouter().query.category as string;
   const filteredThread = threads.filter((t) => t.category === category);

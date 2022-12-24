@@ -84,6 +84,7 @@ export interface GetThreadDetailResponse extends ApiResponse{
 }
 
 export interface PostVoteThread{
+    userId: string;
     threadId: string;
 }
 
@@ -108,6 +109,7 @@ export interface PostCommentResponse extends ApiResponse{
 export interface PostVoteComment{
     threadId: string;
     commentId: string;
+    userId: string;
 }
 
 export interface PostVoteCommentResponse extends ApiResponse{

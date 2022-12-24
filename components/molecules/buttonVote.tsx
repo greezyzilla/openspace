@@ -19,23 +19,27 @@ export default function ButtonVote(props : Partial<VoteButtonProps>) {
   } = props;
 
   const { auth } = useAppSelector((state) => state);
+
   const dispatch = useAppDispatch();
   const request = useRequest();
 
   const isVotingComment = !!commentId;
   const isUpVoting = !!votes.find((userId) => userId === auth.user?.id);
 
+  const userId = !auth.loading && auth.user ? auth.user!.id : '';
+
   const onVoteHandle = async () => {
     if (isVotingComment) {
-      if (isVoteDown) request(() => dispatch(postVoteDownComment({ commentId, threadId })));
-      else request(() => dispatch(postVoteUpComment({ commentId, threadId })));
-    } else if (isVoteDown) request(() => dispatch(postVoteDown({ threadId })));
-    else request(() => dispatch(postVoteUp({ threadId })));
+      if (isVoteDown) request(() => dispatch(postVoteDownComment({ commentId, threadId, userId })));
+      else request(() => dispatch(postVoteUpComment({ commentId, threadId, userId })));
+    } else if (isVoteDown) request(() => dispatch(postVoteDown({ threadId, userId })));
+    else request(() => dispatch(postVoteUp({ threadId, userId })));
   };
 
   const onVoteNeutralHandle = async () => {
-    if (isVotingComment) request(() => dispatch(postVoteNeutralComment({ threadId, commentId })));
-    else request(() => dispatch(postVoteNeutral({ threadId })));
+    if (isVotingComment) {
+      request(() => dispatch(postVoteNeutralComment({ threadId, commentId, userId })));
+    } else request(() => dispatch(postVoteNeutral({ threadId, userId })));
   };
 
   return (

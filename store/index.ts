@@ -1,10 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { loadingBarMiddleware, loadingBarReducer } from 'react-redux-loading-bar';
+import undoable from 'redux-undo';
 import { authReducer, threadReducer, userReducer } from '../features';
+
+const undoableThreadReducer = undoable(threadReducer, { limit: 10 });
 
 export const store = configureStore({
   reducer: {
-    thread: threadReducer,
+    thread: undoableThreadReducer,
     user: userReducer,
     auth: authReducer,
     loadingBar: loadingBarReducer,

@@ -24,7 +24,10 @@ export function removeAccessToken() {
 
 const baseURL = 'https://forum-api.dicoding.dev/v1/';
 
-export async function fetchWithToken(url : string, options : AxiosRequestConfig<any>) {
+export async function fetchWithToken(
+  url : string,
+  options : AxiosRequestConfig<any>,
+): Promise<ApiResponse> {
   try {
     const response = await axios({
       baseURL: baseURL + url,
@@ -35,23 +38,26 @@ export async function fetchWithToken(url : string, options : AxiosRequestConfig<
       },
     });
 
-    return { ...response.data, code: response.status } as ApiResponse;
+    return { ...response.data, code: response.status };
   } catch (e : any) {
     if (e.response?.status === 401) removeAccessToken();
-    return { status: 'fail', message: e.response.data.message, code: e.response.status } as ApiResponse;
+    return ({ status: 'fail', message: e.response?.data?.message || 'Bad request', code: e.response?.status || 400 });
   }
 }
 
-export async function fetcWithoutToken(url : string, options : AxiosRequestConfig<any>) {
+export async function fetcWithoutToken(
+  url : string,
+  options : AxiosRequestConfig<any>,
+) : Promise<ApiResponse> {
   try {
     const response = await axios({
       baseURL: baseURL + url,
       ...options,
     });
 
-    return { ...response.data, code: response.status } as ApiResponse;
+    return { ...response.data, code: response.status };
   } catch (e : any) {
-    return { status: 'fail', message: e.response.data.message } as ApiResponse;
+    return ({ status: 'fail', message: e.response?.data?.message || 'Bad request', code: e.response?.status || 400 });
   }
 }
 

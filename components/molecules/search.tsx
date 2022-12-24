@@ -10,8 +10,8 @@ import { searchThread } from '../../features/thread';
 export default function Search() {
   const [isOpen, _, open, close] = useToggle(false);
   const { threads, users, filter } = useAppSelector((state) => ({
-    threads: state.thread.threads,
-    filter: state.thread.filter,
+    threads: state.thread.present.threads,
+    filter: state.thread.present.filter,
     users: state.user.users,
   }));
 

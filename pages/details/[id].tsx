@@ -6,7 +6,7 @@ import { DashboardTemplate } from '../../components/templates';
 import { ThreadDetails } from '../../components/organisms';
 
 export default function ThreadDetailPage() {
-  const { thread, loading } = useAppSelector((state) => state.thread);
+  const { thread } = useAppSelector((state) => state.thread.present);
 
   const router = useRouter();
   const dispatch = useAppDispatch();
@@ -15,7 +15,7 @@ export default function ThreadDetailPage() {
     if (router.isReady) dispatch(getThreadById({ threadId: router.query.id as string }));
   }, [router, dispatch]);
 
-  const isLoading = !thread || loading;
+  const isLoading = !thread;
   return (
     <DashboardTemplate title="Details">
       {
