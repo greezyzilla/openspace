@@ -1,6 +1,7 @@
 import classcat from 'classcat';
 import Link from 'next/link';
 import { ReactNode, Ref, forwardRef } from 'react';
+import PropTypes from 'prop-types';
 
 interface ButtonProps{
     children: ReactNode;
@@ -20,7 +21,8 @@ const Button = forwardRef((
   ref : Ref<HTMLButtonElement | HTMLAnchorElement>,
 ) => {
   const {
-    children, className = '', isExternal = false, href = '/', isLink = false, isPrimary = false, isSecondary = false, onClick = () => {}, isSubmit = false, isDisabled,
+    children, className = '', isExternal = false, href = '/', isLink = false,
+    isPrimary = false, isSecondary = false, onClick = () => {}, isSubmit = false, isDisabled,
   } = props;
 
   const buttonClassName = classcat([{
@@ -67,4 +69,29 @@ const Button = forwardRef((
 });
 
 Button.displayName = 'Button';
+Button.propTypes = {
+  children: PropTypes.node.isRequired,
+  className: PropTypes.string,
+  isLink: PropTypes.bool,
+  isExternal: PropTypes.bool,
+  isPrimary: PropTypes.bool,
+  isSecondary: PropTypes.bool,
+  href: PropTypes.string,
+  onClick: PropTypes.func,
+  isSubmit: PropTypes.bool,
+  isDisabled: PropTypes.bool,
+};
+
+Button.defaultProps = {
+  isLink: false,
+  isDisabled: false,
+  href: '/',
+  className: '',
+  isExternal: false,
+  isPrimary: false,
+  isSecondary: false,
+  isSubmit: false,
+  onClick: () => {},
+};
+
 export default Button;

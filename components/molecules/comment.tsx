@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import PropTypes from 'prop-types';
 import { Comment as CommentInterface } from '../../features/thread/thread.interface';
 import { getRelativeDate } from '../../utils';
 import ButtonVote from './buttonVote';
@@ -47,4 +48,8 @@ Comment.Skeleton = function CommentSkeleton() {
       </div>
     </div>
   );
+};
+
+Comment.propTypes = {
+  threadId: PropTypes.string.isRequired,
 };

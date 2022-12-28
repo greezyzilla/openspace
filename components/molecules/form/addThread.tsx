@@ -1,5 +1,6 @@
 import { FormEvent } from 'react';
 import { toast } from 'react-toastify';
+import PropTypes from 'prop-types';
 import { PostThread } from '../../../features/thread/thread.interface';
 import { Button, InputText, InputTextarea } from '../../atoms';
 import { useForm } from '../../../hooks';
@@ -44,3 +45,8 @@ export default function AddThreadForm({ onSubmit, onCancel } : AddThreadFormProp
     </form>
   );
 }
+
+AddThreadForm.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+  onCancel: PropTypes.func.isRequired,
+};

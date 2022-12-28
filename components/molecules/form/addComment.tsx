@@ -1,4 +1,5 @@
 import { FormEvent } from 'react';
+import PropTypes from 'prop-types';
 import { PostComment } from '../../../features/thread/thread.interface';
 import { Button, InputText } from '../../atoms';
 import { useForm } from '../../../hooks';
@@ -29,3 +30,8 @@ export default function AddComment({ onSubmit, threadId } : AddCommentProps) {
     </form>
   );
 }
+
+AddComment.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+  threadId: PropTypes.string.isRequired,
+};

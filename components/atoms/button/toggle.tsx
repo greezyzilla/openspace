@@ -1,5 +1,6 @@
 import classcat from 'classcat';
 import { ReactNode } from 'react';
+import PropTypes from 'prop-types';
 import Button from './default';
 
 interface ToggleProps{
@@ -31,3 +32,21 @@ export default function Toggle(props: Partial<ToggleProps>) {
     </Button>
   );
 }
+
+Toggle.propTypes = {
+  children: PropTypes.node.isRequired,
+  activeClassname: PropTypes.string,
+  inactiveClassname: PropTypes.string,
+  className: PropTypes.string,
+  onActiveClick: PropTypes.func,
+  onInactiveClick: PropTypes.func,
+  isActive: PropTypes.bool.isRequired,
+};
+
+Toggle.defaultProps = {
+  activeClassname: '',
+  inactiveClassname: '',
+  className: '',
+  onActiveClick: () => {},
+  onInactiveClick: () => {},
+};

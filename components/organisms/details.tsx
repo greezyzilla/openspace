@@ -1,6 +1,8 @@
+import PropTypes from 'prop-types';
 import { postComment } from '../../features/thread';
 import { PostComment, ThreadDetail } from '../../features/thread/thread.interface';
 import { useRequest, useAppDispatch } from '../../hooks';
+import { ThreadPropTypes } from '../../proptypes';
 import { AddCommentForm, Thread, Comment } from '../molecules';
 
 interface ThreadDetailProps{
@@ -59,4 +61,8 @@ ThreadDetails.Skeleton = function ThreadDetailsSkeleton() {
       </div>
     </div>
   );
+};
+
+ThreadDetails.propTypes = {
+  thread: PropTypes.exact(ThreadPropTypes).isRequired,
 };

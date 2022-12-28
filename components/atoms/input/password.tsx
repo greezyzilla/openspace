@@ -1,5 +1,6 @@
 import classcat from 'classcat';
 import { ChangeEvent } from 'react';
+import PropTypes from 'prop-types';
 
 interface InputPasswordProps {
     label: string;
@@ -35,3 +36,16 @@ export default function InputPassword(props : Partial<InputPasswordProps>) {
     </div>
   );
 }
+
+InputPassword.propTypes = {
+  label: PropTypes.string.isRequired,
+  placeholder: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+  value: PropTypes.string.isRequired,
+  isValid: PropTypes.bool,
+};
+
+InputPassword.defaultProps = {
+  isValid: true,
+};

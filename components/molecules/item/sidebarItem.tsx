@@ -2,6 +2,7 @@ import classcat from 'classcat';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { ReactElement, ComponentProps, ReactNode } from 'react';
+import PropTypes from 'prop-types';
 
 interface SidebarItemProps{
     href: string;
@@ -55,4 +56,10 @@ SidebarItem.Skeleton = function SidebarItemSkeleton() {
       </div>
     </div>
   );
+};
+
+SidebarItem.propTypes = {
+  href: PropTypes.string.isRequired,
+  Icon: PropTypes.func.isRequired,
+  children: PropTypes.node.isRequired,
 };

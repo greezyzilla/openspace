@@ -1,19 +1,17 @@
 import { ChatBubbleLeftRightIcon } from '@heroicons/react/24/solid';
 import parse from 'html-react-parser';
 import Image from 'next/image';
+import PropTypes from 'prop-types';
 import { Thread as ThreadInterface } from '../../features/thread/thread.interface';
 import { getRelativeDate } from '../../utils';
 import { Button } from '../atoms';
 import ButtonVote from './buttonVote';
+import { ThreadPropTypes, UserPropTypes } from '../../proptypes';
+import { User } from '../../features/user/user.interface';
 
 interface ThreadProps{
   thread: ThreadInterface & {
-    owner: {
-      id: string;
-      name: string;
-      email: string;
-      avatar: string;
-    }
+    owner: User
   }
   isDetails: boolean;
 }
@@ -83,4 +81,12 @@ Thread.Skeleton = function ThreadSkeleton() {
       </div>
     </article>
   );
+};
+
+Thread.propTypes = {
+  thread: PropTypes.exact({
+    ...ThreadPropTypes,
+    owner: PropTypes.exact(UserPropTypes),
+  }).isRequired,
+  isDetails: PropTypes.bool.isRequired,
 };

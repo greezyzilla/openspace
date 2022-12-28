@@ -1,5 +1,7 @@
 import Image from 'next/image';
+import PropTypes from 'prop-types';
 import { User } from '../../../features/user/user.interface';
+import { UserPropTypes } from '../../../proptypes';
 
 interface UserItemProps{
     user: User;
@@ -27,4 +29,8 @@ UserItem.Skeleton = function UserItemSkeleton() {
       </div>
     </div>
   );
+};
+
+UserItem.propTypes = {
+  user: PropTypes.exact(UserPropTypes).isRequired,
 };

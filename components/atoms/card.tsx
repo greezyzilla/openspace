@@ -1,5 +1,6 @@
 import classcat from 'classcat';
 import { ReactNode } from 'react';
+import PropTypes from 'prop-types';
 
 interface CardProps{
     children: ReactNode;
@@ -21,3 +22,14 @@ export default function Card({ children, size = 'md', className }: Partial<CardP
     </div>
   );
 }
+
+Card.propTypes = {
+  children: PropTypes.node.isRequired,
+  size: PropTypes.oneOf(['sm', 'md', 'lg']),
+  className: PropTypes.string,
+};
+
+Card.defaultProps = {
+  size: 'md',
+  className: '',
+};

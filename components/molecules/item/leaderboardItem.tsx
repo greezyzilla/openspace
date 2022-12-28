@@ -1,12 +1,10 @@
 import Image from 'next/image';
+import PropTypes from 'prop-types';
+import { UserPropTypes } from '../../../proptypes';
+import { User } from '../../../features/user/user.interface';
 
 interface LeaderboardItemProps{
-    user: {
-        id: string;
-        name: string;
-        email: string;
-        avatar: string;
-    },
+    user: User,
     no: number;
     score: number;
 }
@@ -43,4 +41,10 @@ LeaderboardItem.Skeleton = function LeaderboardItemSkeleton() {
       <p className="skeleton flex w-20 items-end justify-center text-4xl font-light text-violet-800/80">&nbsp;</p>
     </div>
   );
+};
+
+LeaderboardItem.propTypes = {
+  user: PropTypes.exact(UserPropTypes).isRequired,
+  no: PropTypes.number.isRequired,
+  score: PropTypes.number.isRequired,
 };

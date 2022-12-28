@@ -1,4 +1,5 @@
 import { ArrowSmallDownIcon, ArrowSmallUpIcon } from '@heroicons/react/24/solid';
+import PropTypes from 'prop-types';
 import {
   postVoteDown, postVoteNeutral, postVoteUp,
   postVoteUpComment, postVoteDownComment, postVoteNeutralComment,
@@ -69,4 +70,16 @@ ButtonVote.Skeleton = function ButtonVoteSkeleton() {
       &nbsp;
     </div>
   );
+};
+
+ButtonVote.propTypes = {
+  threadId: PropTypes.string.isRequired,
+  commentId: PropTypes.string,
+  votes: PropTypes.arrayOf(PropTypes.string).isRequired,
+  isVoteDown: PropTypes.bool,
+};
+
+ButtonVote.defaultProps = {
+  commentId: '',
+  isVoteDown: false,
 };

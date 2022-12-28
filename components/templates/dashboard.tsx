@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
 import Head from 'next/head';
+import PropTypes from 'prop-types';
 import { Header, LeftSidebar, RightSidebar } from '../organisms';
 
 interface DashboardTemplateProps{
@@ -26,3 +27,12 @@ export default function DashboardTemplate({ title, children } : Partial<Dashboar
     </>
   );
 }
+
+DashboardTemplate.propTypes = {
+  children: PropTypes.node.isRequired,
+  title: PropTypes.string,
+};
+
+DashboardTemplate.defaultProps = {
+  title: 'OpenSpace',
+};

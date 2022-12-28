@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import { ReactNode } from 'react';
+import PropTypes from 'prop-types';
 
 interface AuthTemplateProps{
     children: ReactNode;
@@ -18,3 +19,12 @@ export default function AuthTemplate({ children, title } : Partial<AuthTemplateP
     </>
   );
 }
+
+AuthTemplate.propTypes = {
+  children: PropTypes.node.isRequired,
+  title: PropTypes.string,
+};
+
+AuthTemplate.defaultProps = {
+  title: 'OpenSpace',
+};

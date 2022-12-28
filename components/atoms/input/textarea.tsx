@@ -1,5 +1,6 @@
 import dynamic from 'next/dynamic';
 import { ChangeEvent } from 'react';
+import PropTypes from 'prop-types';
 
 // (if using Next.js or use own dynamic loader)
 const ReactQuill = dynamic(
@@ -44,3 +45,11 @@ export default function TextArea(props : TextAreaProps) {
     </div>
   );
 }
+
+TextArea.propTypes = {
+  label: PropTypes.string.isRequired,
+  placeholder: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+  value: PropTypes.string.isRequired,
+};

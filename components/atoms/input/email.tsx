@@ -1,4 +1,5 @@
 import { ChangeEvent } from 'react';
+import PropTypes from 'prop-types';
 
 interface InputEmailProps {
     label: string;
@@ -27,3 +28,11 @@ export default function InputEmail(props : InputEmailProps) {
     </div>
   );
 }
+
+InputEmail.propTypes = {
+  label: PropTypes.string.isRequired,
+  placeholder: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+  value: PropTypes.string.isRequired,
+};

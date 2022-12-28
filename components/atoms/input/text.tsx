@@ -1,4 +1,5 @@
 import { ChangeEvent } from 'react';
+import PropTypes from 'prop-types';
 
 interface InputTextProps {
     label?: string;
@@ -26,3 +27,15 @@ export default function InputText({
     </div>
   );
 }
+
+InputText.propTypes = {
+  label: PropTypes.string,
+  placeholder: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+  value: PropTypes.string.isRequired,
+};
+
+InputText.defaultProps = {
+  label: '',
+};
