@@ -1,5 +1,5 @@
 import { ApiResponse } from '../../interfaces';
-import { Owner } from '../user/user.interface';
+import { Owner, User } from '../user/user.interface';
 
 export interface Thread{
     id: string;
@@ -94,7 +94,9 @@ export interface PostComment{
 
 export interface PostCommentResponse extends ApiResponse{
     data: {
-        comment: Comment;
+        comment: Comment & {
+            owner: User;
+        };
         threadId?: string;
     }
 }

@@ -237,7 +237,8 @@ export const threadSlice = createSlice({
     builder.addCase(postComment.pending, (state) => { state.loading = true; });
     builder.addCase(postComment.rejected, (state) => { state.loading = false; });
     builder.addCase(postComment.fulfilled, (state, action) => {
-      state.thread?.comments.unshift(action.payload.data.comment);
+      const { email: _, ...owner } = action.payload.data.comment.owner;
+      state.thread?.comments.unshift({ ...action.payload.data.comment, owner });
       state.loading = false;
     });
     builder.addCase(postVoteUpComment.pending, (state, action) => {
@@ -280,7 +281,6 @@ export const threadSlice = createSlice({
     builder.addCase(postVoteDownComment.fulfilled, (state) => { state.loading = false; });
     builder.addCase(postVoteNeutralComment.pending, (state, action) => {
       state.loading = true;
-
       if (state.thread) {
         const { commentId, userId } = action.meta.arg;
 
