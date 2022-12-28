@@ -1,10 +1,13 @@
 import { ApiResponse } from '../../interfaces';
 
-export interface User{
+export interface Owner{
     id: string;
     name: string;
-    email: string;
     avatar: string;
+}
+
+export interface User extends Owner{
+    email: string;
 }
 
 export interface Leaderboard{

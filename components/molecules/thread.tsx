@@ -6,12 +6,13 @@ import { Thread as ThreadInterface } from '../../features/thread/thread.interfac
 import { getRelativeDate } from '../../utils';
 import { Button } from '../atoms';
 import ButtonVote from './buttonVote';
-import { ThreadPropTypes, UserPropTypes } from '../../proptypes';
-import { User } from '../../features/user/user.interface';
+import { ThreadPropTypes, OwnerPropTypes } from '../../proptypes';
+import { Owner } from '../../features/user/user.interface';
 
 interface ThreadProps{
   thread: ThreadInterface & {
-    owner: User
+    totalComments: number;
+    owner: Owner;
   }
   isDetails: boolean;
 }
@@ -86,7 +87,8 @@ Thread.Skeleton = function ThreadSkeleton() {
 Thread.propTypes = {
   thread: PropTypes.exact({
     ...ThreadPropTypes,
-    owner: PropTypes.exact(UserPropTypes),
+    totalComments: PropTypes.number.isRequired,
+    owner: PropTypes.exact(OwnerPropTypes).isRequired,
   }).isRequired,
   isDetails: PropTypes.bool.isRequired,
 };

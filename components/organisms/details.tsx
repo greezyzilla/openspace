@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { postComment } from '../../features/thread';
 import { PostComment, ThreadDetail } from '../../features/thread/thread.interface';
 import { useRequest, useAppDispatch } from '../../hooks';
-import { ThreadPropTypes } from '../../proptypes';
+import { CommentPropTypes, OwnerPropTypes, ThreadPropTypes } from '../../proptypes';
 import { AddCommentForm, Thread, Comment } from '../molecules';
 
 interface ThreadDetailProps{
@@ -17,13 +17,14 @@ export default function ThreadDetails({ thread }: ThreadDetailProps) {
     request(() => dispatch(postComment(comment)))
   );
 
-  const threadDisplay = {
+  const threadWithTotalComments = {
     ...thread,
     totalComments: thread.comments.length,
-    ownerId: thread.owner.id,
   };
 
   const hasComments = !!thread.comments.length;
+  const { comments, ...threadDisplay } = threadWithTotalComments;
+
   return (
     <div>
       <Thread thread={threadDisplay} isDetails />
@@ -33,7 +34,7 @@ export default function ThreadDetails({ thread }: ThreadDetailProps) {
         {
           hasComments ? (
             <div className="flex flex-col gap-4">
-              {thread.comments.map((comment) => (
+              {comments.map((comment) => (
                 <Comment {...comment} key={comment.id} threadId={thread.id} />
               ))}
             </div>
@@ -64,5 +65,9 @@ ThreadDetails.Skeleton = function ThreadDetailsSkeleton() {
 };
 
 ThreadDetails.propTypes = {
-  thread: PropTypes.exact(ThreadPropTypes).isRequired,
+  thread: PropTypes.exact({
+    ...ThreadPropTypes,
+    owner: PropTypes.exact(OwnerPropTypes).isRequired,
+    comments: PropTypes.arrayOf(PropTypes.exact(CommentPropTypes)).isRequired,
+  }).isRequired,
 };

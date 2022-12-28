@@ -60,6 +60,6 @@ SidebarItem.Skeleton = function SidebarItemSkeleton() {
 
 SidebarItem.propTypes = {
   href: PropTypes.string.isRequired,
-  Icon: PropTypes.func.isRequired,
+  Icon: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.func, PropTypes.symbol])).isRequired,
   children: PropTypes.node.isRequired,
 };

@@ -1,5 +1,5 @@
 import { ApiResponse } from '../../interfaces';
-import { User } from '../user/user.interface';
+import { Owner } from '../user/user.interface';
 
 export interface Thread{
     id: string;
@@ -7,31 +7,22 @@ export interface Thread{
     body: string;
     category: string;
     createdAt: string;
-    ownerId: string;
     upVotesBy: string[];
     downVotesBy: string[];
-    totalComments: number;
 }
 
 export interface Comment{
     id: string;
     content: string;
-    owner: User;
+    owner: Owner;
     createdAt: string;
     downVotesBy: string[];
     upVotesBy: string[];
 }
 
-export interface ThreadDetail{
-    id: string;
-    body: string;
-    category: string;
+export interface ThreadDetail extends Thread{
     comments: Comment[];
-    createdAt: string;
-    downVotesBy: string[];
-    owner: User;
-    title: string;
-    upVotesBy: string[];
+    owner: Owner;
 }
 
 export interface VoteThread{
@@ -61,7 +52,9 @@ export interface GetThread{
 
 export interface GetThreadsResponse extends ApiResponse{
     data: {
-        threads: Thread[];
+        threads: (Thread & {
+            ownerId: string;
+        })[];
     }
 }
 
