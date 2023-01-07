@@ -3,11 +3,17 @@ import { ChangeEvent } from 'react';
 import PropTypes from 'prop-types';
 
 interface InputPasswordProps {
+    /** The label that showing on the top of the input element */
     label: string;
+    /** The placeholder that showing inside the input element when input is empty */
     placeholder: string;
+    /** If isValid is false, the input ring style become danger (red) */
     isValid?: boolean;
+    /** The name that used to interact with ChangeEvent */
     name: string;
+    /** The event handler that be fired every input value changed */
     onChange(e: ChangeEvent<HTMLInputElement>) : void;
+    /** The state of the input element */
     value: string;
 }
 
@@ -22,7 +28,7 @@ export default function InputPassword(props : InputPasswordProps) {
   });
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-1 flex-col gap-2">
       <p className="text-sm text-slate-500">{ label }</p>
       <input
         name={name}

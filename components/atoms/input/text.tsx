@@ -2,10 +2,16 @@ import { ChangeEvent } from 'react';
 import PropTypes from 'prop-types';
 
 interface InputTextProps {
+    /** The label that showing on the top of the input element.
+     * If it is empty the label not showing */
     label?: string;
+    /** The placeholder that showing inside the input element when input is empty */
     placeholder: string;
+    /** The event handler that be fired every input value changed */
     onChange(e: ChangeEvent<HTMLInputElement>) : void;
+    /** The state of the input element */
     value: string;
+    /** The name that used to interact with ChangeEvent */
     name: string;
 }
 
@@ -13,7 +19,7 @@ export default function InputText({
   label, placeholder, onChange, value, name,
 } : InputTextProps) {
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-1 flex-col gap-2">
       {label && <p className="text-sm text-slate-500">{ label }</p>}
       <input
         type="text"

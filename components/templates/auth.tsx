@@ -3,7 +3,9 @@ import { ReactNode } from 'react';
 import PropTypes from 'prop-types';
 
 interface AuthTemplateProps{
+    /** The node that wrapped by the template */
     children: ReactNode;
+    /** The title of the document */
     title: string;
 }
 

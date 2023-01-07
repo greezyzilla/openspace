@@ -5,7 +5,9 @@ import { Button, InputText } from '../../atoms';
 import { useForm } from '../../../hooks';
 
 interface AddCommentProps{
+    /** The event that fired if the form is submitted */
     onSubmit(_comment: PostComment): void;
+    /** The correspondent id of the commented thread */
     threadId: string;
 }
 

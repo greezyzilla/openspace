@@ -7,12 +7,7 @@ module.exports = {
     'jest/globals': true,
     'cypress/globals': true,
   },
-  extends: [
-    'plugin:react/recommended',
-    'airbnb',
-    'plugin:tailwindcss/recommended',
-    'next/core-web-vitals',
-  ],
+  extends: ['plugin:react/recommended', 'airbnb', 'plugin:tailwindcss/recommended', 'next/core-web-vitals', 'plugin:storybook/recommended'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {
@@ -21,16 +16,12 @@ module.exports = {
     ecmaVersion: 13,
     sourceType: 'module',
   },
-  plugins: [
-    'react',
-    '@typescript-eslint',
-    'tailwindcss',
-    'cypress',
-    'jest',
-  ],
+  plugins: ['react', '@typescript-eslint', 'tailwindcss', 'cypress', 'jest'],
   rules: {
     'react/react-in-jsx-scope': 'off',
-    'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
+    'react/jsx-filename-extension': [1, {
+      extensions: ['.js', '.jsx', '.ts', '.tsx'],
+    }],
     'no-underscore-dangle': 'off',
     'import/extensions': ['error', 'ignorePackages', {
       js: 'never',
@@ -38,31 +29,39 @@ module.exports = {
       ts: 'never',
       tsx: 'never',
     }],
-    'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
+    'import/no-extraneous-dependencies': ['error', {
+      devDependencies: true,
+    }],
     'react/jsx-props-no-spreading': 'off',
     'jsx-a11y/anchor-is-valid': 'off',
-    'no-param-reassign': ['error', { props: true, ignorePropertyModificationsFor: ['state'] }],
+    'no-param-reassign': ['error', {
+      props: true,
+      ignorePropertyModificationsFor: ['state'],
+    }],
     'no-shadow': 'off',
     '@typescript-eslint/no-shadow': ['error'],
     'no-unused-vars': 'off',
-    '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_', varsIgnorePattern: '^_' }],
+    '@typescript-eslint/no-unused-vars': ['error', {
+      argsIgnorePattern: '^_',
+      varsIgnorePattern: '^_',
+    }],
     'react/no-array-index-key': 'off',
     'no-promise-executor-return': 'off',
   },
   settings: {
     'import/extensions': ['.js', '.jsx', '.ts', '.tsx'],
-    'import/parsers': { '@typescript-eslint/parser': ['.ts', '.tsx'] },
-    'import/resolver': { node: { extensions: ['.js', '.jsx', '.ts', '.tsx'] } },
+    'import/parsers': {
+      '@typescript-eslint/parser': ['.ts', '.tsx'],
+    },
+    'import/resolver': {
+      node: {
+        extensions: ['.js', '.jsx', '.ts', '.tsx'],
+      },
+    },
     tailwindcss: {
       callees: ['classnames', 'classcat'],
       config: 'tailwind.config.js',
-      cssFiles: [
-        '**/*.css',
-        '!**/node_modules',
-        '!**/.*',
-        '!**/dist',
-        '!**/build',
-      ],
+      cssFiles: ['**/*.css', '!**/node_modules', '!**/.*', '!**/dist', '!**/build'],
       cssFilesRefreshRate: 5000,
       removeDuplicates: true,
       whitelist: [],

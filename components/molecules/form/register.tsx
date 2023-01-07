@@ -44,7 +44,7 @@ export default function RegisterForm() {
     <form className="flex flex-col gap-4 px-8 sm:gap-6" onSubmit={onSubmitHandle}>
       <InputText label="Full Name" name="name" onChange={onChange} placeholder="Alexander Scotch, etc.." value={data.name} />
       <InputEmail label="Email" name="email" onChange={onChange} placeholder="email@example.com" value={data.email} />
-      <div className="flex gap-6">
+      <div className="flex w-full gap-6">
         <InputPassword label="Password" name="password" onChange={onChange} placeholder="*********" value={data.password} />
         <InputPassword isValid={!isPasswordMatch} label="Confirm Password" name="passwordConfirmation" onChange={onChange} placeholder="*********" value={data.passwordConfirmation} />
       </div>

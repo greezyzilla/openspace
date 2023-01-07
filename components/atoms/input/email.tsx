@@ -2,10 +2,15 @@ import { ChangeEvent } from 'react';
 import PropTypes from 'prop-types';
 
 interface InputEmailProps {
+    /** The label that showing on the top of the input element */
     label: string;
+    /** The placeholder that showing inside the input element when input is empty */
     placeholder: string;
+    /** The name that used to interact with ChangeEvent */
     name: string;
+    /** The event handler that be fired every input value changed */
     onChange(e: ChangeEvent<HTMLInputElement>) : void;
+    /** The state of the input element */
     value: string;
 }
 

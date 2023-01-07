@@ -3,8 +3,11 @@ import { Fragment, ReactNode } from 'react';
 import PropTypes from 'prop-types';
 
 interface ModalProps{
+    /** The node that wrapped by the button */
     children: ReactNode;
+    /** The state of the modal */
     isOpen: boolean;
+    /** The event that fired if the close button or the backdrop clicked */
     onClose(): void;
 }
 

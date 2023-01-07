@@ -5,6 +5,7 @@ import { useAppSelector } from '../../hooks';
 import { ThreadPropTypes } from '../../proptypes';
 
 interface ThreadsInterface{
+  /** The list of the thread that being rendered */
   threads?: (ThreadInterface & {
     totalComments: number;
     ownerId: string;

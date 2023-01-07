@@ -6,7 +6,9 @@ import { Button, InputText, InputTextarea } from '../../atoms';
 import { useForm } from '../../../hooks';
 
 interface AddThreadFormProps{
+    /** The event that fired if the form is submitted */
     onSubmit(_newThread : PostThread): void;
+    /** The event that fired after submit is success and if canceled */
     onCancel(): void;
 }
 

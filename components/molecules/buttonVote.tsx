@@ -8,9 +8,14 @@ import { useRequest, useAppDispatch, useAppSelector } from '../../hooks';
 import { ToggleButton } from '../atoms';
 
 interface VoteButtonProps{
+    /** The correspondent id of the voted thread */
     threadId: string;
+    /** The correspondent id of the voted comment,
+     * if exist the button is voting comment instead voting thread */
     commentId?: string;
+    /** The user id list of the votes */
     votes: string[];
+    /** If isVoteDown is true, the button behavior changed to vote down */
     isVoteDown?: boolean;
 }
 

@@ -7,10 +7,15 @@ import { importReactQuill } from '../../../utils';
 const ReactQuill = dynamic(importReactQuill, { ssr: false });
 
 interface TextAreaProps{
+    /** The label that showing on the top of the input element */
     label: string;
+    /** The placeholder that showing inside the input element when input is empty */
     placeholder: string;
+    /** The event handler that be fired every input value changed */
     onChange(_value : ChangeEvent<HTMLInputElement>) : void;
+    /** The state of the input element */
     value: string;
+    /** The name that used to interact with ChangeEvent */
     name: string;
 }
 

@@ -4,15 +4,26 @@ import { ReactNode, Ref, forwardRef } from 'react';
 import PropTypes from 'prop-types';
 
 interface ButtonProps{
+    /** The node that wrapped by the button */
     children: ReactNode;
+    /** Additional classname to style the button */
     className?: string;
+    /** If isLink is true, this component become a link */
     isLink? : boolean;
+    /** If isExternal is true, this component used to navigate outside the base url.
+     *  isLink must be true before use this */
     isExternal? : boolean;
+    /** If isPrimary is true, this component will use primary styling */
     isPrimary? : boolean;
+    /** If isSecondary is true, this component will use secondary styling */
     isSecondary? : boolean;
+    /** The target for link to navigate to */
     href? : string;
+    /** The event that fired if the button or internal link clicked */
     onClick?() : void;
+    /** If isSubmit is true, this button type become submit. Must be used with form wrapper */
     isSubmit?: boolean;
+    /** If isDisabled is true, this button can't be interacted with */
     isDisabled?: boolean;
 }
 

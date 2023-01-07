@@ -6,7 +6,9 @@ import { CommentPropTypes, OwnerPropTypes, ThreadPropTypes } from '../../proptyp
 import { AddCommentForm, Thread, Comment } from '../molecules';
 
 interface ThreadDetailProps{
-    thread: ThreadDetail;
+  /** The correspodent thread that being rendered. Must have (id, title, body,
+  * category, createdAt, upVotesBy, downVotesBy, comments, owner) */
+  thread: ThreadDetail;
 }
 
 export default function ThreadDetails({ thread }: ThreadDetailProps) {

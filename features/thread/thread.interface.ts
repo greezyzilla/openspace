@@ -12,11 +12,17 @@ export interface Thread{
 }
 
 export interface Comment{
+    /** The id of the comment */
     id: string;
+    /** The displayed content of the comment */
     content: string;
+    /** The comment user that the comment belongs to */
     owner: Owner;
+    /** The comment create date, create with date locale ISO */
     createdAt: string;
+    /** The user id list of the comment downvotes */
     downVotesBy: string[];
+    /** The user id list of the comment upvotes */
     upVotesBy: string[];
 }
 

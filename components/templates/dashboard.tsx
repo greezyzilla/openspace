@@ -4,7 +4,9 @@ import PropTypes from 'prop-types';
 import { Header, LeftSidebar, RightSidebar } from '../organisms';
 
 interface DashboardTemplateProps{
-    children : ReactNode;
+    /** The node that wrapped by the template */
+    children: ReactNode;
+    /** The title of the document */
     title: string;
 }
 

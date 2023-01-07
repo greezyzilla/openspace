@@ -3,8 +3,11 @@ import { ReactNode } from 'react';
 import PropTypes from 'prop-types';
 
 interface CardProps{
+    /** The node that wrapped by the card */
     children: ReactNode;
+    /** The maximum size of the card */
     size?: 'sm' | 'md' | 'lg';
+    /** Additional classname to style the card */
     className?: string;
 }
 

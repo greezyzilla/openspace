@@ -4,8 +4,11 @@ import { UserPropTypes } from '../../../proptypes';
 import { User } from '../../../features/user/user.interface';
 
 interface LeaderboardItemProps{
+    /** The correspondent user that will be showed (must have avatar, name and email) */
     user: User,
+    /** The index of the item */
     no: number;
+    /** The score of the user */
     score: number;
 }
 

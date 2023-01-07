@@ -4,13 +4,20 @@ import PropTypes from 'prop-types';
 import Button from './default';
 
 interface ToggleProps{
+    /** The node that wrapped by the toggle button */
     children: ReactNode;
+    /** The class that used when toggle button state is active */
     activeClassname? : string;
+    /** The class that used when toggle button state is inactive */
     inactiveClassname? : string;
+    /** The default class that used in all state */
     className?: string;
-    onActiveClick(): void;
-    onInactiveClick() : void;
+    /** The state of the toggle button */
     isActive: boolean;
+    /** The event that be fired when clicked in active state */
+    onActiveClick(): void;
+    /** The event that be fired when clicked in inactive state */
+    onInactiveClick() : void;
 }
 
 export default function Toggle(props: ToggleProps) {

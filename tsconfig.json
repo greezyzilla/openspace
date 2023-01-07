@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -14,7 +18,20 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "types": ["jest", "node", "@types/testing-library__jest-dom"]
+    "types": [
+      "jest",
+      "node",
+      "@types/testing-library__jest-dom"
+    ]
   },
-  "exclude": ["node_modules", "cypress", "./cypress.config.ts"]
+  "exclude": [
+    "node_modules",
+    "cypress",
+    "./cypress.config.ts"
+  ],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx"
+  ]
 }

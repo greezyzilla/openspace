@@ -10,10 +10,14 @@ import { ThreadPropTypes, OwnerPropTypes } from '../../proptypes';
 import { Owner } from '../../features/user/user.interface';
 
 interface ThreadProps{
+  /** The correspodent thread that being rendered. Must have (id, title, body,
+   * category, createdAt, upVotesBy, downVotesBy, totalComments, owner) */
   thread: ThreadInterface & {
     totalComments: number;
     owner: Owner;
   }
+  /** If isDetails is true, the thread not be limited,
+   * and the navigation link to navigate to the detail thread should be disabled */
   isDetails: boolean;
 }
 

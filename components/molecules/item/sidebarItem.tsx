@@ -5,8 +5,11 @@ import { ReactElement, ComponentProps, ReactNode } from 'react';
 import PropTypes from 'prop-types';
 
 interface SidebarItemProps{
+    /** The target for link to navigate to */
     href: string;
+    /** The Icon from heroicon for item logo */
     Icon(_props: ComponentProps<'svg'>) : ReactElement;
+    /** The node that wrapped by the sidebar item */
     children: ReactNode;
 }
 

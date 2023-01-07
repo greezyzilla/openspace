@@ -4,6 +4,7 @@ import { User } from '../../../features/user/user.interface';
 import { UserPropTypes } from '../../../proptypes';
 
 interface UserItemProps{
+    /** The correspondent user that will be showed (must have avatar, name and email) */
     user: User;
 }
 

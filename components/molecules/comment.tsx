@@ -5,6 +5,7 @@ import { getRelativeDate } from '../../utils';
 import ButtonVote from './buttonVote';
 
 interface CommentProps extends CommentInterface{
+  /** The correspondent id of the comment belongs to, used to vote the comment */
   threadId: string;
 }
 
