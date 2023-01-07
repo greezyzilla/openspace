@@ -40,7 +40,10 @@ export interface VoteComment{
 }
 
 export interface ThreadState{
-    threads: Thread[];
+    threads: (Thread & {
+        ownerId: string;
+        totalComments: number;
+    })[];
     loading: boolean;
     thread?: ThreadDetail;
     filter: string;
@@ -54,6 +57,7 @@ export interface GetThreadsResponse extends ApiResponse{
     data: {
         threads: (Thread & {
             ownerId: string;
+            totalComments: number;
         })[];
     }
 }
@@ -66,7 +70,10 @@ export interface PostThread{
 
 export interface PostThreadResponse extends ApiResponse{
     data: {
-        thread: Thread;
+        thread: Thread & {
+            ownerId: string;
+            totalComments: number;
+        };
     }
 }
 

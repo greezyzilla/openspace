@@ -3,6 +3,9 @@ module.exports = {
     browser: true,
     es2021: true,
     node: true,
+    jest: true,
+    'jest/globals': true,
+    'cypress/globals': true,
   },
   extends: [
     'plugin:react/recommended',
@@ -22,6 +25,8 @@ module.exports = {
     'react',
     '@typescript-eslint',
     'tailwindcss',
+    'cypress',
+    'jest',
   ],
   rules: {
     'react/react-in-jsx-scope': 'off',
@@ -42,6 +47,7 @@ module.exports = {
     'no-unused-vars': 'off',
     '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_', varsIgnorePattern: '^_' }],
     'react/no-array-index-key': 'off',
+    'no-promise-executor-return': 'off',
   },
   settings: {
     'import/extensions': ['.js', '.jsx', '.ts', '.tsx'],

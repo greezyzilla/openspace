@@ -17,12 +17,12 @@ interface ButtonProps{
 }
 
 const Button = forwardRef((
-  props : Partial<ButtonProps>,
+  props : ButtonProps,
   ref : Ref<HTMLButtonElement | HTMLAnchorElement>,
 ) => {
   const {
-    children, className = '', isExternal = false, href = '/', isLink = false,
-    isPrimary = false, isSecondary = false, onClick = () => {}, isSubmit = false, isDisabled,
+    children, className, isExternal, href, isLink,
+    isPrimary, isSecondary, onClick, isSubmit, isDisabled,
   } = props;
 
   const buttonClassName = classcat([{
@@ -51,7 +51,7 @@ const Button = forwardRef((
     return (
       <Link
         ref={ref as Ref<HTMLAnchorElement>}
-        href={href}
+        href={href!}
         onClick={onClick}
         tabIndex={tabIndex}
         className={buttonClassName}
@@ -62,7 +62,7 @@ const Button = forwardRef((
   }
 
   return (
-    <button type={isSubmit ? 'submit' : 'button'} ref={ref as Ref<HTMLButtonElement>} onClick={onClick} className={buttonClassName}>
+    <button type={isSubmit ? 'submit' : 'button'} ref={ref as Ref<HTMLButtonElement>} onClick={onClick} className={buttonClassName} disabled={isDisabled}>
       {children}
     </button>
   );

@@ -7,6 +7,7 @@ import { PostLogin } from '../../../features/auth/auth.interface';
 import { useAppDispatch, useForm } from '../../../hooks';
 import { postLoginUser } from '../../../features/auth';
 import { PostCommentResponse } from '../../../features/thread/thread.interface';
+import { capitalize } from '../../../utils';
 
 export default function LoginForm() {
   const [data, onChange] = useForm<PostLogin>({
@@ -19,14 +20,12 @@ export default function LoginForm() {
 
   const onSubmitHandle = async (e : FormEvent) => {
     e.preventDefault();
-    if (data.email === '' || data.password === '') toast.error('Email or Password can\'t be empty');
+    const response = await dispatch(postLoginUser(data)) as PayloadAction<PostCommentResponse>;
+
+    if (isRejectedWithValue(response)) toast.error(capitalize(response.payload.message));
     else {
-      const response = await dispatch(postLoginUser(data)) as PayloadAction<PostCommentResponse>;
-      if (isRejectedWithValue(response)) toast.error(response.payload.message);
-      else {
-        setTimeout(() => router.replace('/'), 500);
-        toast.success('Login success');
-      }
+      setTimeout(() => router.replace('/'), 500);
+      toast.success('Login success');
     }
   };
 

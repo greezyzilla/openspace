@@ -8,20 +8,20 @@ interface ToggleProps{
     activeClassname? : string;
     inactiveClassname? : string;
     className?: string;
-    onActiveClick?(): void;
-    onInactiveClick?() : void;
+    onActiveClick(): void;
+    onInactiveClick() : void;
     isActive: boolean;
 }
 
-export default function Toggle(props: Partial<ToggleProps>) {
+export default function Toggle(props: ToggleProps) {
   const {
-    activeClassname = '', className = '', inactiveClassname = '',
-    isActive, children, onActiveClick = () => {}, onInactiveClick = () => {},
+    activeClassname, className, inactiveClassname,
+    isActive, children, onActiveClick, onInactiveClick,
   } = props;
 
   const toggleClassname = classcat([{
-    [activeClassname]: isActive,
-    [inactiveClassname]: !isActive,
+    [activeClassname!]: isActive,
+    [inactiveClassname!]: !isActive,
   }, className]);
 
   const onClickHandle = () => (isActive ? onActiveClick() : onInactiveClick());
@@ -38,8 +38,8 @@ Toggle.propTypes = {
   activeClassname: PropTypes.string,
   inactiveClassname: PropTypes.string,
   className: PropTypes.string,
-  onActiveClick: PropTypes.func,
-  onInactiveClick: PropTypes.func,
+  onActiveClick: PropTypes.func.isRequired,
+  onInactiveClick: PropTypes.func.isRequired,
   isActive: PropTypes.bool.isRequired,
 };
 
@@ -47,6 +47,4 @@ Toggle.defaultProps = {
   activeClassname: '',
   inactiveClassname: '',
   className: '',
-  onActiveClick: () => {},
-  onInactiveClick: () => {},
 };

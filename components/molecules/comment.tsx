@@ -23,7 +23,7 @@ export default function Comment(props: CommentProps) {
         </div>
       </div>
       <p className="break-all text-sm leading-6 text-slate-600/80">{content}</p>
-      <div className="flex h-9 gap-4">
+      <div className="flex h-9 gap-4" data-cy="comment-buttons">
         <ButtonVote commentId={id} votes={upVotesBy} threadId={threadId} />
         <ButtonVote commentId={id} votes={downVotesBy} threadId={threadId} isVoteDown />
       </div>

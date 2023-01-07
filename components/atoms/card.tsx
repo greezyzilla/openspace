@@ -8,7 +8,7 @@ interface CardProps{
     className?: string;
 }
 
-export default function Card({ children, size = 'md', className }: Partial<CardProps>) {
+export default function Card({ children, size, className }: CardProps) {
   const cardClassname = classcat([{
     'w-full bg-white text-left': true,
     'max-w-sm': size === 'sm',

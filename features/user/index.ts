@@ -1,11 +1,11 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { fetcWithoutToken } from '../../utils';
+import { fetchWithoutToken } from '../../utils';
 import { GetLeaderboardsResponse, GetUsersResponse, UserState } from './user.interface';
 
 export const getUsers = createAsyncThunk(
   'user/getAll',
   async (_, { rejectWithValue }) => {
-    const response = await fetcWithoutToken('users', {}) as GetUsersResponse;
+    const response = await fetchWithoutToken('users', {}) as GetUsersResponse;
     if (response.status === 'success') return response;
     return rejectWithValue(response);
   },
@@ -14,7 +14,7 @@ export const getUsers = createAsyncThunk(
 export const getLeaderboards = createAsyncThunk(
   'user/leaderboards',
   async (_, { rejectWithValue }) => {
-    const response = await fetcWithoutToken('leaderboards', {}) as GetLeaderboardsResponse;
+    const response = await fetchWithoutToken('leaderboards', {}) as GetLeaderboardsResponse;
     if (response.status === 'success') return response;
     return rejectWithValue(response);
   },
@@ -23,10 +23,10 @@ export const getLeaderboards = createAsyncThunk(
 const initialState : UserState = {
   users: [],
   leaderboards: [],
-  loading: true,
+  loading: false,
 };
 
-export const userSlice = createSlice({
+const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {},

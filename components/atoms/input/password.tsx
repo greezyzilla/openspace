@@ -11,9 +11,9 @@ interface InputPasswordProps {
     value: string;
 }
 
-export default function InputPassword(props : Partial<InputPasswordProps>) {
+export default function InputPassword(props : InputPasswordProps) {
   const {
-    label, placeholder, isValid = true, name, onChange, value,
+    label, placeholder, isValid, name, onChange, value,
   } = props;
   const inputClassname = classcat({
     'w-full rounded-lg border-2 py-3 px-4 text-sm focus:outline-none focus:ring-4': true,

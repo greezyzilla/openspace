@@ -1,12 +1,10 @@
 import dynamic from 'next/dynamic';
 import { ChangeEvent } from 'react';
 import PropTypes from 'prop-types';
+import { importReactQuill } from '../../../utils';
 
 // (if using Next.js or use own dynamic loader)
-const ReactQuill = dynamic(
-  () => import('react-quill').then((mod) => mod),
-  { ssr: false },
-);
+const ReactQuill = dynamic(importReactQuill, { ssr: false });
 
 interface TextAreaProps{
     label: string;

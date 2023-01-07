@@ -1,5 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { fetchWithToken, putAccessToken, removeAccessToken } from '../../utils';
+import {
+  fetchWithToken, fetchWithoutToken, putAccessToken, removeAccessToken,
+} from '../../utils';
 import {
   AuthenticationState, GetAuthenticatedUserResponse,
   PostLogin, PostLoginResponse, PostRegister,
@@ -18,10 +20,11 @@ export const getAuthenticatedUser = createAsyncThunk(
 export const postRegisterUser = createAsyncThunk(
   'auth/register',
   async (user : PostRegister, { rejectWithValue }) => {
-    const response = await fetchWithToken('register', {
+    const response = await fetchWithoutToken('register', {
       method: 'POST',
       data: user,
     }) as PostRegisterResponse;
+
     if (response.status === 'success') return response;
     return rejectWithValue(response);
   },
@@ -30,7 +33,7 @@ export const postRegisterUser = createAsyncThunk(
 export const postLoginUser = createAsyncThunk(
   'auth/login',
   async (user : PostLogin, { rejectWithValue }) => {
-    const response = await fetchWithToken('login', {
+    const response = await fetchWithoutToken('login', {
       method: 'POST',
       data: user,
     }) as PostLoginResponse;
@@ -42,10 +45,10 @@ export const postLoginUser = createAsyncThunk(
 
 const initialState : AuthenticationState = {
   user: undefined,
-  loading: true,
+  loading: false,
 };
 
-export const userSlice = createSlice({
+const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
@@ -63,10 +66,7 @@ export const userSlice = createSlice({
     });
     builder.addCase(postRegisterUser.pending, (state) => { state.loading = true; });
     builder.addCase(postRegisterUser.rejected, (state) => { state.loading = false; });
-    builder.addCase(postRegisterUser.fulfilled, (state, action) => {
-      state.user = action.payload.data!.user;
-      state.loading = false;
-    });
+    builder.addCase(postRegisterUser.fulfilled, (state) => { state.loading = false; });
     builder.addCase(postLoginUser.pending, (state) => { state.loading = true; });
     builder.addCase(postLoginUser.rejected, (state) => { state.loading = false; });
     builder.addCase(postLoginUser.fulfilled, (state, action) => {
@@ -76,5 +76,5 @@ export const userSlice = createSlice({
   },
 });
 
-export const { postSignOut } = userSlice.actions;
-export default userSlice.reducer;
+export const { postSignOut } = authSlice.actions;
+export default authSlice.reducer;

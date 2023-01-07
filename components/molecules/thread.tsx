@@ -17,9 +17,9 @@ interface ThreadProps{
   isDetails: boolean;
 }
 
-export default function Thread({ thread, isDetails = true } : ThreadProps) {
+export default function Thread({ thread, isDetails } : ThreadProps) {
   return (
-    <article className="flex flex-col gap-3 rounded-xl bg-white p-6 shadow-md shadow-slate-100">
+    <article className="flex flex-col gap-3 rounded-xl bg-white p-6 shadow-md shadow-slate-100" data-cy={thread.id}>
       <Button isLink href={`/details/${thread.id}`} className="text-xl font-semibold text-slate-700 line-clamp-2" isDisabled={isDetails}>{thread.title}</Button>
       <div className="flex gap-3">
         <Image src={thread.owner.avatar} className="rounded-lg" width={40} height={40} alt={thread.owner.name} />
@@ -49,7 +49,7 @@ export default function Thread({ thread, isDetails = true } : ThreadProps) {
             <span className="hidden sm:inline-flex">Comment</span>
           </p>
         </Button>
-        <div className="flex gap-4 ">
+        <div className="flex gap-4" data-cy={`buttons-vote-${thread.id}`}>
           <ButtonVote votes={thread.upVotesBy} threadId={thread.id} />
           <ButtonVote votes={thread.downVotesBy} threadId={thread.id} isVoteDown />
         </div>

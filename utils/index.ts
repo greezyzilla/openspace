@@ -2,13 +2,13 @@ import axios, { AxiosRequestConfig } from 'axios';
 
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
-import { Thread } from './features/thread/thread.interface';
-import { ApiResponse } from './interfaces';
+import { Thread } from '../features/thread/thread.interface';
+import { ApiResponse } from '../interfaces';
 
 dayjs.extend(relativeTime);
 
 export function getAccessToken() {
-  if (typeof window === 'undefined') return null;
+  if (typeof localStorage === 'undefined') return undefined;
 
   const accessToken = localStorage.getItem('accessToken');
   return accessToken;
@@ -22,7 +22,7 @@ export function removeAccessToken() {
   return localStorage.removeItem('accessToken');
 }
 
-const baseURL = 'https://forum-api.dicoding.dev/v1/';
+export const baseURL = 'https://forum-api.dicoding.dev/v1/';
 
 export async function fetchWithToken(
   url : string,
@@ -45,7 +45,7 @@ export async function fetchWithToken(
   }
 }
 
-export async function fetcWithoutToken(
+export async function fetchWithoutToken(
   url : string,
   options : AxiosRequestConfig<any>,
 ) : Promise<ApiResponse> {
@@ -75,8 +75,13 @@ export const capitalize = (text: string) => text.split(' ').map((t) => t[0].toUp
 
 export const getRelativeDate = (dateString: string) => dayjs(dateString).fromNow();
 
-export const getFilteredThread = (filter:string, threads:Thread[]) => threads.filter((thread) => {
+export const getFilteredThread = (
+  filter:string,
+  threads:(Thread & {ownerId: string })[],
+) => threads.filter((thread) => {
   const regressingTitle = thread.title.toLowerCase().includes(filter);
   const regressingCategory = thread.category.toLocaleLowerCase().includes(filter);
   return regressingTitle || regressingCategory;
 });
+
+export const importReactQuill = () => import('react-quill');

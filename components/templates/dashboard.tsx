@@ -5,14 +5,14 @@ import { Header, LeftSidebar, RightSidebar } from '../organisms';
 
 interface DashboardTemplateProps{
     children : ReactNode;
-    title?: string;
+    title: string;
 }
 
-export default function DashboardTemplate({ title, children } : Partial<DashboardTemplateProps>) {
+export default function DashboardTemplate({ title, children } : DashboardTemplateProps) {
   return (
     <>
       <Head>
-        <title>{title ? `${title} | OpenSpace` : 'OpenSpace'}</title>
+        <title>{`${title} | OpenSpace`}</title>
       </Head>
       <Header />
       <div className="flex h-full flex-1 overflow-hidden bg-slate-50 backdrop-blur-lg">
@@ -30,9 +30,5 @@ export default function DashboardTemplate({ title, children } : Partial<Dashboar
 
 DashboardTemplate.propTypes = {
   children: PropTypes.node.isRequired,
-  title: PropTypes.string,
-};
-
-DashboardTemplate.defaultProps = {
-  title: 'OpenSpace',
+  title: PropTypes.string.isRequired,
 };

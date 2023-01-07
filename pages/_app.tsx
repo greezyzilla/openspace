@@ -25,7 +25,6 @@ function Middleware({ children } : {children : ReactElement}) {
       const pathName = router.asPath.split('/')[1];
       const hasAccessToken = !!getAccessToken();
       const guestPath = ['', 'leaderboard', 'categories', 'details'].includes(pathName);
-
       if (guestPath) {
         dispatch(getThreads());
         dispatch(getUsers());
@@ -34,7 +33,9 @@ function Middleware({ children } : {children : ReactElement}) {
       if (hasAccessToken) {
         if (guestPath) {
           dispatch(getAuthenticatedUser())
-            .then((response) => isRejectedWithValue(response) && removeAccessToken());
+            .then((response) => {
+              if (isRejectedWithValue(response)) removeAccessToken();
+            });
         } else router.replace('/');
       }
     }

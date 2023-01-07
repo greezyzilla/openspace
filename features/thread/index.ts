@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ActionCreators } from 'redux-undo';
-import { fetchWithToken, fetcWithoutToken } from '../../utils';
+import { fetchWithToken, fetchWithoutToken } from '../../utils';
 import {
   GetThread, GetThreadDetailResponse,
   GetThreadsResponse, PostComment,
@@ -13,7 +13,7 @@ import {
 export const getThreads = createAsyncThunk(
   'thread/getAll',
   async (_, { rejectWithValue }) => {
-    const response = await fetcWithoutToken('threads', {}) as GetThreadsResponse;
+    const response = await fetchWithoutToken('threads', {}) as GetThreadsResponse;
     if (response.status === 'success') return response;
     return rejectWithValue(response);
   },
@@ -22,7 +22,7 @@ export const getThreads = createAsyncThunk(
 export const getThreadById = createAsyncThunk(
   'thread/getById',
   async ({ threadId } : GetThread, { rejectWithValue }) => {
-    const response = await fetcWithoutToken(`threads/${threadId}`, {}) as GetThreadDetailResponse;
+    const response = await fetchWithoutToken(`threads/${threadId}`, {}) as GetThreadDetailResponse;
     if (response.status === 'success') return response;
     return rejectWithValue(response);
   },
@@ -146,7 +146,7 @@ const initialState : ThreadState = {
   thread: undefined,
 };
 
-export const threadSlice = createSlice({
+const threadSlice = createSlice({
   name: 'thread',
   initialState,
   reducers: {
@@ -252,8 +252,8 @@ export const threadSlice = createSlice({
         ));
 
         const comment = state.thread.comments[commentIndex];
-        const voteDownIndex = comment.downVotesBy?.findIndex((id) => userId === id);
-        if (voteDownIndex! >= 0) comment.downVotesBy?.splice(voteDownIndex!, 1);
+        const voteDownIndex = comment.downVotesBy.findIndex((id) => userId === id);
+        if (voteDownIndex! >= 0) comment.downVotesBy.splice(voteDownIndex!, 1);
 
         comment.upVotesBy.unshift(userId);
       }

@@ -26,14 +26,14 @@ export default function LeftSidebar() {
   return (
     <>
       <Button onClick={open} className="group fixed bottom-8 right-8 flex items-center gap-3 rounded-lg bg-violet-700 p-2 text-sm text-white/90 shadow-xl shadow-black/20 md:hidden">
-        <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-violet-100/5">
+        <div data-cy="btn-post-sm" className="flex h-8 w-8 items-center justify-center rounded-lg bg-violet-100/5">
           <PlusIcon className="h-4 w-4 text-white" />
           <p className="absolute top-0 -left-24 hidden whitespace-nowrap rounded-lg bg-white p-2 text-xs text-slate-500 shadow-md group-hover:block">New Thread</p>
         </div>
       </Button>
-      <aside className="hidden max-w-[240px] flex-1 flex-col gap-6 border-r-2 border-slate-200/50 pl-6 pt-6 md:flex">
+      <aside data-cy="left-sidebar" className="hidden max-w-[240px] flex-1 flex-col gap-6 border-r-2 border-slate-200/50 pl-6 pt-6 md:flex">
         <Button onClick={open} className="mr-3 flex items-center gap-3 rounded-lg bg-violet-700 px-3 py-2 text-sm text-white/90 shadow-sm shadow-violet-300">
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-100/20">
+          <div data-cy="btn-post-lg" className="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-100/20">
             <PlusIcon className="h-4 w-4 text-white" />
           </div>
           New Thread

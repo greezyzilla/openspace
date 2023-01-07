@@ -12,7 +12,9 @@ export default function Header() {
       </div>
       <div className="flex flex-1 items-center justify-end gap-1 md:justify-between">
         <Search />
-        {user ? <UserNavigation /> : <UserNavigation.NotAuthenticated />}
+        <div data-cy="user-nav">
+          {user ? <UserNavigation /> : <UserNavigation.NotAuthenticated />}
+        </div>
       </div>
     </header>
   );

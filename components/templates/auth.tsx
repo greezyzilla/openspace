@@ -4,14 +4,14 @@ import PropTypes from 'prop-types';
 
 interface AuthTemplateProps{
     children: ReactNode;
-    title?: string;
+    title: string;
 }
 
-export default function AuthTemplate({ children, title } : Partial<AuthTemplateProps>) {
+export default function AuthTemplate({ children, title } : AuthTemplateProps) {
   return (
     <>
       <Head>
-        <title>{title ? `${title} | OpenSpace` : 'OpenSpace'}</title>
+        <title>{`${title} | OpenSpace`}</title>
       </Head>
       <div className="flex h-full items-center justify-center bg-slate-50/50">
         {children}
@@ -22,9 +22,5 @@ export default function AuthTemplate({ children, title } : Partial<AuthTemplateP
 
 AuthTemplate.propTypes = {
   children: PropTypes.node.isRequired,
-  title: PropTypes.string,
-};
-
-AuthTemplate.defaultProps = {
-  title: 'OpenSpace',
+  title: PropTypes.string.isRequired,
 };

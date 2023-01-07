@@ -10,8 +10,8 @@ interface InputTextProps {
 }
 
 export default function InputText({
-  label = '', placeholder, onChange, value, name,
-} : Partial<InputTextProps>) {
+  label, placeholder, onChange, value, name,
+} : InputTextProps) {
   return (
     <div className="flex flex-col gap-2">
       {label && <p className="text-sm text-slate-500">{ label }</p>}

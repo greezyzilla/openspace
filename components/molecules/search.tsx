@@ -30,7 +30,7 @@ export default function Search() {
   return (
     <>
       <Button onClick={open} className="flex h-10 w-10 items-center justify-center gap-20 rounded-xl bg-slate-100 md:h-auto md:w-auto md:justify-between md:px-4 md:py-2">
-        <p className="hidden bg-transparent text-xs text-slate-400 outline-none md:block">Type to search</p>
+        <p className="hidden bg-transparent text-xs text-slate-400 outline-none md:block" data-cy="btn-search-text">Type to search</p>
         <div className="hidden h-8 items-center justify-center rounded-lg bg-white px-2 text-xs text-slate-500 shadow-sm shadow-slate-200 md:flex">
           Ctrl + /
         </div>
@@ -45,21 +45,21 @@ export default function Search() {
             </div>
             {
               !!filter && (
-                <div className="flex max-h-72 flex-col overflow-auto border-t-2">
+                <div className="flex max-h-72 flex-col overflow-auto border-t-2" data-cy="search-list">
                   { filteredThread.length
                     ? filteredThread?.map((thread) => {
                       const user = users.find((u) => u.id === thread.ownerId)!;
                       return (
                         <Button href={`/details/${thread.id}`} onClick={close} isLink className="flex gap-2 py-3 px-4 hover:bg-slate-50" key={thread.id}>
                           <Image src={user.avatar} alt={user.name} className="rounded-lg" width={52} height={52} />
-                          <div className="flex w-full flex-col items-start overflow-hidden">
+                          <div className="flex w-full flex-col items-start overflow-hidden" data-cy="search-item">
                             <h3 className="mb-1 w-full truncate text-left font-medium text-slate-800">{thread.title}</h3>
                             <div className="flex w-full justify-between gap-2">
                               <p className="truncate text-sm">
                                 Created by&nbsp;
                                 <span className="text-sm font-medium">{user.name}</span>
                                 &nbsp;
-                                {getRelativeDate(thread.createdAt!)}
+                                {getRelativeDate(thread.createdAt)}
                               </p>
                               <p className="w-full max-w-[100px] truncate rounded-md bg-violet-100 p-1 text-xs text-slate-800">
                                 #
@@ -69,7 +69,7 @@ export default function Search() {
                           </div>
                         </Button>
                       );
-                    }) : <p className="p-4 text-slate-500">No Result found</p>}
+                    }) : <p className="p-4 text-slate-500" data-cy="search-not-found">No Result found</p>}
                 </div>
               )
             }

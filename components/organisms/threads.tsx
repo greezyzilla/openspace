@@ -11,7 +11,7 @@ interface ThreadsInterface{
   })[];
 }
 
-export default function Threads({ threads } : Partial<ThreadsInterface>) {
+export default function Threads({ threads } : ThreadsInterface) {
   const { users, loading } = useAppSelector((state) => state.user);
 
   const isLoading = !users.length || !threads?.length || loading;

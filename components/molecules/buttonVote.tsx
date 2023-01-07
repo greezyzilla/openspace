@@ -14,9 +14,9 @@ interface VoteButtonProps{
     isVoteDown?: boolean;
 }
 
-export default function ButtonVote(props : Partial<VoteButtonProps>) {
+export default function ButtonVote(props : VoteButtonProps) {
   const {
-    commentId = '', threadId = '', isVoteDown = false, votes = [],
+    commentId, threadId, isVoteDown, votes,
   } = props;
 
   const { auth } = useAppSelector((state) => state);
