@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react';
 import { isRejectedWithValue } from '@reduxjs/toolkit';
 import { useRouter } from 'next/router';
-import App from '../_app';
+import App from '../_app.page';
 import { getAccessToken } from '../../utils';
 import { getThreads } from '../../features/thread';
 import { getUsers } from '../../features/user';

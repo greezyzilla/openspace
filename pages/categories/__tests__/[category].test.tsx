@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import Categories from '../[category]';
+import Categories from '../[category].page';
 import { createThread } from '../../../tests/threadHelpers';
 
 jest.mock('next/router', () => ({ useRouter: () => ({ query: { category: 'test' } } as any) }));

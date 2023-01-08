@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
 import { Provider } from 'react-redux';
-import NotFound from '../../pages/404';
+import NotFound from '../../pages/404.page';
 import { store } from '../../store';
 
 const meta: Meta<typeof NotFound> = {

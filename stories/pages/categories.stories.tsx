@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
 import { Provider } from 'react-redux';
-import CategoriesPage from '../../pages/categories/[category]';
+import CategoriesPage from '../../pages/categories/[category].page';
 import { store } from '../../store';
 
 const meta: Meta<typeof CategoriesPage> = {

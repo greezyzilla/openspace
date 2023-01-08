@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
 import { Provider } from 'react-redux';
-import RegisterPage from '../../../pages/auth/register';
+import RegisterPage from '../../../pages/auth/register.page';
 import { store } from '../../../store';
 
 const meta: Meta<typeof RegisterPage> = {

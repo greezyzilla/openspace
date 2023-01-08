@@ -56,7 +56,7 @@ export default function UserInformation() {
 
 UserInformation.NotAuthenticated = function UserInformationNotAuthenticated() {
   return (
-    <Button isLink href="/auth/login" className="whitespace-nowrap rounded-md px-2 py-1.5 text-sm text-white hover:bg-slate-50/50">
+    <Button isLink href="/auth/login" className="rounded-md px-2 py-1.5 text-sm text-white hover:bg-slate-50/50">
       <div className="flex gap-3">
         <div className="hidden flex-col items-end md:flex">
           <p className="text-sm text-slate-500">Has an account?</p>

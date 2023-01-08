@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import Leaderboards from '../leaderboard';
+import Leaderboards from '../leaderboard.page';
 
 jest.mock('../../components/templates/dashboard', () => jest.fn(({ children }: any) => <div>{children}</div>));
 jest.mock('../../components/organisms/leaderboards', () => jest.fn(() => <div>Leaderboards</div>));

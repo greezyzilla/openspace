@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
 import { Provider } from 'react-redux';
-import DetailsPage from '../../pages/details/[id]';
+import DetailsPage from '../../pages/details/[id].page';
 import { store } from '../../store';
 
 const meta: Meta<typeof DetailsPage> = {

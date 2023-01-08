@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
 import { Provider } from 'react-redux';
-import LeaderboardsPage from '../../pages/leaderboard';
+import LeaderboardsPage from '../../pages/leaderboard.page';
 import { store } from '../../store';
 
 const meta: Meta<typeof LeaderboardsPage> = {

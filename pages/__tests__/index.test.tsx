@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import Home from '..';
+import Home from '../index.page';
 
 jest.mock('../../components/templates/dashboard', () => jest.fn(({ children }: any) => <div>{children}</div>));
 jest.mock('../../components/organisms/threads', () => jest.fn(() => <div>Threads</div>));

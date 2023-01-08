@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import DetailPage from '../[id]';
+import DetailPage from '../[id].page';
 import { useAppSelector } from '../../../hooks';
 import { createThreadDetail } from '../../../tests/threadHelpers';
 import { getThreadById } from '../../../features/thread';

@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import Register from '../register';
+import Register from '../register.page';
 
 jest.mock('../../../components/templates/auth', () => jest.fn(({ children }: any) => <div>{children}</div>));
 jest.mock('../../../components/molecules/form/register', () => jest.fn(() => <div>Register-Form</div>));

@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import Page404 from '../404';
+import Page404 from '../404.page';
 
 jest.mock('../../components/organisms/notFound/page', () => jest.fn(() => <div>Page Not Found</div>));
 jest.mock('../../hooks', () => ({

@@ -6,6 +6,7 @@ const nextConfig = {
     dangerouslyAllowSVG: true,
     domains: ['ui-avatars.com'],
   },
+  pageExtensions: ['page.tsx'],
 };
 
 module.exports = nextConfig;
