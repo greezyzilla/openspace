@@ -13,7 +13,7 @@ export default function useAppRequest() {
 
   const request = async (callback : () => Promise<PayloadAction<any>>) => {
     if (!hasAuthenticatedUser || !hasAccessToken) {
-      toast.error('Please login To Continue');
+      toast.error('Please Login To Continue');
       return router.push('/auth/login');
     }
 
